@@ -1,5 +1,16 @@
 
+var twenty_PEGVAL = [0, 18, 36, 54, 72, 90, 108, 126, 144, 162, 180, 198, 216, 234, 252, 270, 288, 306, 324, 342,359];
+/* 
+var fifteen_PEGVAL = [0, 24, 48, 72, 96, 120, 144, 168, 192, 216, 240, 264, 288, 312, 336,359];
+var eight_PEGVAL = [0,45,90,135,180,225,270,315,359];
 
+var HEX_MOLECULE_RANGE = [60,120,240,300];
+var PENTA_MOLECULE_RANGE = [];
+
+*/
+
+
+//draws the cursor circle and shows data
 function ClickerPeg(){
 
   noFill();
@@ -8,12 +19,14 @@ function ClickerPeg(){
   ellipse(mouseX,mouseY,20,20);
   textSize(17);
   if(modeClicker==1){
-  text(getMouseAngleEstimate(returnArray_X[returnArray_X.length-1], returnArray_Y[returnArray_Y.length-1]), mouseX +10, mouseY-5);
+  text(getMouseAngleEstimate(returnArray_X[returnArray_X.length-1], returnArray_Y[returnArray_Y.length-1],twenty_PEGVAL), mouseX +10, mouseY-5);
+  //text(testVarMouseWheel, mouseX + 10, mouseY +10);
 }}
 
-function filterEightAngle(filterPegNo){
+//simply assigns the correct number for each angle range
+function filterEightAngle(filterPegNo, maxNo){
   var return_no = 0;
-  if(filterPegNo == 0 || filterPegNo == 8){
+  if(filterPegNo == 0 || filterPegNo == maxNo){
           return_no= 0;
           
          }
@@ -23,77 +36,60 @@ function filterEightAngle(filterPegNo){
   return return_no;
 }
 
+//appends the current coordinates for the global x and y arrays
+//called under events
 function addPointArray(returnArray_X, returnArray_Y, anglePegNo){
      //first reference point
+    var lastXArr = returnArray_X.length - 1; 
+    var lastYArr = returnArray_Y.length - 1;
+    var exceedDistPointer = calPointerExceed(returnArray_X[lastXArr], returnArray_Y[lastYArr], mouseX, mouseY, 120);
+  
      var currPegNo = 0;
      if(returnArray_X.length>0){
-         currPegNo = filterEightAngle(anglePegNo);
+         currPegNo = filterEightAngle(anglePegNo,twenty_PEGVAL.length-1);
          
-         FixedX = returnEightAngle("X",80);
-         FixedY = returnEightAngle("Y",80);
-         
-         append(returnArray_X, returnArray_X[returnArray_X.length-1] + FixedX[currPegNo]);
-         append(returnArray_Y, returnArray_Y[returnArray_Y.length-1] + FixedY[currPegNo]);
+         FixedX = returnEightAngle("X",80,twenty_PEGVAL);
+         FixedY = returnEightAngle("Y",80,twenty_PEGVAL);
+        if(!exceedDistPointer){
+         append(returnArray_X, mouseX);
+         append(returnArray_Y, mouseY);
         // print(returnArray_X);
+        }
      }
      else if(returnArray_X.length == 0){
        append(returnArray_X, mouseX);
        append(returnArray_Y, mouseY);
+       //ADD THE FIRST POINT STICK
+       pointStickAssignment(pointHighlight.length,mouseX, mouseY, 30);
      }
 }
 
+
+//draws the angle guides at the last point
 function drawEightLine(refPtX,refPtY, xptArr, yptArr){
    
-    strokeWeight(0.5);
+    strokeWeight(0.4);
     for(let cnt = 0; cnt< xptArr.length; cnt++){
       line(refPtX, refPtY, xptArr[cnt] + refPtX, yptArr[cnt] +refPtY);
       textSize(7);
-      text(cnt ,xptArr[cnt] + refPtX+3,yptArr[cnt] +refPtY+3);
-  }
-}
-
-function renderingLineStructure(array_X, array_Y){
-  
-  var getGuideOfX = returnEightAngle("X", 50);
-  var getGuideOfY = returnEightAngle("Y", 50);
-  var currentPegAngle = getMouseAngleEstimate(returnArray_X[returnArray_X.length-1], returnArray_Y[returnArray_Y.length-1]);
-  var filteredPeg = filterEightAngle(currentPegAngle);
-  
-  if(array_X.length > 0){  
-    for(let currNo = 1; currNo <= array_X.length; currNo++){
-      if(currNo == array_X.length){
-       stroke(0);
-       line(array_X[currNo],array_Y[currNo],mouseX,mouseY);
-       if(modeClicker == 1){
-         drawEightLine(array_X[currNo-1], array_Y[currNo-1], getGuideOfX, getGuideOfY);
-         stroke(color('rgba(255, 158, 207,0.5)'));
-         strokeWeight(5);
-         line(returnArray_X[returnArray_X.length-1],returnArray_Y[returnArray_Y.length-1], returnArray_X[returnArray_X.length-1] + getGuideOfX[filteredPeg],returnArray_Y[returnArray_Y.length-1] +getGuideOfY[filteredPeg]);
-      }}
-      else{
-        stroke(90);
-        strokeWeight(3);
-        line(array_X[currNo-1],array_Y[currNo-1], array_X[currNo], array_Y[currNo]);
-        //drawEightLine(array_X[currNo], array_Y[currNo], getGuideOfX, getGuideOfY);
-      }
-    }
+      //text(cnt ,xptArr[cnt] + refPtX+3,yptArr[cnt] +refPtY+3);
   }
 }
 
 //returns the angles for the next branch
-function returnEightAngle(XorY, lengthPX){
+function returnEightAngle(XorY, lengthPX,fixedPegList){
   angleMode(DEGREES);
-  let pi_constants = [0,45,90,135,180,225,270,315];
+  //let fixedAngles = [0,45,90,135,180,225,270,315, 359];
   return_values = [];  
  
- for(let cnt = 0; cnt<pi_constants.length;cnt++){
+ for(let cnt = 0; cnt<fixedPegList.length-1;cnt++){
   if(XorY == "X"){
-  var currValX =  lengthPX * cos(pi_constants[cnt]);
+  var currValX =  lengthPX * cos(fixedPegList[cnt]);
   //print("PRINTX:"+currValX);
   append(return_values, currValX);
  }
  else if(XorY == "Y"){
-  var currValY =  lengthPX * sin(pi_constants[cnt]);
+  var currValY =  lengthPX * sin(fixedPegList[cnt]);
   //print("PRINTY:"+currValY);
   append(return_values, currValY);
  }
@@ -102,10 +98,10 @@ function returnEightAngle(XorY, lengthPX){
   return return_values;
 }
 
-//tracks position of the mouse and gives the estimate for 8 possible branches (assuming "Carbon" atom)
-function getMouseAngleEstimate(prevX, prevY){
+//tracks position of the mouse and gives the estimate for n number of possible branches (assuming "Carbon" atom)
+function getMouseAngleEstimate(prevX, prevY,fixedPegList){
   
-  allAngleBorders = [0,45,90,135,180,225,270,315,359];
+  
   angleMode(DEGREES); 
   var angleFromPrevPoint = 0;
   var returnPegNo = 0;
@@ -118,10 +114,11 @@ function getMouseAngleEstimate(prevX, prevY){
    angleFromPrevPoint = 180 + addTo180;
   }
   
-  for(let cnt = 1; cnt<allAngleBorders.length; cnt++){
+  for(let cnt = 1; cnt<fixedPegList.length; cnt++){
     
-    borderOne = allAngleBorders[cnt-1];
-    borderTwo = allAngleBorders[cnt];
+        borderOne = fixedPegList[cnt-1];
+        borderTwo = fixedPegList[cnt];
+  
 
     if(angleFromPrevPoint>borderOne && angleFromPrevPoint < borderTwo){
     
@@ -140,4 +137,17 @@ function getMouseAngleEstimate(prevX, prevY){
     }
   }
   return returnPegNo;
+}
+
+
+function calPointerExceed(mousePosX, mousePosY, prevX, prevY, lengthLimit){
+  let booleanReturn = false;
+  var calculateDistance = sqrt(sq(mousePosY - prevY)+sq(mousePosX-prevX));
+  if(calculateDistance<=lengthLimit){
+    booleanReturn = false;
+  }
+  else{
+    booleanReturn = true;
+  }
+  return booleanReturn;
 }
