@@ -1,55 +1,98 @@
-//  HANDLES EVENTS IN THE PROCESSING RUNNED SCRIPT
-var testVarMouseWheel;
+//Only one atom allowed to be selected at any time
+var selectedAtomIfAny = [];
 
-//mouse events
+
 function mousePressed(){
-  
-  if(modeClicker==1){
-   //Drawing mode
-   if(mouseButton == LEFT){
-    var lastXArr = returnArray_X.length-1;
-    var lastYArr = returnArray_Y.length-1;
-    var anglePeg = getMouseAngleEstimate(returnArray_X[lastXArr], returnArray_Y[lastYArr], twenty_PEGVAL);
-    
-    addPointArray(returnArray_X, returnArray_Y,anglePeg);
 
-    if(!calPointerExceed(returnArray_X[lastXArr], returnArray_Y[lastYArr], mouseX, mouseY, 120) && pointHighlight.length >= 0){
-    pointStickAssignment(pointHighlight.length,mouseX, mouseY, 30);
-      print(pointHighlight);
-  }
-  }
-  }
-  
-  
+
+if(modeClicker == 1){
+      addingAsParent(main_branch_atoms);
+}
+else if(modeClicker == 0){
+    mouseClickedSelectedFunc(main_branch_atoms);
 }
 
-// keypressed events
+}
+
 function keyPressed(){
- if(keyCode== ESCAPE){ 
-   modeClicker = 0;
- 
- }
+
+  if(keyCode == ESCAPE){
+      modeClicker = 0;
+      print("clicker mode 0")
+  }
+
 }
 
-//mouse wheel events
-function mouseWheel(event){
-testVarMouseWheel = event.delta;
-}
 
-//Mouse Dragged event
-function mouseDragged(){
+// selects atom if there arent any selected, otherwise switches between selected atoms
+function mouseClickedSelectedFunc(mainBranchArray){
+    for(let cnt = 0; cnt<mainBranchArray.length; cnt ++){
+        currAtomClass = mainBranchArray[cnt];
+        if(currAtomClass.hoverBool == true && currAtomClass.selectedBool == false){
+            
+            if(selectedAtomIfAny.length<=0){
+                currAtomClass.selectedBool = true;
+                selectedAtomIfAny[0] = currAtomClass;
+                break;
+            }
+            else if(selectedAtomIfAny.length>0 ){
+                //when there is a currently selected atom, select this
+                print("doing this");
+                makeSelectedAtom(currAtomClass,selectedAtomIfAny);
+                break;
+            }
+        }
+        else if(currAtomClass == selectedAtomIfAny[0]&& withinArea(currAtomClass.x, currAtomClass.y,fixed_length_bond)== true && currAtomClass.selectedBool == true){
+            //triggered when an already selected point is clicked on 
+            //ADD SUB BRANCHES
 
-  if(modeClicker == 0){
-    for(let currPt = 0; currPt<=pointHighlight.length-1; currPt++){
-      if(pointHighlight[currPt].return_boolean){
-        print("changing...")
-        returnArray_X[currPt] = mouseX;
-        returnArray_Y[currPt] = mouseY;
-        pointHighlight[currPt].x = mouseX;
-        pointHighlight[currPt].y = mouseY;
-      }
+            addingMainSubBranches(selectedAtomIfAny[0]);
+            print("adding");
+        }
+        currAtomClass.checkIfSubBranchSelected(currAtomClass.subBranches);
     }
-
 }
 
+
+
+//switches between selected points
+function makeSelectedAtom(currAtom, ifSelectedArr){
+    currAtom.selectedBool = true;
+    ifSelectedArr[0].selectedBool = false;
+    ifSelectedArr.pop();
+    ifSelectedArr[0] = currAtom;
+}
+
+//TO BE IMPLEMENTED!! unselects all points 
+function clickedAway(currAtom, ifSelectedArr){
+    currAtom.selectedBool = false;
+    ifSelectedArr.pop();
+}
+
+//Check if cursor is drawing on an existing point
+function checkIfHover(main_branch_atoms){
+    var returnBool = false;
+    for(let cnt = 0; cnt< main_branch_atoms.length; cnt++){
+        //print(main_branch_atoms[cnt].hoverBool);
+        if(main_branch_atoms[cnt].hoverBool){
+            returnBool = true;
+            break;
+        }
+        else{
+            returnBool = false;
+        }
+    }
+    return returnBool;
+}
+
+function withinArea(posX, posY, radiusRegion){
+    var return_bool = false;
+    var calDist = sqrt(sq(mouseY-posY)+sq(mouseX-posX));
+    if(calDist<=radiusRegion){
+        return_bool = true;
+    }
+    else{
+        return_bool = false;
+    }
+    return return_bool;
 }
