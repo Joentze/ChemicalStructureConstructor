@@ -86,7 +86,7 @@ class bond{
         }
     }
     
-    checkIfHover(){
+    /*checkIfHover(){
         if(this.isWithinArea){
             var gradientOne = this.gradientCalculation(mouseY,this.firstY,mouseX,this.firstX);
             var gradientTwo = this.gradientCalculation(this.secondY, mouseY, this.secondX, mouseX);
@@ -110,7 +110,26 @@ class bond{
                 }
             }
         }
+    }*/
+    checkIfHover(){
+        if(this.isWithinArea){
+            let p1Vector = createVector(-this.firstX,-this.firstY);
+            let p2Vector = createVector(this.secondX,this.secondY);
+            let thisBondVector = p5.Vector.add(p1Vector,p2Vector);
+            let mouseVectorFromOrigin = createVector(mouseX, mouseY);
+            let mouseVectorFromP1 = p5.Vector.add(p1Vector,mouseVectorFromOrigin);
+            let crossProduct = thisBondVector.cross(mouseVectorFromP1);
+            var magCross = crossProduct.mag();
+
+            if(magCross<=350){
+                this.isHoverLine = true;
+            }
+            else{
+                this.isHoverLine = false;
+            }
+        }
     }
+
 
     gradientCalculation(y_two, y_one, x_two, x_one){
         var num = y_two - y_one;

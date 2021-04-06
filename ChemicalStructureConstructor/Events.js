@@ -42,7 +42,7 @@ function mouseClickedSelectedFunc(mainBranchArray){
                 break;
             }
         }
-        else if(currAtomClass == selectedAtomIfAny[0]&& withinArea(currAtomClass.x, currAtomClass.y,fixed_length_bond)== true && currAtomClass.selectedBool == true){
+        else if(currAtomClass == selectedAtomIfAny[0]&& withinArea(currAtomClass.x, currAtomClass.y,fixed_length_bond-10)== true && currAtomClass.selectedBool == true){
             //triggered when an already selected point is clicked on 
             //ADD SUB BRANCHES
 
@@ -85,14 +85,17 @@ function checkIfHover(main_branch_atoms){
     return returnBool;
 }
 
+//check if cursor is within a certain radius of selected point
 function withinArea(posX, posY, radiusRegion){
     var return_bool = false;
     var calDist = sqrt(sq(mouseY-posY)+sq(mouseX-posX));
     if(calDist<=radiusRegion){
         return_bool = true;
+
     }
     else{
         return_bool = false;
+
     }
     return return_bool;
 }

@@ -18,23 +18,29 @@ class buttonCreation{
         var NewButton = createButton(this.text);
         NewButton.class(this.idName + " " +this.img);
         //NewButton.position(this.x, this.y);
-        NewButton.mouseOver(makeModeTwo);
-        NewButton.mouseOut(makeModeOne);
+        NewButton.mouseOver(this.buttonIsHover);
+        NewButton.mouseOut(this.buttonIsNotHover);
         NewButton.mouseClicked(this.exe);
     }
     
+
+    buttonIsHover(){
+        buttonHighlight = true;
+    }
+    buttonIsNotHover(){
+        buttonHighlight = false;
+    }
+    
 }
-// fix all of this
-function makeModeTwo(){
-    prevModeClicker = modeClicker;
-    if(modeClicker == 1){
-    modeClicker = 0;}
-}
+
 function makeModeOne(){
     modeClicker = prevModeClicker;
 }
-function runThis(){
+function modeClickerOne(){
     modeClicker = 1;
+}
+function modeClickerZero(){
+    modeClicker = 0;
 }
 //^^^^^^^
 function makeFullScreen(){

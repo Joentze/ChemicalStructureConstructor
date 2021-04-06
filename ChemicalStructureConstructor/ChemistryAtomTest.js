@@ -12,6 +12,8 @@ var currSelectedVar = 0;
 //States in the system
 var modeClicker = 1;
 var prevModeClicker;
+var isBranchingAnotherAtom = false;
+var buttonHighlight = false;
 
 //var newAtom;
 var testThisButton
@@ -20,8 +22,10 @@ var fixed_length_bond = 100;
 
 function setup() {
   //NEATEN THIS UP!!!!
-  testThisButton = new buttonCreation(20,20,"backGroundPencil",runThis,"","mainButtonPreset");
-  testThisButton.renderButton();
+  var drawMainBranch = new buttonCreation(20,20,"backGroundPencil",modeClickerOne,"","mainButtonPreset");
+  drawMainBranch.renderButton();
+  var branchFromNodes = new buttonCreation(20,20,"backGroundBranching",modeClickerZero,"","mainButtonPreset");
+  branchFromNodes.renderButton();
   fsButton= new buttonCreation(windowWidth*0.98,windowHeight*0.9,"backGroundFS",makeFullScreen,"","clearPresetButton");
   fsButton.renderButton();
 }
@@ -70,6 +74,7 @@ function drawGuideLine(){
     stroke(60);
     line(lastAtom.x, lastAtom.y, lastAtom.x + getX, lastAtom.y + getY);
     var getDist = sqrt(sq(mouseY-lastAtom.y)+sq(mouseX - lastAtom.x));
+    pop();
     if(getDist>fixed_length_bond){
       push();
       strokeWeight(1.5);
@@ -78,7 +83,7 @@ function drawGuideLine(){
       returnIfExceed = true;
       pop();
     }
-    pop();
+    
   }
   return returnIfExceed;
 }

@@ -137,7 +137,7 @@ class atoms{
                     break;
                 }
             }
-            else if(currAtomClass == selectedAtomIfAny[0] && withinArea(currAtomClass.x, currAtomClass.y,fixed_length_bond)==true && currAtomClass.selectedBool == true){
+            else if(currAtomClass == selectedAtomIfAny[0] && withinArea(currAtomClass.x, currAtomClass.y,fixed_length_bond-10)==true && currAtomClass.selectedBool == true){
                 //triggered when an already selected point is clicked on 
                 //ADD SUB BRANCHES
                 addingMainSubBranches(selectedAtomIfAny[0]);

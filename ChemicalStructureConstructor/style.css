@@ -28,11 +28,18 @@
 
 
 .backGroundPencil{
-    background-image: url('image/pencil.svg');
+    background-image: url('image/mainBranchDraw.svg');
     background-position: center;
     background-repeat: no-repeat;
-    top: 86%;
-    left:3%;
+    top: 91%;
+    left:2%;
+}
+.backGroundBranching{
+    background-image: url('image/BranchIcon5.svg');
+    background-position: center;
+    background-repeat: no-repeat;
+    top: 91%;
+    left:7%;
 }
 
 .backGroundFS{
