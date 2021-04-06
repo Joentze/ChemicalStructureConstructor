@@ -87,3 +87,4 @@ function addingBonds(main_branch_atoms, currLen){
     bondArrLen = main_bonds.length;
     main_bonds[bondArrLen] = new bond(firstAtom, secondAtom);
 }
+

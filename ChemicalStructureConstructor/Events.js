@@ -5,11 +5,14 @@ var selectedAtomIfAny = [];
 function mousePressed(){
 
 
-if(modeClicker == 1){
+if(modeClicker == 1 && mouseButton == LEFT){
       addingAsParent(main_branch_atoms);
 }
-else if(modeClicker == 0){
+else if(modeClicker == 0 && mouseButton == LEFT){
     mouseClickedSelectedFunc(main_branch_atoms);
+}
+else if(modeClicker == 0 && mouseButton == RIGHT){
+    //launchSelectionsBox();
 }
 
 }
@@ -99,3 +102,28 @@ function withinArea(posX, posY, radiusRegion){
     }
     return return_bool;
 }
+
+//to disable the regular right click menu
+/*
+function newMenuFormation(atomSelectionArray){
+    if (document.addEventListener) {
+        document.addEventListener('contextmenu', function(e) {
+          //alert("You've tried to open context menu"); //here you draw your own menu
+        if(atomSelectionArray.length>0){
+            var currAtom = atomSelectionArray[0];
+            var currSelectionTable = new selectionListCreation(currAtom.x,currAtom.y + 15,elementsCovalentBondCount,testSelection,"selectionBoxPreset")
+            currSelectionTable.renderListSel();
+        }
+          e.preventDefault();
+        }, false);
+      } else {
+        document.attachEvent('oncontextmenu', function() {
+          alert("You've tried to open context menu");
+          window.event.returnValue = false;
+        });
+      }
+}*/
+window.addEventListener('contextmenu', function (e) { 
+    // do something here... 
+    e.preventDefault(); 
+  }, false);

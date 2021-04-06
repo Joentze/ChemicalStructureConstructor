@@ -42,11 +42,13 @@ function modeClickerOne(){
 function modeClickerZero(){
     modeClicker = 0;
 }
-//^^^^^^^
 function makeFullScreen(){
     let fs = fullscreen();
     fullscreen(!fs);
 }
+
+
+
 function checkIfHoverCircle(posX, posY, radiusRange){
     var return_bool = false;
     var calDist = sqrt(sq(mouseY-posY)+sq(mouseX - posX));
@@ -57,4 +59,43 @@ function checkIfHoverCircle(posX, posY, radiusRange){
         return_bool = false;
     }
     return return_bool;
+}
+
+class selectionListCreation{
+    constructor(posX, posY, itemSelection, executeThisFunction,classPresetCSS){
+        this.x = posX;
+        this.y = posY;
+        this.listSel = itemSelection;
+        this.exe = executeThisFunction;
+        this.CSSclass =  classPresetCSS;
+        this.currVal;
+    }
+    renderListSel(){
+        let listSel = createSelect();
+        listSel.position(this.x, this.y);
+        this.assignListItems(listSel);
+        listSel.class(this.CSSclass);
+        this.currVal = listSel.value();
+        listSel.changed(this.exe);
+    }
+    assignListItems(listSel){
+        var listToLook = this.listSel;
+        var lengthOfKey = Object.keys(listToLook).length;
+        var listOfKeys = Object.keys(listToLook);
+        for(var cnt = 0; cnt<lengthOfKey; cnt++){
+            var currAssignment = listOfKeys[cnt];
+            listSel.option(currAssignment);
+        }
+    }
+}
+
+function testSelection(){
+    console.log("i made a selection");
+}
+function launchSelectionsBox(){
+    if(selectedAtomIfAny.length>0){
+        var currAtom = selectedAtomIfAny[0];
+        var currSelectionTable = new selectionListCreation(currAtom.x,currAtom.y + 15,elementsCovalentBondCount,testSelection,"selectionBoxPreset");
+        currSelectionTable.renderListSel();
+    }
 }
