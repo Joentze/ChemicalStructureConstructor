@@ -65,32 +65,45 @@ class selectionListCreation{
     constructor(posX, posY, itemSelection, executeThisFunction,classPresetCSS){
         this.x = posX;
         this.y = posY;
-        this.listSel = itemSelection;
+        this.namePair = itemSelection;
         this.exe = executeThisFunction;
         this.CSSclass =  classPresetCSS;
         this.currVal;
+        this.listSel;
     }
     renderListSel(){
-        let listSel = createSelect();
-        listSel.position(this.x, this.y);
-        this.assignListItems(listSel);
-        listSel.class(this.CSSclass);
-        this.currVal = listSel.value();
-        listSel.changed(this.exe);
+        this.listSel = createSelect();
+        //listSel.position(this.x,this.y)
+        this.assignListItems(this.namePair);
+        this.listSel.class(this.CSSclass);
+        //this.currVal = listSel.value();
+        this.listSel.changed(this.exe);
+        this.listSel.style('font-family','Arame-Regular');
+        this.listSel.mouseOver(this.buttonIsHover);
+        this.listSel.mouseOut(this.buttonIsNotHover);
     }
-    assignListItems(listSel){
-        var listToLook = this.listSel;
+    assignListItems(namePair){
+        var listToLook = namePair;
         var lengthOfKey = Object.keys(listToLook).length;
         var listOfKeys = Object.keys(listToLook);
         for(var cnt = 0; cnt<lengthOfKey; cnt++){
             var currAssignment = listOfKeys[cnt];
-            listSel.option(currAssignment);
+            this.listSel.option(currAssignment);
         }
+    }
+    buttonIsHover(){
+        buttonHighlight = true;
+    }
+    buttonIsNotHover(){
+        buttonHighlight = false;
     }
 }
 
-function testSelection(){
-    console.log("i made a selection");
+function changeMainElementSelection(){
+    let currSelect = newSelectionBoxTest.listSel;
+    var getNumCovalentBonds = elementsCovalentBondCount[currSelect.value()];
+    currElement = getNumCovalentBonds;
+    print(currElement);
 }
 function launchSelectionsBox(){
     if(selectedAtomIfAny.length>0){

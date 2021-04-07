@@ -11,10 +11,24 @@ var elementsCovalentBondCount = {
     "Phosphine":5
 };
 
+var elementsSymbol = {
+    "Carbon":"C",
+    "Nitrogen":"N",
+    "Oxygen":"O",
+    "Hydrogen":"H",
+    "Silicon":"Si",
+    "Fluorine":"F",
+    "Chlorine":"Cl",
+    "Bromine":"Br",
+    "Iodine":"I",
+    "Phosphine":"P"
+};
+
 var organicGroupCovalent = {
     "Hydroxyl": 1,
     "Carboxylic":1,
     "Ester":2,
     "Amine":1,
     "Amide":2,
+    "Methyl":1
 }

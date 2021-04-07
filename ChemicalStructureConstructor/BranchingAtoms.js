@@ -27,7 +27,7 @@ function addingMainSubBranches(currSelectedAtom){
         var fixedY = calculateNextPointFixLen(fixed_length_bond,"Y",currSelectedAtom);
         
         //adds new atom under the sub branches of the main branch atom
-        var thisNewAtom = new atoms(currSelectedAtom.x+fixedX, currSelectedAtom.y+fixedY, 4);
+        var thisNewAtom = new atoms(currSelectedAtom.x+fixedX, currSelectedAtom.y+fixedY, currElement);
         currSelectedAtom.addBranch(thisNewAtom, currSelectedAtom);
         
         //adds the main branch atom as a parent atom
@@ -42,7 +42,7 @@ function addingAsParent(main_branch_atoms){
     
    if(buttonHighlight == false){
     if(main_branch_atoms.length <= 0){
-        main_branch_atoms[main_branch_atoms.length] = new atoms(mouseX, mouseY, 4);
+        main_branch_atoms[main_branch_atoms.length] = new atoms(mouseX, mouseY, currElement);
     }
     else if(main_branch_atoms.length>0){
         var latestAtom = main_branch_atoms[main_branch_atoms.length-1];
@@ -56,7 +56,7 @@ function addingAsParent(main_branch_atoms){
             var getNewY = calculateNextPointFixLen(fixed_length_bond,"Y",main_branch_atoms[currLen-1]);
 
             //this adds the new atom within the respective length
-            main_branch_atoms[currLen] = new atoms(main_branch_atoms[currLen-1].x+getNewX, main_branch_atoms[currLen-1].y+getNewY, 4);
+            main_branch_atoms[currLen] = new atoms(main_branch_atoms[currLen-1].x+getNewX, main_branch_atoms[currLen-1].y+getNewY, currElement);
             
             // o0 <--- o1
             var currAtomParentArr = main_branch_atoms[currLen].parentAtoms;

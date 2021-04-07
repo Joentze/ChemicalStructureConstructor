@@ -40,11 +40,14 @@ class atoms{
 
         //Bonds between parent and immediate child
         this.parChildBondArr = [];
+
+        //selection bubble for right click select
+        this.selectionTable;
     }
 
     //draws the atom
     renderAtom(){
-
+        
         if(this.selectedBool){
             push();
             this.CursorNearExpand();
@@ -52,6 +55,7 @@ class atoms{
             fill(color('rgba(232, 134, 121,0.5)'));
             ellipse(this.x, this.y, this.radiusB, this.radiusB);
             pop();
+            
         }
         else{
             push();

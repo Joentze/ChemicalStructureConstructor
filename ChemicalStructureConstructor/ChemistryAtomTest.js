@@ -20,7 +20,19 @@ var testThisButton
 //Fixed length for the bonds
 var fixed_length_bond = 100;
 
+//Default font 
+let myFont;
+
+//
+var newSelectionBoxTest;
+
+function preload() {
+  myFont = loadFont('Assets/Arame-Regular.ttf');
+}
+
 function setup() {
+  //load default font 
+  textFont(myFont);
   //NEATEN THIS UP!!!!
   var drawMainBranch = new buttonCreation(20,20,"backGroundPencil",modeClickerOne,"","mainButtonPreset");
   drawMainBranch.renderButton();
@@ -29,8 +41,8 @@ function setup() {
   fsButton= new buttonCreation(windowWidth*0.98,windowHeight*0.9,"backGroundFS",makeFullScreen,"","clearPresetButton");
   fsButton.renderButton();
   //newMenuFormation();
-  //var newSelectionBoxTest = new selectionListCreation(50,100,elementsCovalentBondCount,testSelection,"selectionBoxPreset");
-  //newSelectionBoxTest.renderListSel();
+  newSelectionBoxTest = new selectionListCreation(1,1,elementsCovalentBondCount,changeMainElementSelection,"selectionBoxPreset");
+  newSelectionBoxTest.renderListSel();
 }
 
 function windowResized() {
@@ -43,6 +55,9 @@ function draw() {
   drawMainStructure(main_branch_atoms, main_bonds);
   if(modeClicker == 1){
   drawGuideLine();}
+  else if(modeClicker == 0){
+    drawGuideLineForBranching(selectedAtomIfAny[0]);
+  }
  
 }
 
@@ -72,12 +87,15 @@ function drawGuideLine(){
   if(lenOfMain>0){
     var getX = calculateNextPointFixLen(fixed_length_bond, "X", lastAtom);
     var getY = calculateNextPointFixLen(fixed_length_bond, "Y", lastAtom);
+    var getDist = sqrt(sq(mouseY-lastAtom.y)+sq(mouseX - lastAtom.x));
+    if(getDist<fixed_length_bond){
     push();
     strokeWeight(0.8);
     stroke(60);
     line(lastAtom.x, lastAtom.y, lastAtom.x + getX, lastAtom.y + getY);
-    var getDist = sqrt(sq(mouseY-lastAtom.y)+sq(mouseX - lastAtom.x));
     pop();
+    }
+    /*
     if(getDist>fixed_length_bond){
       push();
       strokeWeight(1.5);
@@ -86,7 +104,44 @@ function drawGuideLine(){
       returnIfExceed = true;
       pop();
     }
-    
+    */
+  }
+  return returnIfExceed;
+}
+function drawGuideLineForBranching(currAtomClass){
+  
+  var returnIfExceed = false;
+  if(selectedAtomIfAny.length>0){
+    var getX = calculateNextPointFixLen(fixed_length_bond, "X", currAtomClass);
+    var getY = calculateNextPointFixLen(fixed_length_bond, "Y", currAtomClass);
+    var getDist = sqrt(sq(mouseY-currAtomClass.y)+sq(mouseX - currAtomClass.x));
+    if(getDist<fixed_length_bond){
+      if(currAtomClass.fullState == false){
+        push();
+        strokeWeight(0.8);
+        stroke(60);
+        line(currAtomClass.x, currAtomClass.y, currAtomClass.x + getX, currAtomClass.y + getY);
+        pop();
+      }
+      else{
+        push();
+        strokeWeight(3);
+        stroke(color("rgba(200,60,60,0.6)"));
+        line(currAtomClass.x, currAtomClass.y, currAtomClass.x + getX, currAtomClass.y + getY);
+        pop();
+      }
+      
+  }
+    /*
+    if(getDist>fixed_length_bond){
+      push();
+      strokeWeight(1.5);
+      stroke(color('rgba(225,30,40,0.6)'));
+      line(lastAtom.x+getX,lastAtom.y+getY, mouseX, mouseY);
+      returnIfExceed = true;
+      pop();
+    }
+    */
   }
   return returnIfExceed;
 }
