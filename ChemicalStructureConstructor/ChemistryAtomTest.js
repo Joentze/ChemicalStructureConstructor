@@ -81,13 +81,12 @@ function drawGuideLine() {
   if (lenOfMain > 0) {
     let {x,y} = calculateNextPointFixLen(fixed_length_bond,lastAtom);
     var getDist = sqrt(sq(mouseY - lastAtom.y) + sq(mouseX - lastAtom.x));
-    if (getDist < fixed_length_bond) {
-      push();
-      strokeWeight(0.8);
-      stroke(60);
-      line(lastAtom.x, lastAtom.y, lastAtom.x + x, lastAtom.y + y);
-      pop();
-    }
+    push();
+    strokeWeight(0.8);
+    stroke(60);
+    line(lastAtom.x, lastAtom.y, lastAtom.x + x, lastAtom.y + y);
+    pop();
+    
     /*
     if(getDist>fixed_length_bond){
       push();

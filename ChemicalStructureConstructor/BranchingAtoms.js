@@ -38,18 +38,18 @@ function addingMainSubBranches(currSelectedAtom){
 
 // adding atoms to the main branch
 function addingAsParent(main_branch_atoms){
-    
    if(buttonHighlight == false){
     if(main_branch_atoms.length <= 0){
         main_branch_atoms[main_branch_atoms.length] = new atoms(mouseX, mouseY, currElement);
     }
     else if(main_branch_atoms.length>0){
         var latestAtom = main_branch_atoms[main_branch_atoms.length-1];
-        var shouldDraw = withinArea(latestAtom.x, latestAtom.y, fixed_length_bond);
-        if(!checkIfHover(main_branch_atoms)  && shouldDraw == true){
+        // var shouldDraw = withinArea(latestAtom.x, latestAtom.y, fixed_length_bond);
+        let shouldDraw = true;
+        if(!checkIfHover(main_branch_atoms)  && shouldDraw){
        
             var currLen = main_branch_atoms.length;
-           
+
             // this gets the fixed angled bonds
             let {x,y} = calculateNextPointFixLen(fixed_length_bond,main_branch_atoms[currLen-1]);
 
