@@ -40,6 +40,8 @@ function setup() {
   fsButton = new buttonCreation(windowWidth * 0.98,windowHeight * 0.9,"backGroundFS",makeFullScreen,"","clearPresetButton");
   fsButton.renderButton();
   //newMenuFormation();
+  var joinBranchesButton = new buttonCreation(windowWidth * 0.98,windowHeight * 0.9,"backGroundJoinBranches",joinBranches,"","mainButtonPreset");
+  joinBranchesButton.renderButton();
   newSelectionBoxTest = new selectionListCreation(1,1,elementsCovalentBondCount,changeMainElementSelection,"selectionBoxPreset");
   newSelectionBoxTest.renderListSel();
 }

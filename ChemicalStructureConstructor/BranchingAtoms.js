@@ -46,6 +46,7 @@ function addingAsParent(main_branch_atoms){
         var latestAtom = main_branch_atoms[main_branch_atoms.length-1];
 
         var shouldDraw = withinArea(latestAtom.x, latestAtom.y, fixed_length_bond);
+        print(latestAtom.fullState);
         if(!checkIfHover(main_branch_atoms)  && shouldDraw == true && latestAtom.fullState == false){
         // var shouldDraw = withinArea(latestAtom.x, latestAtom.y, fixed_length_bond);
       

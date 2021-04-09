@@ -6,7 +6,8 @@ function mousePressed(){
 
 
 if(modeClicker == 1 && mouseButton == LEFT){
-      addingAsParent(main_branch_atoms);
+   
+    addingAsParent(main_branch_atoms);
 }
 else if(modeClicker == 0 && mouseButton == LEFT){
     mouseClickedSelectedFunc(main_branch_atoms);
@@ -16,6 +17,8 @@ else if(modeClicker == 0 && mouseButton == RIGHT){
 }
 
 }
+
+
 
 function keyPressed(){
 
@@ -127,3 +130,14 @@ window.addEventListener('contextmenu', function (e) {
     // do something here... 
     e.preventDefault(); 
   }, false);
+
+
+function clearSelectedAtom(selectedAtomIfAny){
+
+    if(selectedAtomIfAny.length==1){
+        var selectedAtom = selectedAtomIfAny[0];
+        selectedAtom.selectedBool = false;
+        selectedAtomIfAny.pop();
+        console.log("is clearing...")
+    }
+}

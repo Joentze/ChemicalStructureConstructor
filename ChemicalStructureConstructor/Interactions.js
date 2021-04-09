@@ -35,6 +35,7 @@ function makeModeOne() {
 }
 function modeClickerOne() {
   modeClicker = 1;
+  clearSelectedAtom(selectedAtomIfAny);
 }
 function modeClickerZero() {
   modeClicker = 0;

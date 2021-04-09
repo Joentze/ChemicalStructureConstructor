@@ -68,6 +68,20 @@ class atoms{
         
         // renders the other atoms and their respective secondary atoms
         this.renderSubBranches();
+        //checks if the atom is fully bonded
+        this.checkIfFullState();
+    }
+
+    checkIfFullState(){
+        var parentLen = this.parentAtoms.length;
+        var subBranchLen = this.subBranches.length;
+        var sumOfLen = parentLen + subBranchLen;
+        if(sumOfLen <this.bNo){
+            this.fullState = false;
+        }
+        else{
+            this.fullState = true;
+        }
     }
 
     //runs a for loop to render the atoms in the sub branches.
@@ -145,7 +159,7 @@ class atoms{
                 //triggered when an already selected point is clicked on 
                 //ADD SUB BRANCHES
                 addingMainSubBranches(selectedAtomIfAny[0]);
-                print("adding");
+                //print("adding");
             }
             this.checkIfSubBranchSelected(currAtomClass.subBranches);
         }
