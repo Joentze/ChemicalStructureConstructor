@@ -5,9 +5,8 @@
 */
 
 class buttonCreation {
-  constructor(posX, posY, iconIMG, funcToExec, text, classOfButtonPreset) {
-    this.x = posX;
-    this.y = posY;
+  constructor(iconIMG, funcToExec, text, classOfButtonPreset) {
+    
     this.img = iconIMG;
     this.exe = funcToExec;
     this.text = text;
@@ -29,10 +28,10 @@ class buttonCreation {
     buttonHighlight = false;
   }
 }
-
+/*
 function makeModeOne() {
   modeClicker = prevModeClicker;
-}
+}*/
 function modeClickerOne() {
   modeClicker = 1;
   clearSelectedAtom(selectedAtomIfAny);
@@ -43,6 +42,17 @@ function modeClickerZero() {
 function makeFullScreen() {
   let fs = fullscreen();
   fullscreen(!fs);
+}
+function joinBranches(){
+  console.log("join");
+}
+function changeViewStructure(){
+  if(currViewingState>=2){
+    currViewingState = 0;
+  }else{
+  currViewingState += 1;
+  }
+  print(currViewingState);
 }
 
 function checkIfHoverCircle(posX, posY, radiusRange) {
@@ -96,7 +106,9 @@ class selectionListCreation {
 function changeMainElementSelection() {
   let currSelect = newSelectionBoxTest.listSel;
   var getNumCovalentBonds = elementsCovalentBondCount[currSelect.value()];
+  var getSymElement = elementsSymbol[currSelect.value()];
   currElement = getNumCovalentBonds;
+  currElementName = getSymElement;
   print(currElement);
 }
 function launchSelectionsBox() {

@@ -1,13 +1,13 @@
 class atoms{
-
-    constructor(posX, posY, noOfBranches){
+    // **** New variable in construtor shows the name of the element
+    constructor(posX, posY, noOfBranches, SymbolOfElement){
 
         //position of the atom
         this.x = posX;
         this.y = posY;
 
         //for testing
-        this.name;
+        this.sym = SymbolOfElement;
 
         //the total number of total covalent bonds that can be formed
         this.bNo = noOfBranches;
@@ -24,7 +24,7 @@ class atoms{
         this.fullState = false;
 
         //color of the rendered atom
-        this.colorOfAtom = color(0);
+        this.colorOfAtom = color(40);
 
         //radius of rendered atom 
         this.radiusA = 10;
@@ -43,29 +43,76 @@ class atoms{
 
         //selection bubble for right click select
         this.selectionTable;
+
+        //if atom is not carbon leave gap for the text
+        this.isGapNeeded = false;
     }
 
     //draws the atom
     renderAtom(){
+        this.isAtomCarbon();
         
-        if(this.selectedBool){
-            push();
-            this.CursorNearExpand();
-            stroke(color('rgb(150, 30,30)'));
-            fill(color('rgba(232, 134, 121,0.5)'));
-            ellipse(this.x, this.y, this.radiusB, this.radiusB);
-            pop();
-            
-        }
-        else{
-            push();
-            noStroke();
-            fill(this.colorOfAtom);
-            var currRadiusSize = this.CursorNearExpand();
-            ellipse(this.x, this.y, currRadiusSize, currRadiusSize);
-            pop();
-        }
-        
+            if(this.isGapNeeded == false && currViewingState == 0){
+                if(this.selectedBool){
+                    push();
+                    this.CursorNearExpand();
+                    strokeWeight(0.3);
+                    stroke(color('rgb(150, 30,30)'));
+                    fill(color('rgba(232, 134, 121,0.5)'));
+                    ellipse(this.x, this.y, this.radiusB, this.radiusB);
+                    pop();
+                    
+                }
+                else{
+                    push();
+                    noStroke();
+                    fill(this.colorOfAtom);
+                    var currRadiusSize = this.CursorNearExpand();
+                    ellipse(this.x, this.y, currRadiusSize, currRadiusSize);
+                    pop();
+                }
+            }
+            else if(this.isGapNeeded==true){
+
+                push();
+                this.CursorNearExpand();
+                textAlign(CENTER);
+                textFont('Arial');
+                textSize(18);
+                text(this.sym,this.x,this.y);
+                pop();
+                //this.isGapNeeded = true;
+            }
+            else if(this.isGapNeeded == false && currViewingState == 1){
+                this.isGapNeeded = true;
+                push();
+                this.CursorNearExpand();
+                textAlign(CENTER);
+                textFont('Arial');
+                textSize(18);
+                text(this.sym,this.x,this.y);
+                pop();
+            }
+            else if(this.isGapNeeded==false && currViewingState == 2){
+                if(this.selectedBool){
+                    push();
+                    this.CursorNearExpand();
+                    strokeWeight(0.3);
+                    stroke(color('rgb(150, 30,30)'));
+                    fill(color('rgba(232, 134, 121,0.5)'));
+                    ellipse(this.x, this.y, this.radiusB, this.radiusB);
+                    pop();
+                    
+                }
+                else{
+                    push();
+                    noStroke();
+                    fill(this.colorOfAtom);
+                    var currRadiusSize = this.CursorNearExpand();
+                    //ellipse(this.x, this.y, currRadiusSize, currRadiusSize);
+                    pop();
+                }
+            }
         // renders the other atoms and their respective secondary atoms
         this.renderSubBranches();
         //checks if the atom is fully bonded
@@ -165,5 +212,12 @@ class atoms{
         }
 
     }
-    
+    isAtomCarbon(){
+        if(this.sym=="C"){
+            this.isGapNeeded = false;
+        }
+        else{
+            this.isGapNeeded = true;
+        }
+    }
 }
