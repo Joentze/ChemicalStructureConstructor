@@ -49,7 +49,7 @@ function mouseClickedSelectedFunc(mainBranchArray){
                 break;
             }
         }
-        else if(currAtomClass == selectedAtomIfAny[0]&& withinArea(currAtomClass.x, currAtomClass.y,fixed_length_bond-10)== true && currAtomClass.selectedBool == true){
+        else if(currAtomClass == selectedAtomIfAny[0]&& withinArea(currAtomClass.x, currAtomClass.y,2*fixed_length_bond)== true && currAtomClass.selectedBool == true){
             //triggered when an already selected point is clicked on 
             //ADD SUB BRANCHES
 
@@ -98,7 +98,6 @@ function withinArea(posX, posY, radiusRegion){
     var calDist = sqrt(sq(mouseY-posY)+sq(mouseX-posX));
     if(calDist<=radiusRegion){
         return_bool = true;
-
     }
     else{
         return_bool = false;

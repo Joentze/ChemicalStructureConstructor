@@ -98,11 +98,13 @@ function drawGuideLine() {
   if (lenOfMain > 0) {
     let {x,y} = calculateNextPointFixLen(fixed_length_bond,lastAtom, mouseX, mouseY);
     var getDist = sqrt(sq(mouseY - lastAtom.y) + sq(mouseX - lastAtom.x));
-    push();
-    strokeWeight(0.8);
-    stroke(60);
-    line(lastAtom.x, lastAtom.y, lastAtom.x + x, lastAtom.y + y);
-    pop();
+    if (getDist < 2*fixed_length_bond) {
+      push();
+      strokeWeight(0.8);
+      stroke(60);
+      line(lastAtom.x, lastAtom.y, lastAtom.x + x, lastAtom.y + y);
+      pop();
+    }
     
     /*
     if(getDist>fixed_length_bond){
@@ -124,7 +126,7 @@ function drawGuideLineForBranching(currAtomClass) {
     var getDist = sqrt(
       sq(mouseY - currAtomClass.y) + sq(mouseX - currAtomClass.x)
     );
-    if (getDist < fixed_length_bond) {
+    if (getDist < 2*fixed_length_bond) {
       if (currAtomClass.fullState == false) {
         push();
         strokeWeight(0.8);
