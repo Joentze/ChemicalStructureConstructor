@@ -23,10 +23,10 @@ function addingMainSubBranches(currSelectedAtom){
     if(!currSelectedAtom.fullState){
         
         //returns the fixed length bonds 
-        let {x,y} = calculateNextPointFixLen(fixed_length_bond,currSelectedAtom);
+        let {x,y} = calculateNextPointFixLen(fixed_length_bond,currSelectedAtom, mouseX, mouseY);
         
         //adds new atom under the sub branches of the main branch atom
-        var thisNewAtom = new atoms(currSelectedAtom.x+x, currSelectedAtom.y+y, currElement);
+        var thisNewAtom = new atoms(currSelectedAtom.x+x, currSelectedAtom.y+y, currElement, currElementName);
         currSelectedAtom.addBranch(thisNewAtom, currSelectedAtom);
         
         //adds the main branch atom as a parent atom
@@ -40,21 +40,25 @@ function addingMainSubBranches(currSelectedAtom){
 function addingAsParent(main_branch_atoms){
    if(buttonHighlight == false){
     if(main_branch_atoms.length <= 0){
-        main_branch_atoms[main_branch_atoms.length] = new atoms(mouseX, mouseY, currElement);
+        main_branch_atoms[main_branch_atoms.length] = new atoms(mouseX, mouseY, currElement, currElementName);
     }
     else if(main_branch_atoms.length>0){
         var latestAtom = main_branch_atoms[main_branch_atoms.length-1];
+
+        var shouldDraw = withinArea(latestAtom.x, latestAtom.y, fixed_length_bond);
+        print(latestAtom.fullState);
+        if(!checkIfHover(main_branch_atoms)  && shouldDraw == true && latestAtom.fullState == false){
         // var shouldDraw = withinArea(latestAtom.x, latestAtom.y, fixed_length_bond);
-        let shouldDraw = true;
-        if(!checkIfHover(main_branch_atoms)  && shouldDraw){
+      
+
        
             var currLen = main_branch_atoms.length;
 
             // this gets the fixed angled bonds
-            let {x,y} = calculateNextPointFixLen(fixed_length_bond,main_branch_atoms[currLen-1]);
+            let {x,y} = calculateNextPointFixLen(fixed_length_bond,main_branch_atoms[currLen-1], mouseX, mouseY);
 
             //this adds the new atom within the respective length
-            main_branch_atoms[currLen] = new atoms(main_branch_atoms[currLen-1].x+x, main_branch_atoms[currLen-1].y+y, currElement);
+            main_branch_atoms[currLen] = new atoms(main_branch_atoms[currLen-1].x+x, main_branch_atoms[currLen-1].y+y, currElement, currElementName);
             
             // o0 <--- o1
             var currAtomParentArr = main_branch_atoms[currLen].parentAtoms;

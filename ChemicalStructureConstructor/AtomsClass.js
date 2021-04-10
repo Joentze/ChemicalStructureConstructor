@@ -1,13 +1,13 @@
 class atoms{
-
-    constructor(posX, posY, noOfBranches){
+    // **** New variable in construtor shows the name of the element
+    constructor(posX, posY, noOfBranches, SymbolOfElement){
 
         //position of the atom
         this.x = posX;
         this.y = posY;
 
         //for testing
-        this.name;
+        this.sym = SymbolOfElement;
 
         //the total number of total covalent bonds that can be formed
         this.bNo = noOfBranches;
@@ -24,7 +24,7 @@ class atoms{
         this.fullState = false;
 
         //color of the rendered atom
-        this.colorOfAtom = color(0);
+        this.colorOfAtom = color(40);
 
         //radius of rendered atom 
         this.radiusA = 10;
@@ -43,31 +43,82 @@ class atoms{
 
         //selection bubble for right click select
         this.selectionTable;
+
+        //if atom is not carbon leave gap for the text
+        this.isGapNeeded = false;
     }
 
     //draws the atom
     renderAtom(){
+        this.isAtomCarbon();
         
-        if(this.selectedBool){
-            push();
-            this.CursorNearExpand();
-            stroke(color('rgb(150, 30,30)'));
-            fill(color('rgba(232, 134, 121,0.5)'));
-            ellipse(this.x, this.y, this.radiusB, this.radiusB);
-            pop();
-            
-        }
-        else{
-            push();
-            noStroke();
-            fill(this.colorOfAtom);
-            var currRadiusSize = this.CursorNearExpand();
-            ellipse(this.x, this.y, currRadiusSize, currRadiusSize);
-            pop();
-        }
-        
+            if(this.isGapNeeded == false && currViewingState == 0){
+                if(this.selectedBool){
+                   this.RSelected();
+                }
+                else{
+                    push();
+                    noStroke();
+                    fill(this.colorOfAtom);
+                    var currRadiusSize = this.CursorNearExpand();
+                    ellipse(this.x, this.y, currRadiusSize, currRadiusSize);
+                    pop();
+                }
+            }
+            else if(this.isGapNeeded==true){
+                this.RShowText();
+            }
+            else if(this.isGapNeeded == false && currViewingState == 1){
+                this.isGapNeeded = true;
+                this.RShowText();
+            }
+            else if(this.isGapNeeded==false && currViewingState == 2){
+                if(this.selectedBool){
+                    this.RSelected();
+                }
+                else{
+                    push();
+                    noStroke();
+                    fill(this.colorOfAtom);
+                    var currRadiusSize = this.CursorNearExpand();
+                    //ellipse(this.x, this.y, currRadiusSize, currRadiusSize);
+                    pop();
+                }
+            }
         // renders the other atoms and their respective secondary atoms
         this.renderSubBranches();
+        //checks if the atom is fully bonded
+        this.checkIfFullState();
+    }
+    RSelected(){
+        push();
+        this.CursorNearExpand();
+        strokeWeight(0.3);
+        stroke(color('rgb(150, 30,30)'));
+        fill(color('rgba(232, 134, 121,0.5)'));
+        ellipse(this.x, this.y, this.radiusB, this.radiusB);
+        pop();
+    }
+
+    RShowText(){
+        push();
+        this.CursorNearExpand();
+        textAlign(CENTER);
+        textFont('Arial');
+        textSize(18);
+        text(this.sym,this.x,this.y);
+        pop();
+    }
+    checkIfFullState(){
+        var parentLen = this.parentAtoms.length;
+        var subBranchLen = this.subBranches.length;
+        var sumOfLen = parentLen + subBranchLen;
+        if(sumOfLen <this.bNo){
+            this.fullState = false;
+        }
+        else{
+            this.fullState = true;
+        }
     }
 
     //runs a for loop to render the atoms in the sub branches.
@@ -145,11 +196,18 @@ class atoms{
                 //triggered when an already selected point is clicked on 
                 //ADD SUB BRANCHES
                 addingMainSubBranches(selectedAtomIfAny[0]);
-                print("adding");
+                //print("adding");
             }
             this.checkIfSubBranchSelected(currAtomClass.subBranches);
         }
 
     }
-    
+    isAtomCarbon(){
+        if(this.sym=="C"){
+            this.isGapNeeded = false;
+        }
+        else{
+            this.isGapNeeded = true;
+        }
+    }
 }

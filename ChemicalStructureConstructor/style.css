@@ -35,6 +35,7 @@
     top: 91%;
     left:2%;
 }
+
 .backGroundBranching{
     background-image: url('image/BranchIcon5.svg');
     background-position: center;
@@ -43,11 +44,27 @@
     left:7%;
 }
 
+.backGroundJoinBranches{
+    background-image: url('image/JoinBranches.svg');
+    background-position: center;
+    background-repeat: no-repeat;
+    top: 91%;
+    left:12%;
+}
+
 .backGroundFS{
     background-image: url('image/fullscreen.svg');
     background-position: center;
     background-repeat: no-repeat;
     top:93%;
+    left:96%;
+}
+
+.backGroundviewButt{
+    background-image: url('image/eye.svg');
+    background-position: center;
+    background-repeat: no-repeat;
+    top:85%;
     left:96%;
 }
 

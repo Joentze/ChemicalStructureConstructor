@@ -2,6 +2,7 @@
 
 //current element ---> current number of branches
 var currElement = 4;
+var currElementName = "C"
 
 //Object Oriented variables
 var main_branch_atoms = [];
@@ -10,12 +11,21 @@ var currSelectedVar = 0;
 
 //States in the system
 var modeClicker = 1;
-var prevModeClicker;
+//var prevModeClicker;
+
+//viewing state
+//0-skeletal structure, 1 - lewis structure, 2-view without nodes
+var currViewingState = 0;
+
+//shows user is branching
 var isBranchingAnotherAtom = false;
+
+//shows if button is highlighted
 var buttonHighlight = false;
 
 //var newAtom;
 var testThisButton;
+
 //Fixed length for the bonds
 var fixed_length_bond = 100;
 
@@ -33,13 +43,20 @@ function setup() {
   //load default font
   textFont(myFont);
   //NEATEN THIS UP!!!!
-  var drawMainBranch = new buttonCreation(20,20,"backGroundPencil",modeClickerOne,"","mainButtonPreset");
+  var drawMainBranch = new buttonCreation("backGroundPencil",modeClickerOne,"","mainButtonPreset");
   drawMainBranch.renderButton();
-  var branchFromNodes = new buttonCreation(20,20,"backGroundBranching",modeClickerZero,"","mainButtonPreset");
+  var branchFromNodes = new buttonCreation("backGroundBranching",modeClickerZero,"","mainButtonPreset");
   branchFromNodes.renderButton();
-  fsButton = new buttonCreation(windowWidth * 0.98,windowHeight * 0.9,"backGroundFS",makeFullScreen,"","clearPresetButton");
+  fsButton = new buttonCreation("backGroundFS",makeFullScreen,"","clearPresetButton");
   fsButton.renderButton();
+  
   //newMenuFormation();
+  var joinBranchesButton = new buttonCreation("backGroundJoinBranches",joinBranches,"","mainButtonPreset");
+  joinBranchesButton.renderButton();
+
+  var structureViewButton = new buttonCreation("backGroundviewButt",changeViewStructure,"","clearPresetButton");
+  structureViewButton.renderButton();
+
   newSelectionBoxTest = new selectionListCreation(1,1,elementsCovalentBondCount,changeMainElementSelection,"selectionBoxPreset");
   newSelectionBoxTest.renderListSel();
 }
@@ -60,9 +77,9 @@ function draw() {
 }
 
 //calculates the fixed x y coordinates for a fixed bond length
-function calculateNextPointFixLen(fixedLength, prevPoint) {
+function calculateNextPointFixLen(fixedLength, prevPoint, newX, newY) {
   angleMode(DEGREES);
-  var getAngleToHorizontal = atan2(mouseY - prevPoint.y, mouseX - prevPoint.x);
+  var getAngleToHorizontal = atan2(newY - prevPoint.y, newX - prevPoint.x);
   if (getAngleToHorizontal < 0) {
     var addTo180 = map(getAngleToHorizontal, -180, -1, 0, 179);
     getAngleToHorizontal = 180 + addTo180;
@@ -79,7 +96,7 @@ function drawGuideLine() {
   var lastAtom = main_branch_atoms[lenOfMain - 1];
   var returnIfExceed = false;
   if (lenOfMain > 0) {
-    let {x,y} = calculateNextPointFixLen(fixed_length_bond,lastAtom);
+    let {x,y} = calculateNextPointFixLen(fixed_length_bond,lastAtom, mouseX, mouseY);
     var getDist = sqrt(sq(mouseY - lastAtom.y) + sq(mouseX - lastAtom.x));
     push();
     strokeWeight(0.8);
@@ -103,7 +120,7 @@ function drawGuideLine() {
 function drawGuideLineForBranching(currAtomClass) {
   var returnIfExceed = false;
   if (selectedAtomIfAny.length > 0) {
-    let {x,y} = calculateNextPointFixLen(fixed_length_bond,currAtomClass);
+    let {x,y} = calculateNextPointFixLen(fixed_length_bond,currAtomClass, mouseX, mouseY);
     var getDist = sqrt(
       sq(mouseY - currAtomClass.y) + sq(mouseX - currAtomClass.x)
     );

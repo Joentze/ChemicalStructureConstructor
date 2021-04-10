@@ -11,26 +11,29 @@ class bond{
         this.secondX = atomTwo.x;
         this.secondY = atomTwo.y;
 
-        
-
         //aesthetics of the bond rendering.
         this.strokeW = 2;
         this.strokeColor = color('rgb(40,40,40)');
+
         //bond selected aesthetics
         this.strokeWSel = 10;
         this.strokeColorSel = color('rgba(242, 109, 142,0.4)');
+
         //when cursor isHover aesthetics
         this.strokeColHov = color('rgba(100,100,100,0.4)');
 
         //states of the selected bond
         this.isSelected = false;
+
         //whether cursor xy is within atom one and two xy
         this.isWithinArea = false;
+
         //if hovering in line area
         this.isHoverLine = false;
 
         //BORDER ALLOWANCE
         this.borderAdd = 15; //3 px
+
         //Gradient difference tolerance
         this.gradientTolerance = 0.2;
     }
@@ -40,18 +43,20 @@ class bond{
         
             this.checkIfinArea();
             this.checkIfHover();
-      
+            let {x1,y1,x2,y2} = this.gapMinus(20,this.atomOne,this.atomTwo);
         push();
             stroke(this.strokeColor);
             strokeWeight(this.strokeW);
-            line(this.firstX,this.firstY,this.secondX,this.secondY);
+            line(this.firstX+x1,this.firstY+y1, this.secondX+x2,this.secondY+y2);
+            //print(x1);
+            //print(x2);
         pop();
         //is returned when clicked and isSelected becomes true
         if(this.isSelected){
             push();
                 stroke(this.strokeColorSel);
                 strokeWeight(this.strokeWSel);
-                line(this.firstX,this.firstY,this.secondX,this.secondY);
+                line(this.firstX+x1,this.firstY+y1, this.secondX+x2,this.secondY+y2);
             pop();
         }
         //is returned when cursor is hovered
@@ -60,7 +65,7 @@ class bond{
             push();
                 stroke(this.strokeColHov);
                 strokeWeight(this.strokeWSel);
-                line(this.firstX,this.firstY,this.secondX,this.secondY);
+                line(this.firstX+x1,this.firstY+y1, this.secondX+x2,this.secondY+y2);
             pop();
         }
     }
@@ -156,5 +161,28 @@ class bond{
             return_list[1] = firstCoord-this.borderAdd;
         }
         return return_list;
+    }
+
+    gapMinus(radiusClear, atomOne, atomTwo){
+        let x1,y1,x2,y2;
+        var returnPairOne = calculateNextPointFixLen(radiusClear,atomOne,atomTwo.x,atomTwo.y);
+        if(atomOne.isGapNeeded == true){
+            x1 = returnPairOne["x"];
+            y1 = returnPairOne["y"];
+        }
+        else{
+            x1 = 0;
+            y1 = 0;
+        }
+        var returnPairTwo = calculateNextPointFixLen(radiusClear, atomTwo,atomOne.x, atomOne.y);
+        if(atomTwo.isGapNeeded == true){
+            x2 = returnPairTwo["x"];
+            y2 = returnPairTwo["y"];
+        }
+        else{
+            x2 = 0;
+            y2 = 0;
+        }
+        return {x1,y1,x2,y2};
     }
 }
