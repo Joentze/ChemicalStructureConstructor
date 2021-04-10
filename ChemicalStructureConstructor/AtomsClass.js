@@ -54,14 +54,7 @@ class atoms{
         
             if(this.isGapNeeded == false && currViewingState == 0){
                 if(this.selectedBool){
-                    push();
-                    this.CursorNearExpand();
-                    strokeWeight(0.3);
-                    stroke(color('rgb(150, 30,30)'));
-                    fill(color('rgba(232, 134, 121,0.5)'));
-                    ellipse(this.x, this.y, this.radiusB, this.radiusB);
-                    pop();
-                    
+                   this.RSelected();
                 }
                 else{
                     push();
@@ -73,36 +66,15 @@ class atoms{
                 }
             }
             else if(this.isGapNeeded==true){
-
-                push();
-                this.CursorNearExpand();
-                textAlign(CENTER);
-                textFont('Arial');
-                textSize(18);
-                text(this.sym,this.x,this.y);
-                pop();
-                //this.isGapNeeded = true;
+                this.RShowText();
             }
             else if(this.isGapNeeded == false && currViewingState == 1){
                 this.isGapNeeded = true;
-                push();
-                this.CursorNearExpand();
-                textAlign(CENTER);
-                textFont('Arial');
-                textSize(18);
-                text(this.sym,this.x,this.y);
-                pop();
+                this.RShowText();
             }
             else if(this.isGapNeeded==false && currViewingState == 2){
                 if(this.selectedBool){
-                    push();
-                    this.CursorNearExpand();
-                    strokeWeight(0.3);
-                    stroke(color('rgb(150, 30,30)'));
-                    fill(color('rgba(232, 134, 121,0.5)'));
-                    ellipse(this.x, this.y, this.radiusB, this.radiusB);
-                    pop();
-                    
+                    this.RSelected();
                 }
                 else{
                     push();
@@ -118,7 +90,25 @@ class atoms{
         //checks if the atom is fully bonded
         this.checkIfFullState();
     }
+    RSelected(){
+        push();
+        this.CursorNearExpand();
+        strokeWeight(0.3);
+        stroke(color('rgb(150, 30,30)'));
+        fill(color('rgba(232, 134, 121,0.5)'));
+        ellipse(this.x, this.y, this.radiusB, this.radiusB);
+        pop();
+    }
 
+    RShowText(){
+        push();
+        this.CursorNearExpand();
+        textAlign(CENTER);
+        textFont('Arial');
+        textSize(18);
+        text(this.sym,this.x,this.y);
+        pop();
+    }
     checkIfFullState(){
         var parentLen = this.parentAtoms.length;
         var subBranchLen = this.subBranches.length;
