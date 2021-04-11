@@ -10,8 +10,8 @@ var main_bonds = [];
 var currSelectedVar = 0;
 
 //States in the system
-var modeClicker = 1;
-//var prevModeClicker;
+let modes = {SELECT:0, EDIT:1}
+let mode = modes.EDIT;
 
 //viewing state
 //0-skeletal structure, 1 - lewis structure, 2-view without nodes
@@ -35,6 +35,13 @@ let myFont;
 
 //
 var newSelectionBoxTest;
+
+
+
+let structure = new Structure()
+
+let selectedAtom = null;
+
 
 function preload() {
   myFont = loadFont("Assets/Arame-Regular.ttf");
@@ -74,16 +81,9 @@ function draw() {
   testAtomBar.checkToShow();
   resizeCanvas(windowWidth, windowHeight);
   background(230);
-  drawMainStructure(main_branch_atoms, main_bonds);
-  if (modeClicker == 1) {
-    drawGuideLine();
-  } else if (modeClicker == 0) {
-    drawGuideLineForBranching(selectedAtomIfAny[0]);
-    if(selectedAtomIfAny.length>0){
-      //test
-      };
-  }
-  
+
+  structure.render();
+
 }
 
 //calculates the fixed x y coordinates for a fixed bond length
@@ -97,35 +97,26 @@ function calculateNextPointFixLen(fixedLength, prevPoint, newX, newY) {
   let x = fixedLength * cos(getAngleToHorizontal);
   let y = fixedLength * sin(getAngleToHorizontal);
 
-  return {x,y};
+  return [prevPoint.x+x, prevPoint.y+y];
 }
 
 //draws out the guideline for fixed angles
 function drawGuideLine() {
-  var lenOfMain = main_branch_atoms.length;
-  var lastAtom = main_branch_atoms[lenOfMain - 1];
-  var returnIfExceed = false;
-  if (lenOfMain > 0) {
-    let {x,y} = calculateNextPointFixLen(fixed_length_bond,lastAtom, mouseX, mouseY);
-    var getDist = sqrt(sq(mouseY - lastAtom.y) + sq(mouseX - lastAtom.x));
-    push();
-    strokeWeight(0.8);
-    stroke(60);
-    line(lastAtom.x, lastAtom.y, lastAtom.x + x, lastAtom.y + y);
-    pop();
-    
-    /*
-    if(getDist>fixed_length_bond){
+  let latestAtom = structure.atoms.slice(-1)[0]
+  if(selectedAtom){
+      latestAtom=selectedAtom
+  }  
+  if (latestAtom) {
+    let [projX,projY] = calculateNextPointFixLen(fixed_length_bond,latestAtom, mouseX, mouseY);
+    var distance = dist(latestAtom.x, latestAtom.y, mouseX, mouseY);
+    if (distance < 2 * fixed_length_bond) {
       push();
-      strokeWeight(1.5);
-      stroke(color('rgba(225,30,40,0.6)'));
-      line(lastAtom.x+getX,lastAtom.y+getY, mouseX, mouseY);
-      returnIfExceed = true;
+      strokeWeight(0.8);
+      stroke(60);
+      line(latestAtom.x, latestAtom.y, projX, projY);
       pop();
     }
-    */
   }
-  return returnIfExceed;
 }
 function drawGuideLineForBranching(currAtomClass) {
   var returnIfExceed = false;
@@ -134,7 +125,7 @@ function drawGuideLineForBranching(currAtomClass) {
     var getDist = sqrt(
       sq(mouseY - currAtomClass.y) + sq(mouseX - currAtomClass.x)
     );
-    if (getDist < fixed_length_bond) {
+    if (getDist < 2*fixed_length_bond) {
       if (currAtomClass.fullState == false) {
         push();
         strokeWeight(0.8);
@@ -149,16 +140,6 @@ function drawGuideLineForBranching(currAtomClass) {
         pop();
       }
     }
-    /*
-    if(getDist>fixed_length_bond){
-      push();
-      strokeWeight(1.5);
-      stroke(color('rgba(225,30,40,0.6)'));
-      line(lastAtom.x+getX,lastAtom.y+getY, mouseX, mouseY);
-      returnIfExceed = true;
-      pop();
-    }
-    */
   }
   return returnIfExceed;
 }

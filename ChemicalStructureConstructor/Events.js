@@ -1,24 +1,46 @@
 //Only one atom allowed to be selected at any time
-var selectedAtomIfAny = [];
 
 
 function mousePressed(){
+    if (mode==modes.EDIT){
+        if(mouseButton == LEFT){
+            // change selection if any atom is hovered
+            let changingSelection = false;
+            for (atom of structure.atoms){
+                if (atom.hoverBool){
+                    selectedAtom=atom;
+                    changingSelection=true;
+                }
+            }
+            // if no atom is hovered, create a new atom
+            if (!changingSelection){
+                newAtom = createAtom()
+                if(newAtom){
+                    selectedAtom=newAtom
+                }
+                
+            }
+            
+        }
+        else if(mouseButton == RIGHT){
+            // join selected atom with currently hovered atom
+            newAtom = joinAtoms()
+            if(newAtom){
+                selectedAtom=newAtom
+            }
+        }
+        
+        // update each atoms selectedBool and fullstate
+        for(let atom of structure.atoms){
+            atom.selectedBool = (atom == selectedAtom)
+            atom.fullstate = atomIsFull(atom)
+        }
 
 
-if(modeClicker == 1 && mouseButton == LEFT){
+    }
    
-    addingAsParent(main_branch_atoms);
-}
-else if(modeClicker == 0 && mouseButton == LEFT){
-    mouseClickedSelectedFunc(main_branch_atoms);
-}
-else if(modeClicker == 0 && mouseButton == RIGHT){
-    //launchSelectionsBox();
-}
-
 
 }
-
 
 
 function keyPressed(){
@@ -31,44 +53,7 @@ function keyPressed(){
 }
 
 
-// selects atom if there arent any selected, otherwise switches between selected atoms
-function mouseClickedSelectedFunc(mainBranchArray){
-    for(let cnt = 0; cnt<mainBranchArray.length; cnt ++){
-        currAtomClass = mainBranchArray[cnt];
-        if(currAtomClass.hoverBool == true && currAtomClass.selectedBool == false){
-            
-            if(selectedAtomIfAny.length<=0){
-                currAtomClass.selectedBool = true;
-                selectedAtomIfAny[0] = currAtomClass;
-                break;
-            }
-            else if(selectedAtomIfAny.length>0 ){
-                //when there is a currently selected atom, select this
-                print("doing this");
-                makeSelectedAtom(currAtomClass,selectedAtomIfAny);
-                break;
-            }
-        }
-        else if(currAtomClass == selectedAtomIfAny[0]&& withinArea(currAtomClass.x, currAtomClass.y,fixed_length_bond-10)== true && currAtomClass.selectedBool == true){
-            //triggered when an already selected point is clicked on 
-            //ADD SUB BRANCHES
 
-            addingMainSubBranches(selectedAtomIfAny[0]);
-            print("adding");
-        }
-        currAtomClass.checkIfSubBranchSelected(currAtomClass.subBranches);
-    }
-}
-
-
-
-//switches between selected points
-function makeSelectedAtom(currAtom, ifSelectedArr){
-    currAtom.selectedBool = true;
-    ifSelectedArr[0].selectedBool = false;
-    ifSelectedArr.pop();
-    ifSelectedArr[0] = currAtom;
-}
 
 //TO BE IMPLEMENTED!! unselects all points 
 function clickedAway(currAtom, ifSelectedArr){
@@ -76,35 +61,11 @@ function clickedAway(currAtom, ifSelectedArr){
     ifSelectedArr.pop();
 }
 
-//Check if cursor is drawing on an existing point
-function checkIfHover(main_branch_atoms){
-    var returnBool = false;
-    for(let cnt = 0; cnt< main_branch_atoms.length; cnt++){
-        //print(main_branch_atoms[cnt].hoverBool);
-        if(main_branch_atoms[cnt].hoverBool){
-            returnBool = true;
-            break;
-        }
-        else{
-            returnBool = false;
-        }
-    }
-    return returnBool;
-}
-
 //check if cursor is within a certain radius of selected point
-function withinArea(posX, posY, radiusRegion){
-    var return_bool = false;
-    var calDist = sqrt(sq(mouseY-posY)+sq(mouseX-posX));
-    if(calDist<=radiusRegion){
-        return_bool = true;
-
-    }
-    else{
-        return_bool = false;
-
-    }
-    return return_bool;
+function withinRadius(posX, posY, radiusRegion){
+    let distance = dist(mouseX,mouseY,posX,posY) 
+    return distance<=radiusRegion
+    
 }
 
 //to disable the regular right click menu

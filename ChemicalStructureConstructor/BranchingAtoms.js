@@ -13,6 +13,8 @@ function drawMainStructure(mainBranchArray, main_bonds){
 
 }
 
+
+
 //this function adds a subbranch atom to the selected atom (via the mouseClickedSelectedFunc()) and assigns the
 // selected atom as a parent atom in the subbranch atom class object.
 //*** to add into the mouseClickedSelectedFunc!!!!!!!
@@ -45,7 +47,7 @@ function addingAsParent(main_branch_atoms){
     else if(main_branch_atoms.length>0){
         var latestAtom = main_branch_atoms[main_branch_atoms.length-1];
 
-        var shouldDraw = withinArea(latestAtom.x, latestAtom.y, fixed_length_bond);
+        var shouldDraw = withinArea(latestAtom.x, latestAtom.y, fixed_length_bond*2);
         print(latestAtom.fullState);
         if(!checkIfHover(main_branch_atoms)  && shouldDraw == true && latestAtom.fullState == false){
         // var shouldDraw = withinArea(latestAtom.x, latestAtom.y, fixed_length_bond);
@@ -87,6 +89,6 @@ function addingBonds(main_branch_atoms, currLen){
     firstAtom = main_branch_atoms[currLen - 1];
     secondAtom = main_branch_atoms[currLen];
     bondArrLen = main_bonds.length;
-    main_bonds[bondArrLen] = new bond(firstAtom, secondAtom);
+    main_bonds[bondArrLen] = new Bond(firstAtom, secondAtom);
 }
 
