@@ -1,9 +1,4 @@
-/*function testButton(){
-    var createButtonTest = createButton("testButton");
-    createButtonTest.id("mainButtonPreset");
-}
-*/
-
+//Creates Button
 class buttonCreation {
   constructor(iconIMG, funcToExec, text, classOfButtonPreset) {
     
@@ -32,10 +27,12 @@ class buttonCreation {
 function makeModeOne() {
   modeClicker = prevModeClicker;
 }*/
+
 function modeClickerOne() {
   modeClicker = 1;
   clearSelectedAtom(selectedAtomIfAny);
 }
+
 function modeClickerZero() {
   modeClicker = 0;
 }
@@ -66,10 +63,10 @@ function checkIfHoverCircle(posX, posY, radiusRange) {
   return return_bool;
 }
 
+//Creates selection box
 class selectionListCreation {
-  constructor(posX, posY, itemSelection, executeThisFunction, classPresetCSS) {
-    this.x = posX;
-    this.y = posY;
+  constructor(itemSelection, executeThisFunction, classPresetCSS) {
+    
     this.namePair = itemSelection;
     this.exe = executeThisFunction;
     this.CSSclass = classPresetCSS;
@@ -111,6 +108,7 @@ function changeMainElementSelection() {
   currElementName = getSymElement;
   print(currElement);
 }
+
 function launchSelectionsBox() {
   if (selectedAtomIfAny.length > 0) {
     var currAtom = selectedAtomIfAny[0];
@@ -122,5 +120,12 @@ function launchSelectionsBox() {
       "selectionBoxPreset"
     );
     currSelectionTable.renderListSel();
+  }
+}
+
+
+class radioSelectionHorizontal{
+  constructor(){
+    
   }
 }

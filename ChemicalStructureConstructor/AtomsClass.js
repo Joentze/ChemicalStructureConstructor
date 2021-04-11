@@ -51,7 +51,7 @@ class atoms{
     //draws the atom
     renderAtom(){
         this.isAtomCarbon();
-        
+        this.isFullChangeState();
             if(this.isGapNeeded == false && currViewingState == 0){
                 if(this.selectedBool){
                    this.RSelected();
@@ -208,6 +208,11 @@ class atoms{
         }
         else{
             this.isGapNeeded = true;
+        }
+    }
+    isFullChangeState(){
+        if(this.fullState){
+            modeClicker = 0;
         }
     }
 }
