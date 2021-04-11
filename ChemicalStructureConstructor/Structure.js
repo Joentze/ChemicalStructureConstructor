@@ -25,6 +25,8 @@ class Structure{
         }
 
     }
+
+  
     addAtom(atom){
         this.atoms.push(atom)
         this.adjList.set(atom,[])
