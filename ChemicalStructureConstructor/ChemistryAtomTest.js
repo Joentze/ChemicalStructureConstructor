@@ -25,6 +25,7 @@ var buttonHighlight = false;
 
 //var newAtom;
 var testThisButton;
+var testAtomBar;
 
 //Fixed length for the bonds
 var fixed_length_bond = 100;
@@ -49,6 +50,7 @@ function preload() {
 function setup() {
   //load default font
   textFont(myFont);
+  
   //NEATEN THIS UP!!!!
   var drawMainBranch = new buttonCreation("backGroundPencil",modeClickerOne,"","mainButtonPreset");
   drawMainBranch.renderButton();
@@ -64,8 +66,11 @@ function setup() {
   var structureViewButton = new buttonCreation("backGroundviewButt",changeViewStructure,"","clearPresetButton");
   structureViewButton.renderButton();
 
-  newSelectionBoxTest = new selectionListCreation(1,1,elementsCovalentBondCount,changeMainElementSelection,"selectionBoxPreset");
+  newSelectionBoxTest = new selectionListCreation(elementsCovalentBondCount,changeMainElementSelection,"selectionBoxPreset");
   newSelectionBoxTest.renderListSel();
+
+  testAtomBar = new AtomBar(50,90);
+  testAtomBar.renderSelectionElement(selectedAtomIfAny[0]);
 }
 
 function windowResized() {
@@ -73,9 +78,12 @@ function windowResized() {
 }
 
 function draw() {
+  testAtomBar.checkToShow();
   resizeCanvas(windowWidth, windowHeight);
   background(230);
+
   structure.render();
+
 }
 
 //calculates the fixed x y coordinates for a fixed bond length

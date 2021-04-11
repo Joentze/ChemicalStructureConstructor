@@ -32,3 +32,16 @@ var organicGroupCovalent = {
     "Amide":2,
     "Methyl":1
 }
+
+var elementsArShow = {
+    "C":{"aM":12,"aN":6},
+    "N":{"aM":14,"aN":7},
+    "O":{"aM":16,"aN":8},
+    "H":{"aM":1,"aN":1},
+    "S":{"aM":28,"aN":14},
+    "F":{"aM":19,"aN":9},
+    "Cl":{"aM":35.5,"aN":17},
+    "Br":{"aM":80,"aN":35},
+    "I":{"aM":127,"aN":53},
+    "P":{"aM":31,"aN":15}
+};
