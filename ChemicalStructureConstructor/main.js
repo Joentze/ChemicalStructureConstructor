@@ -143,3 +143,4 @@ function drawGuideLineForBranching(currAtomClass) {
   }
   return returnIfExceed;
 }
+
