@@ -69,8 +69,8 @@ function setup() {
   newSelectionBoxTest = new selectionListCreation(elementsCovalentBondCount,changeMainElementSelection,"selectionBoxPreset");
   newSelectionBoxTest.renderListSel();
 
-  testAtomBar = new AtomBar(50,90);
-  testAtomBar.renderSelectionElement(selectedAtomIfAny[0]);
+  //testAtomBar = new AtomBar(50,90);
+  //testAtomBar.renderSelectionElement(selectedAtomIfAny[0]);
 }
 
 function windowResized() {
@@ -78,7 +78,7 @@ function windowResized() {
 }
 
 function draw() {
-  testAtomBar.checkToShow();
+  
   resizeCanvas(windowWidth, windowHeight);
   background(230);
 
