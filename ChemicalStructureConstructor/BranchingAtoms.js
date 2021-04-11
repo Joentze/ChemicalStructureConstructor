@@ -13,6 +13,8 @@ function drawMainStructure(mainBranchArray, main_bonds){
 
 }
 
+
+
 //this function adds a subbranch atom to the selected atom (via the mouseClickedSelectedFunc()) and assigns the
 // selected atom as a parent atom in the subbranch atom class object.
 //*** to add into the mouseClickedSelectedFunc!!!!!!!
@@ -87,6 +89,6 @@ function addingBonds(main_branch_atoms, currLen){
     firstAtom = main_branch_atoms[currLen - 1];
     secondAtom = main_branch_atoms[currLen];
     bondArrLen = main_bonds.length;
-    main_bonds[bondArrLen] = new bond(firstAtom, secondAtom);
+    main_bonds[bondArrLen] = new Bond(firstAtom, secondAtom);
 }
 

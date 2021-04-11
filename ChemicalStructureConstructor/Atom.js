@@ -1,4 +1,4 @@
-class atoms{
+class Atom{
     // **** New variable in construtor shows the name of the element
     constructor(posX, posY, noOfBranches, SymbolOfElement){
 
@@ -11,15 +11,7 @@ class atoms{
 
         //the total number of total covalent bonds that can be formed
         this.bNo = noOfBranches;
-        
-        //to store other atom objects
-        this.subBranches = [];
-
-        //to store the total number of parents if any.
-        //it is important to know that there can be more than one parent, this is especially true 
-        //for ring compounts.
-        this.parentAtoms = [];
-        
+             
         //to see if the branch is fully filled
         this.fullState = false;
 
@@ -38,8 +30,6 @@ class atoms{
         //check if cursor is hovering over the atom 
         this.hoverBool = false;
 
-        //Bonds between parent and immediate child
-        this.parChildBondArr = [];
 
         //selection bubble for right click select
         this.selectionTable;
@@ -49,9 +39,9 @@ class atoms{
     }
 
     //draws the atom
-    renderAtom(){
+    render(){
         this.isAtomCarbon();
-        
+        // this.checkIfFullState();
             if(this.isGapNeeded == false && currViewingState == 0){
                 if(this.selectedBool){
                    this.RSelected();
@@ -85,10 +75,8 @@ class atoms{
                     pop();
                 }
             }
-        // renders the other atoms and their respective secondary atoms
-        this.renderSubBranches();
         //checks if the atom is fully bonded
-        this.checkIfFullState();
+        // this.checkIfFullState();
     }
     RSelected(){
         push();
@@ -109,30 +97,20 @@ class atoms{
         text(this.sym,this.x,this.y);
         pop();
     }
-    checkIfFullState(){
-        var parentLen = this.parentAtoms.length;
-        var subBranchLen = this.subBranches.length;
-        var sumOfLen = parentLen + subBranchLen;
-        if(sumOfLen <this.bNo){
-            this.fullState = false;
-        }
-        else{
-            this.fullState = true;
-        }
-    }
 
-    //runs a for loop to render the atoms in the sub branches.
-    renderSubBranches(){
-        var maxLength = this.subBranches.length;
-        var maxLengthBondArr = this.parChildBondArr.length;
-        for(var cnt = 0; cnt<maxLength; cnt++){
-            this.subBranches[cnt].renderAtom();
-        }
-        for(var cntB = 0; cntB<maxLengthBondArr; cntB++){
-            var thisCurrBond = this.parChildBondArr[cntB]
-            thisCurrBond.renderLine();
-        }
-    }
+
+    // checkIfFullState(){
+    //     var parentLen = this.parentAtoms.length;
+    //     var subBranchLen = this.subBranches.length;
+    //     var sumOfLen = parentLen + subBranchLen;
+    //     if(sumOfLen <this.bNo){
+    //         this.fullState = false;
+    //     }
+    //     else{
+    //         this.fullState = true;
+    //     }
+    // }
+
     
     // implements lerp for when the cursor is near the atom 
     CursorNearExpand(){
@@ -151,57 +129,7 @@ class atoms{
         return return_radius;
     }
 
-    //adds sub branches to the current atom
-    addBranch(newAtomObject, refToThisAtom){
-        //print("trying to add..")
-        var getLastObjNo = this.subBranches.length ;
-        //print("getObj:"+getLastObjNo);
-        var getParentListLen = this.parentAtoms.length;
-        //print("getParent:"+getParentListLen);
-        
-        var getLastParChiLen = this.parChildBondArr.length;
 
-        if(this.selectedBool){
-        if(getLastObjNo + getParentListLen<this.bNo){
-            this.subBranches[getLastObjNo] = newAtomObject;
-            this.parChildBondArr[getLastParChiLen] = new Bond(refToThisAtom, newAtomObject);
-            print("adding branches and bonds...")
-        }
-        else{
-            this.fullState = true;
-        }
-    }
-    }
-
-    checkIfSubBranchSelected(subBranchesArray){
-
-        for(let cnt = 0; cnt<subBranchesArray.length; cnt ++){
-
-            currAtomClass = subBranchesArray[cnt];
-            if(currAtomClass.hoverBool == true && currAtomClass.selectedBool == false){
-
-                if(selectedAtomIfAny.length<=0){
-                    currAtomClass.selectedBool = true;
-                    selectedAtomIfAny[0] = currAtomClass;
-                    break;
-                }
-                else if(selectedAtomIfAny.length>0 ){
-                    //when there is a currently selected atom, select this
-                    print("doing this");
-                    makeSelectedAtom(currAtomClass,selectedAtomIfAny);
-                    break;
-                }
-            }
-            else if(currAtomClass == selectedAtomIfAny[0] && withinArea(currAtomClass.x, currAtomClass.y,fixed_length_bond-10)==true && currAtomClass.selectedBool == true){
-                //triggered when an already selected point is clicked on 
-                //ADD SUB BRANCHES
-                addingMainSubBranches(selectedAtomIfAny[0]);
-                //print("adding");
-            }
-            this.checkIfSubBranchSelected(currAtomClass.subBranches);
-        }
-
-    }
     isAtomCarbon(){
         if(this.sym=="C"){
             this.isGapNeeded = false;
