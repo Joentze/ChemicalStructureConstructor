@@ -69,8 +69,8 @@ function setup() {
   newSelectionBoxTest = new selectionListCreation(elementsCovalentBondCount,changeMainElementSelection,"selectionBoxPreset");
   newSelectionBoxTest.renderListSel();
 
-  //testAtomBar = new AtomBar(50,90);
-  //testAtomBar.renderSelectionElement(selectedAtomIfAny[0]);
+  testAtomBar = new AtomBar(50,90);
+  
 }
 
 function windowResized() {
@@ -81,6 +81,9 @@ function draw() {
   
   resizeCanvas(windowWidth, windowHeight);
   background(230);
+  if(selectedAtom!=null){
+    testAtomBar.renderAtomBar(selectedAtom)
+  }
 
   structure.render();
 
@@ -143,3 +146,4 @@ function drawGuideLineForBranching(currAtomClass) {
   }
   return returnIfExceed;
 }
+

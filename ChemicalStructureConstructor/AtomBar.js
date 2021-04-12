@@ -1,22 +1,40 @@
 //THIS NEEDS ALOT OF WORKKKKKKKK SHITTTT
-/*class AtomBar{
+class AtomBar{
     constructor(x,y){
-     this.posX = x;
-     this.posY = y;
-     this.showThis = false;
+        this.posX = x;
+        this.posY = y;
+        this.showThis = false;
+        this.className = "selectionBoxElementsPreset";
+        this.elementBoxSelector = new selectionListCreation(elementsSymbol,changeCurrSelectedAtomElement,this.className);
+        this.prevAtom;
     }
 
     renderingElementText(AtomSelected){
         let atomSym = AtomSelected.sym;
         push();
-        noStroke();
-        fill(color('rgb(40,40,40)'));
-        textSize(70);
-        text(atomSym,this.posX,this.posY);
-        pop();
-        let aM = elementsArShow[atomSym]["aM"];
-        let aN = elementsArShow[atomSym]["aN"];
+        if(atomSym.length==1){
+            textFont('Arial');
+            noStroke();
+            fill(color('rgb(40,40,40)'));
+            textSize(70);
+            text(atomSym,this.posX,this.posY);
+            pop();
+
+        }
+        else if(atomSym.length == 2){
+            textFont('Arial');
+            noStroke();
+            fill(color('rgb(40,40,40)'));
+            textSize(70);
+            text(atomSym,this.posX-20,this.posY);
+            pop();
+
+        }
+            let aM = elementsArShow[atomSym]["aM"];
+            let aN = elementsArShow[atomSym]["aN"];
+        
         push();
+        textFont('Arial');
         noStroke();
         fill(color('rgb(40,40,40)'));
         textSize(10);
@@ -25,30 +43,37 @@
         pop();
     }
 
-    renderSelectionElement(){
-        if(this.showThis){
-            let elementBoxSelector = new selectionListCreation(elementsSymbol,changeCurrSelectedAtomElement,"selectionBoxElementsPreset" );
-            elementBoxSelector.renderListSel();
-        }
+    renderSelectionElement(selectedAtom){
+           this.elementBoxSelector.renderListSel();
+           if(this.prevAtom!=selectedAtom){
+            let getIndex = Object.keys(elementsCovalentBondCount);
+            document.getElementsByClassName(this.className)[0].selectedIndex = getIndex.indexOf(selectedAtom.element) ;
+            
+            this.prevAtom = selectedAtom;
+
+           }
     }
 
-    checkToShow(){
-        if(modeClicker == 0 && selectedAtomIfAny.length>0){
-            this.showThis = true;
-            print("showing....")
-        }
-        else{
-            this.showThis = false;
-        }
+
+
+
+    renderAtomBar(selectedAtom){
+        this.renderingElementText(selectedAtom);
+        this.renderSelectionElement(selectedAtom);
     }
    
 }
 
+
 function changeCurrSelectedAtomElement() {
-    let currSelect = newSelectionBoxTest.listSel;
-    var getNumCovalentBonds = elementsCovalentBondCount[currSelect.value()];
-    var getSymElement = elementsSymbol[currSelect.value()];
-    selectedAtomIfAny[0].bNo = getNumCovalentBonds;
-    selectedAtomIfAny[0].sym = getSymElement;
+  
+    var currValue = document.getElementsByClassName("selectionBoxElementsPreset")[0].selectedIndex;
+    let objName = Object.keys(elementsSymbol)[currValue]
+    selectedAtom.sym = elementsSymbol[objName];
+    selectedAtom.bNo = elementsCovalentBondCount[objName];
+
+}   
+  
+  function getKeyByValue(object, value) {
+    return Object.keys(object).find(key => object[key] === value);
   }
-  */
