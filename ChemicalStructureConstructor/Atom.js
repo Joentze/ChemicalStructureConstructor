@@ -5,6 +5,8 @@ class Atom{
         //position of the atom
         this.x = posX;
         this.y = posY;
+        this.targetX = this.x;
+        this.targetY = this.y;
 
         //for testing
         this.sym = SymbolOfElement;
@@ -40,6 +42,7 @@ class Atom{
 
     //draws the atom
     render(){
+        this.updatePos()
         this.isAtomCarbon();
         // this.checkIfFullState();
             if(this.isGapNeeded == false && currViewingState == 0){
@@ -78,6 +81,13 @@ class Atom{
         //checks if the atom is fully bonded
         // this.checkIfFullState();
     }
+
+    updatePos(){
+        const d = 1
+        this.x = lerp(this.x, this.targetX, 0.05);
+        this.y = lerp(this.y, this.targetY, 0.05);
+    }
+
     RSelected(){
         push();
         this.CursorNearExpand();
