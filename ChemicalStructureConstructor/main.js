@@ -50,7 +50,7 @@ function preload() {
 function setup() {
   //load default font
   textFont(myFont);
-  
+
   //NEATEN THIS UP!!!!
   var drawMainBranch = new buttonCreation("backGroundPencil",modeClickerEDIT,"","mainButtonPreset");
   drawMainBranch.renderButton();
@@ -90,6 +90,8 @@ function draw() {
 
   }
 
+  structure.render();
+  // text(`${mouseX}, ${mouseY}`,10,10)
   SELECT_AtomBar.renderAtomBar(selectedAtom);
   //print(SELECT_AtomBar.visibility);
 
