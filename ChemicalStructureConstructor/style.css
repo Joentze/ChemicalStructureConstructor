@@ -97,9 +97,9 @@
 }
 
 .selectionBoxElementsPreset{
-    position:sticky;
-    top: 13%;
-    left:45%;
+    position:absolute;
+    top: 7%;
+    left:12%;
     outline:none;
    
     border:none;

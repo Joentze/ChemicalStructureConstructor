@@ -48,10 +48,14 @@ class AtomBar{
            if(this.prevAtom!=selectedAtom){
             let getIndex = Object.keys(elementsCovalentBondCount);
             document.getElementsByClassName(this.className)[0].selectedIndex = getIndex.indexOf(selectedAtom.element) ;
-            this.prevAtom = selectedAtom
+            
+            this.prevAtom = selectedAtom;
 
            }
     }
+
+
+
 
     renderAtomBar(selectedAtom){
         this.renderingElementText(selectedAtom);
@@ -60,10 +64,15 @@ class AtomBar{
    
 }
 
+
 function changeCurrSelectedAtomElement() {
+  
+    var currValue = document.getElementsByClassName("selectionBoxElementsPreset")[0].selectedIndex;
+    let objName = Object.keys(elementsSymbol)[currValue]
+    selectedAtom.sym = elementsSymbol[objName];
+    selectedAtom.bNo = elementsCovalentBondCount[objName];
 
-}
-
+}   
   
   function getKeyByValue(object, value) {
     return Object.keys(object).find(key => object[key] === value);
