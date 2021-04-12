@@ -77,7 +77,8 @@ class selectionListCreation {
     //listSel.position(this.x,this.y)
     this.assignListItems(this.namePair);
     this.listSel.class(this.CSSclass);
-    //this.currVal = listSel.value();
+    this.currVal = this.listSel.value();
+
     this.listSel.changed(this.exe);
     this.listSel.style("font-family", "Arame-Regular");
     this.listSel.mouseOver(this.buttonIsHover);

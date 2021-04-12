@@ -8,7 +8,7 @@ class Atom{
 
         //for testing
         this.sym = SymbolOfElement;
-
+        this.element =  getKeyByValue(elementsSymbol, this.sym);
         //the total number of total covalent bonds that can be formed
         this.bNo = noOfBranches;
              
