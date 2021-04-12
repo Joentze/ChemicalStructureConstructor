@@ -36,7 +36,7 @@ function mousePressed(){
             atom.fullstate = atomIsFull(atom)
         }
 
-
+        neatenStructure(structure)
     }
    
 

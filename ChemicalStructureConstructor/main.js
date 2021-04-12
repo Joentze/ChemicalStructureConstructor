@@ -50,7 +50,7 @@ function preload() {
 function setup() {
   //load default font
   textFont(myFont);
-  
+
   //NEATEN THIS UP!!!!
   var drawMainBranch = new buttonCreation("backGroundPencil",modeClickerOne,"","mainButtonPreset");
   drawMainBranch.renderButton();
@@ -86,7 +86,7 @@ function draw() {
   }
 
   structure.render();
-
+  // text(`${mouseX}, ${mouseY}`,10,10)
 }
 
 //calculates the fixed x y coordinates for a fixed bond length
