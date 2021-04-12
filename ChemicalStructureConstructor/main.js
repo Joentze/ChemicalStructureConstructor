@@ -25,7 +25,7 @@ var buttonHighlight = false;
 
 //var newAtom;
 var testThisButton;
-var testAtomBar;
+var SELECT_AtomBar;
 
 //Fixed length for the bonds
 var fixed_length_bond = 100;
@@ -34,7 +34,7 @@ var fixed_length_bond = 100;
 let myFont;
 
 //
-var newSelectionBoxTest;
+var EDIT_selectionBox;
 
 
 
@@ -52,24 +52,20 @@ function setup() {
   textFont(myFont);
 
   //NEATEN THIS UP!!!!
-  var drawMainBranch = new buttonCreation("backGroundPencil",modeClickerOne,"","mainButtonPreset");
+  var drawMainBranch = new buttonCreation("backGroundPencil",modeClickerEDIT,"","mainButtonPreset");
   drawMainBranch.renderButton();
-  var branchFromNodes = new buttonCreation("backGroundBranching",modeClickerZero,"","mainButtonPreset");
+  var branchFromNodes = new buttonCreation("backGroundBranching",modeClickerSELECT,"","mainButtonPreset");
   branchFromNodes.renderButton();
+  
   fsButton = new buttonCreation("backGroundFS",makeFullScreen,"","clearPresetButton");
   fsButton.renderButton();
-  
-  //newMenuFormation();
-  var joinBranchesButton = new buttonCreation("backGroundJoinBranches",joinBranches,"","mainButtonPreset");
-  joinBranchesButton.renderButton();
 
   var structureViewButton = new buttonCreation("backGroundviewButt",changeViewStructure,"","clearPresetButton");
   structureViewButton.renderButton();
 
-  newSelectionBoxTest = new selectionListCreation(elementsCovalentBondCount,changeMainElementSelection,"selectionBoxPreset");
-  newSelectionBoxTest.renderListSel();
-
-  testAtomBar = new AtomBar(50,90);
+  EDIT_selectionBox = new selectionListCreation(elementsCovalentBondCount,changeMainElementSelection,"selectionBoxPreset");
+  EDIT_selectionBox.renderListSel();
+  SELECT_AtomBar = new AtomBar(50,90);
   
 }
 
@@ -81,12 +77,24 @@ function draw() {
   
   resizeCanvas(windowWidth, windowHeight);
   background(230);
-  if(selectedAtom!=null){
-    testAtomBar.renderAtomBar(selectedAtom)
+  structure.render();
+  if(selectedAtom!=null && mode == modes.SELECT){
+    SELECT_AtomBar.visibility = true;
+    
+    EDIT_selectionBox.visibility = false;
+    }
+    
+  if(mode == modes.EDIT){
+    SELECT_AtomBar.visibility = false;
+    EDIT_selectionBox.visibility = true;
+
   }
 
   structure.render();
   // text(`${mouseX}, ${mouseY}`,10,10)
+  SELECT_AtomBar.renderAtomBar(selectedAtom);
+  //print(SELECT_AtomBar.visibility);
+
 }
 
 //calculates the fixed x y coordinates for a fixed bond length
