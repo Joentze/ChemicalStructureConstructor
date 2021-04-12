@@ -28,21 +28,22 @@ function makeModeOne() {
   modeClicker = prevModeClicker;
 }*/
 
-function modeClickerOne() {
-  modeClicker = 1;
-  clearSelectedAtom(selectedAtomIfAny);
+function modeClickerEDIT() {
+  //selectedAtom = null;
+  mode = modes.EDIT;
+  console.log("EDIT MODE");
 }
 
-function modeClickerZero() {
-  modeClicker = 0;
+function modeClickerSELECT() {
+  mode = modes.SELECT;
+  console.log("SELECT MODE");
 }
+
 function makeFullScreen() {
   let fs = fullscreen();
   fullscreen(!fs);
 }
-function joinBranches(){
-  console.log("join");
-}
+
 function changeViewStructure(){
   if(currViewingState>=2){
     currViewingState = 0;
@@ -72,6 +73,7 @@ class selectionListCreation {
     this.CSSclass = classPresetCSS;
     this.currVal;
     this.listSel = createSelect();
+    this.visibility = true;
   }
   renderListSel() {
     //listSel.position(this.x,this.y)
@@ -83,6 +85,15 @@ class selectionListCreation {
     this.listSel.style("font-family", "Arame-Regular");
     this.listSel.mouseOver(this.buttonIsHover);
     this.listSel.mouseOut(this.buttonIsNotHover);
+    
+    if(this.visibility){
+      
+      this.listSel.style('visibility', 'visible')
+    }
+    else{
+      this.listSel.style('visibility','hidden');
+    };
+    
   }
   assignListItems(namePair) {
     var listToLook = namePair;
@@ -102,7 +113,7 @@ class selectionListCreation {
 }
 
 function changeMainElementSelection() {
-  let currSelect = newSelectionBoxTest.listSel;
+  let currSelect = EDIT_selectionBox.listSel;
   var getNumCovalentBonds = elementsCovalentBondCount[currSelect.value()];
   var getSymElement = elementsSymbol[currSelect.value()];
   currElement = getNumCovalentBonds;

@@ -56,6 +56,7 @@ class Atom{
                 }
             }
             else if(this.isGapNeeded==true){
+                print("is thisss")
                 this.RShowText();
             }
             else if(this.isGapNeeded == false && currViewingState == 1){
@@ -131,7 +132,7 @@ class Atom{
 
 
     isAtomCarbon(){
-        if(this.sym=="C"){
+        if(this.sym =="C"){
             this.isGapNeeded = false;
         }
         else{

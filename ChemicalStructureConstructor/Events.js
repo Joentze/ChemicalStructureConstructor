@@ -38,6 +38,22 @@ function mousePressed(){
 
 
     }
+    else if(mode == modes.SELECT){
+        if(mouseButton == LEFT){
+        // change selection if any atom is hovered
+        for (atom of structure.atoms){
+            if (atom.hoverBool){
+                selectedAtom=atom;
+            }
+        }
+            
+        for(let atom of structure.atoms){
+            atom.selectedBool = (atom == selectedAtom)
+            atom.fullstate = atomIsFull(atom)
+        }
+    }
+
+}
    
 
 }
