@@ -82,6 +82,13 @@ class Atom{
         // this.checkIfFullState();
     }
 
+    setPos(x,y){
+        this.x = x;
+        this.targetX = x;
+        this.y = y;
+        this.targetY = y;
+    }
+
     updatePos(){
         const d = 1
         this.x = lerp(this.x, this.targetX, 0.05);

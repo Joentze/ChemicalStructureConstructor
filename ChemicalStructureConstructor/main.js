@@ -36,7 +36,7 @@ let myFont;
 //
 var EDIT_selectionBox;
 
-
+let view = new View()
 
 let structure = new Structure()
 
@@ -77,6 +77,11 @@ function draw() {
   
   resizeCanvas(windowWidth, windowHeight);
   background(230);
+
+  if(mousePressed && view.panning){
+    view.pan();
+  }
+
   structure.render();
   if(selectedAtom!=null && mode == modes.SELECT){
     SELECT_AtomBar.visibility = true;

@@ -38,7 +38,12 @@ function mousePressed(){
 
         neatenStructure(structure)
     }
+
+
     else if(mode == modes.SELECT){
+        if(mouseButton == CENTER){
+            view.panStart()
+        }
         if(mouseButton == LEFT){
         // change selection if any atom is hovered
         for (atom of structure.atoms){
@@ -54,8 +59,14 @@ function mousePressed(){
     }
 
 }
-   
 
+}
+
+function mouseWheel(e){
+    if (mode==modes.SELECT){
+        view.zoom(e.delta)
+        
+    }
 }
 
 
@@ -69,6 +80,10 @@ function keyPressed(){
 }
 
 
+
+function mouseReleased(){
+    view.panStop()
+}
 
 
 //TO BE IMPLEMENTED!! unselects all points 
