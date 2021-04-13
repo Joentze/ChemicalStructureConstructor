@@ -15,12 +15,16 @@ function neatenStructure(structure){
         if (!bondAngles){
             return
         }
-        let referenceAtom = null
+        let referenceAtom = atom
         for(let neighbour of structure.adjList.get(atom)){
             if (visited.has(neighbour)){
                 referenceAtom = neighbour
             }
         }
+        // if (!referenceAtom){
+        //     referenceAtom = structure.adjList.get(atom)[0]
+        //     console.log(structure.adjList.get(atom))
+        // }
         
         let referenceAngle = getBearing(atom,referenceAtom)
         for(let neighbour of structure.adjList.get(atom)){
@@ -65,6 +69,5 @@ function neatenStructure(structure){
         numBonds = structure.adjList.get(atom).length
         return numBonds>1 ? 360/numBonds : null;
     }
-
     dfs(structure.atoms[0])
 }
