@@ -36,7 +36,10 @@ let myFont;
 //
 var EDIT_selectionBox;
 
-
+//
+let ADJUST_ZOOM = 1;
+let ZOOM_slider;
+let testRadio;
 
 let structure = new Structure()
 
@@ -65,7 +68,9 @@ function setup() {
 
   EDIT_selectionBox = new selectionListCreation(elementsCovalentBondCount,changeMainElementSelection,"selectionBoxPreset");
   EDIT_selectionBox.renderListSel();
-  SELECT_AtomBar = new AtomBar(50,90);
+  SELECT_AtomBar = new AtomBar(40,90);
+ // ZOOM_slider = new sliderInput("sliderForZoom");
+  
   
 }
 
@@ -80,8 +85,7 @@ function draw() {
   structure.render();
   if(selectedAtom!=null && mode == modes.SELECT){
     SELECT_AtomBar.visibility = true;
-    
-    EDIT_selectionBox.visibility = false;
+        EDIT_selectionBox.visibility = false;
     }
     
   if(mode == modes.EDIT){
@@ -94,7 +98,7 @@ function draw() {
   // text(`${mouseX}, ${mouseY}`,10,10)
   SELECT_AtomBar.renderAtomBar(selectedAtom);
   //print(SELECT_AtomBar.visibility);
-
+ 
 }
 
 //calculates the fixed x y coordinates for a fixed bond length

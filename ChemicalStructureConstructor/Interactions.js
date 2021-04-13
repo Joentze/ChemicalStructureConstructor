@@ -135,9 +135,25 @@ function launchSelectionsBox() {
   }
 }
 
-
-class radioSelectionHorizontal{
-  constructor(){
-    
+/*
+class sliderInput{
+  constructor(StyleCSS){
+    this.css = StyleCSS;
+    this.sliderVar = createSlider(0,100,1);
+    this.sliderVar.class(this.css);
+    this.sliderVar.mouseOver(this.buttonIsHover);
+    this.sliderVar.mouseOut(this.buttonIsNotHover)
+  }
+  returnSliderVal(){
+    return this.sliderVar.value();
+  }
+  buttonIsHover() {
+    buttonHighlight = true;
+  }
+  buttonIsNotHover() {
+    buttonHighlight = false;
   }
 }
+*/
+
+

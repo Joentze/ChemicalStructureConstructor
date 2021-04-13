@@ -56,6 +56,10 @@ class AtomBar{
            }
     }
 
+    renderButtons(selectedAtom){
+        
+    }
+
     renderAtomBar(selectedAtom){
         
         if(selectedAtom!=null){

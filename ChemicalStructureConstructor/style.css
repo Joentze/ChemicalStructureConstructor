@@ -129,3 +129,16 @@
     z-index: 1;
     position: fixed;
 }
+
+.sliderForZoom{
+    position:sticky;
+    top:3%;
+    left:90%;
+    z-index:3;
+    width:100px;
+    color: rgb(40,40,40);
+}
+
+.filterBlur{
+    filter:blur(8px);
+}
