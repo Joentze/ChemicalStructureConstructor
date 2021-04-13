@@ -59,7 +59,6 @@ class Atom{
                 }
             }
             else if(this.isGapNeeded==true){
-                print("is thisss")
                 this.RShowText();
             }
             else if(this.isGapNeeded == false && currViewingState == 1){
@@ -81,6 +80,13 @@ class Atom{
             }
         //checks if the atom is fully bonded
         // this.checkIfFullState();
+    }
+
+    setPos(x,y){
+        this.x = x;
+        this.targetX = x;
+        this.y = y;
+        this.targetY = y;
     }
 
     updatePos(){

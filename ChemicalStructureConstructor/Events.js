@@ -35,10 +35,17 @@ function mousePressed(){
             atom.selectedBool = (atom == selectedAtom)
             atom.fullstate = atomIsFull(atom)
         }
+        if(structure.atoms.length>0){
+            neatenStructure(structure)
 
-        neatenStructure(structure)
+        }
     }
+
+
     else if(mode == modes.SELECT){
+        if(mouseButton == CENTER){
+            view.panStart()
+        }
         if(mouseButton == LEFT){
         // change selection if any atom is hovered
         for (atom of structure.atoms){
@@ -54,8 +61,14 @@ function mousePressed(){
     }
 
 }
-   
 
+}
+
+function mouseWheel(e){
+    if (mode==modes.SELECT){
+        view.zoom(e.delta)
+        
+    }
 }
 
 
@@ -69,6 +82,10 @@ function keyPressed(){
 }
 
 
+
+function mouseReleased(){
+    view.panStop()
+}
 
 
 //TO BE IMPLEMENTED!! unselects all points 
