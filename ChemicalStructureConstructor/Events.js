@@ -35,8 +35,10 @@ function mousePressed(){
             atom.selectedBool = (atom == selectedAtom)
             atom.fullstate = atomIsFull(atom)
         }
+        if(structure.atoms.length>0){
+            neatenStructure(structure)
 
-        neatenStructure(structure)
+        }
     }
 
 

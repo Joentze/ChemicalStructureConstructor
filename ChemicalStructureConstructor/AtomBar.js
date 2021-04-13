@@ -51,7 +51,6 @@ class AtomBar{
            if(this.prevAtom!=selectedAtom){
             let getIndex = Object.keys(elementsCovalentBondCount);
             document.getElementsByClassName(this.className)[0].selectedIndex = getIndex.indexOf(selectedAtom.element);
-            console.log("changed");
             this.prevAtom = selectedAtom;
            }
     }

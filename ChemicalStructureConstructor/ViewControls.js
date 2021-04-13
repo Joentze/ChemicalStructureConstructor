@@ -45,8 +45,6 @@ class View{
 
         }
 
-        console.log(fixed_length_bond)
-
     }
 
 }
