@@ -59,7 +59,6 @@ class Atom{
                 }
             }
             else if(this.isGapNeeded==true){
-                print("is thisss")
                 this.RShowText();
             }
             else if(this.isGapNeeded == false && currViewingState == 1){
