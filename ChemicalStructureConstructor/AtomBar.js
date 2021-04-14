@@ -1,15 +1,23 @@
-//THIS NEEDS ALOT OF WORKKKKKKKK SHITTTT
+
 class AtomBar{
     constructor(x,y){
+        this.imageShowCentralList = ["showCentralPresetThree.svg","showCentralPresetTwo.svg","showCentralPresetOne.svg"];
         this.posX = x;
         this.posY = y;
         this.showThis = false;
         this.className = "selectionBoxElementsPreset";
         this.elementBoxSelector = new selectionListCreation(elementsSymbol,changeCurrSelectedAtomElement,this.className);
+        this.selectedAtomCentralToggle = new buttonCreation("toggleMainButtonPreset",funcIncrement, "","toggleButtonPreset");
+        this.selectedAtomCentralToggle.visibility = this.visibility;
+        
+       
+        //this.selectedAtomLonePairToggle = new buttonCreation("",)
         this.prevAtom;
         this.visibility = false;
+        
     }
 
+    //RENDERS THE TEXT AT TOP LEFT CORNER DURING SELECT MODE
     renderingElementText(AtomSelected){
         let atomSym = AtomSelected.sym;
         push();
@@ -44,19 +52,35 @@ class AtomBar{
         pop();
     }
 
+    //RENDERS THE SELECTION BOX FOR THE CURRENT ATOM
     renderSelectionElement(selectedAtom){
             this.elementBoxSelector.visibility = this.visibility;
             this.elementBoxSelector.renderListSel();
  
            if(this.prevAtom!=selectedAtom){
+
             let getIndex = Object.keys(elementsCovalentBondCount);
             document.getElementsByClassName(this.className)[0].selectedIndex = getIndex.indexOf(selectedAtom.element);
+            this.changeIconCentralAtom(selectedAtom);
             this.prevAtom = selectedAtom;
            }
     }
 
-    renderButtons(selectedAtom){
+
+    //SHOWS AND CHANGES THE STATES OF THE ATOM SELECTED
+    renderShowCentral(selectedAtom){
+        this.selectedAtomCentralToggle.visibility = this.visibility;
+        this.selectedAtomCentralToggle.renderButton();
+        //this.selectedAtomCentralToggle.NewButton.style('background-image',`url('image/${this.imageShowCentralList[0]}')`);
         
+    }
+
+    changeIconCentralAtom(selectedAtom){
+        this.selectedAtomCentralToggle.NewButton.style('background-image',`url('image/${this.imageShowCentralList[selectedAtom.showCentral]}')`);
+    }
+
+    renderLonePairs(selectedAtom){
+
     }
 
     renderAtomBar(selectedAtom){
@@ -64,12 +88,16 @@ class AtomBar{
         if(selectedAtom!=null){
 
         this.renderSelectionElement(selectedAtom);
-
+         this.renderShowCentral(selectedAtom);
+        
         }
         if(mode == modes.SELECT && selectedAtom!=null){
         this.renderingElementText(selectedAtom);
+       
+       
     }
-
+     
+    
     
 }
 }
@@ -96,3 +124,23 @@ function changeCurrSelectedAtomElement() {
   function getKeyByValue(object, value) {
     return Object.keys(object).find(key => object[key] === value);
   }
+
+
+ function funcIncrement(){
+      
+    if(selectedAtom != null){
+        
+        let currViewingState = selectedAtom.showCentral;
+
+        if(currViewingState>=2){
+            currViewingState = 0;
+            
+        }else{
+            currViewingState += 1;
+
+        }
+        
+        SELECT_AtomBar.selectedAtomCentralToggle.NewButton.style('background-image',`url('image/${SELECT_AtomBar.imageShowCentralList[currViewingState]}')`);
+        selectedAtom.showCentral = currViewingState;
+    }
+}

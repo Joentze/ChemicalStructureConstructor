@@ -64,9 +64,11 @@ function setup() {
 
   var structureViewButton = new buttonCreation("backGroundviewButt",changeViewStructure,"","clearPresetButton");
   structureViewButton.renderButton();
-
+  
   EDIT_selectionBox = new selectionListCreation(elementsCovalentBondCount,changeMainElementSelection,"selectionBoxPreset");
   EDIT_selectionBox.renderListSel();
+ // let radioTest = new checkBox(50,100,"test","SetRadioPreset");
+ // radioTest.createCheckBox();
   SELECT_AtomBar = new AtomBar(40,90);
  // ZOOM_slider = new sliderInput("sliderForZoom");
   

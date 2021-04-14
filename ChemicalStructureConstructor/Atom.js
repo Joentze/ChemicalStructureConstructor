@@ -38,6 +38,12 @@ class Atom{
 
         //if atom is not carbon leave gap for the text
         this.isGapNeeded = false;
+
+        //render in select mode
+        this.showLonePairs = false;
+
+        //1-show carbon sym, 2-show skeletal, 0-show node.
+        this.showCentral = 0;
     }
 
     //draws the atom
@@ -45,7 +51,7 @@ class Atom{
         this.updatePos()
         this.isAtomCarbon();
         // this.checkIfFullState();
-            if(this.isGapNeeded == false && currViewingState == 0){
+            if(this.isGapNeeded == false && this.showCentral == 0){
                 if(this.selectedBool){
                    this.RSelected();
                 }
@@ -61,11 +67,11 @@ class Atom{
             else if(this.isGapNeeded==true){
                 this.RShowText();
             }
-            else if(this.isGapNeeded == false && currViewingState == 1){
+            else if(this.isGapNeeded == false && this.showCentral == 1){
                 this.isGapNeeded = true;
                 this.RShowText();
             }
-            else if(this.isGapNeeded==false && currViewingState == 2){
+            else if(this.isGapNeeded==false && this.showCentral == 2){
                 if(this.selectedBool){
                     this.RSelected();
                 }
@@ -114,20 +120,6 @@ class Atom{
         text(this.sym,this.x,this.y);
         pop();
     }
-
-
-    // checkIfFullState(){
-    //     var parentLen = this.parentAtoms.length;
-    //     var subBranchLen = this.subBranches.length;
-    //     var sumOfLen = parentLen + subBranchLen;
-    //     if(sumOfLen <this.bNo){
-    //         this.fullState = false;
-    //     }
-    //     else{
-    //         this.fullState = true;
-    //     }
-    // }
-
     
     // implements lerp for when the cursor is near the atom 
     CursorNearExpand(){

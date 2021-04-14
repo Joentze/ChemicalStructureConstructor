@@ -6,15 +6,28 @@ class buttonCreation {
     this.exe = funcToExec;
     this.text = text;
     this.idName = classOfButtonPreset;
+    this.buttonState = false;
+    this.buttonCnt = 0;
+    this.visibility = true;
+    this.NewButton = createButton(this.text);
   }
   renderButton() {
-    var NewButton = createButton(this.text);
-    NewButton.class(this.idName + " " + this.img);
+    
+    this.NewButton.class(this.idName + " " + this.img);
     //NewButton.position(this.x, this.y);
-    NewButton.mouseOver(this.buttonIsHover);
-    NewButton.mouseOut(this.buttonIsNotHover);
-    NewButton.mouseClicked(this.exe);
+    this.NewButton.mouseOver(this.buttonIsHover);
+    this.NewButton.mouseOut(this.buttonIsNotHover);
+    this.NewButton.mouseClicked(this.exe);
+
+    if(this.visibility){
+      
+      this.NewButton.style('visibility', 'visible')
+    }
+    else{
+      this.NewButton.style('visibility','hidden');
+    };
   }
+
 
   buttonIsHover() {
     buttonHighlight = true;
@@ -23,6 +36,8 @@ class buttonCreation {
     buttonHighlight = false;
   }
 }
+
+
 /*
 function makeModeOne() {
   modeClicker = prevModeClicker;
@@ -44,13 +59,17 @@ function makeFullScreen() {
   fullscreen(!fs);
 }
 
+
+
 function changeViewStructure(){
   if(currViewingState>=2){
     currViewingState = 0;
   }else{
   currViewingState += 1;
   }
-  print(currViewingState);
+  for(let currAtom of structure.atoms){
+    currAtom.showCentral = currViewingState;
+  }
 }
 
 function checkIfHoverCircle(posX, posY, radiusRange) {
@@ -156,4 +175,32 @@ class sliderInput{
 }
 */
 
+/*
+class checkBox{
+  constructor(posX, posY, name, styleSheet){
+    this.x = posX;
+    this.y = posY;
+    this.name = name;
+    this.css = styleSheet;
+    this.checkBox;
+  }
 
+  createCheckBox(){
+    this.checkBox = createCheckbox(this.name, false);
+    this.checkBox.class(this.css);
+    let theInput = this.checkBox.child()[0];
+    theInput.id(this.css);
+    this.checkBox.mouseOver(this.buttonIsHover);
+    this.checkBox.mouseOut(this.buttonIsNotHover);
+    this.checkBox.style('font-family', 'Arame-Regular');
+  }
+ 
+buttonIsHover() {
+    buttonHighlight = true;
+  }
+buttonIsNotHover() {
+    buttonHighlight = false;
+  }
+  
+}
+*/
