@@ -40,7 +40,7 @@ class Atom{
         this.isGapNeeded = false;
 
         //render in select mode
-        this.showLonePairs = false;
+        this.showLonePairs = 0;
 
         //1-show carbon sym, 2-show skeletal, 0-show node.
         this.showCentral = 0;

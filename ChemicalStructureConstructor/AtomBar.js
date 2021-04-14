@@ -1,18 +1,31 @@
 
 class AtomBar{
     constructor(x,y){
-        this.imageShowCentralList = ["showCentralPresetThree.svg","showCentralPresetTwo.svg","showCentralPresetOne.svg"];
+
+        //position of atom bar
         this.posX = x;
         this.posY = y;
-        this.showThis = false;
+
+        //class name atom bar 
         this.className = "selectionBoxElementsPreset";
-        this.elementBoxSelector = new selectionListCreation(elementsSymbol,changeCurrSelectedAtomElement,this.className);
-        this.selectedAtomCentralToggle = new buttonCreation("toggleMainButtonPreset",funcIncrement, "","toggleButtonPreset");
-        this.selectedAtomCentralToggle.visibility = this.visibility;
         
-       
-        //this.selectedAtomLonePairToggle = new buttonCreation("",)
+        //Array of ul for images for button
+        this.imageShowCentralList = ["showCentralPresetThree.svg","showCentralPresetTwo.svg","showCentralPresetOne.svg"];
+        this.imageShowLPList = ["showLPPresetThree.svg","showLPPresetTwo.svg","showLPPresetOne.svg"];
+        
+        //Creation of interaction objects
+        this.elementBoxSelector = new selectionListCreation(elementsSymbol,changeCurrSelectedAtomElement,this.className);
+        this.selectedAtomCentralToggle = new buttonCreation("toggleMainButtonPreset",ElementfuncIncrement, "","toggleButtonPreset");
+        this.selectedAtomLonePairToggle = new buttonCreation("toggleMainButtonPreset",LPfuncIncrement,"","LPtoggleButtonPreset");
+        
+        //assign visibility
+        this.selectedAtomCentralToggle.visibility = this.visibility;
+        this.selectedAtomLonePairToggle.visibility = this.visibility;
+
+        //keeps record of previous atom
         this.prevAtom;
+        
+        //current visibility of atom bar
         this.visibility = false;
         
     }
@@ -42,14 +55,14 @@ class AtomBar{
             let aM = elementsArShow[atomSym]["aM"];
             let aN = elementsArShow[atomSym]["aN"];
         
-        push();
-        textFont('Arial');
-        noStroke();
-        fill(color('rgb(40,40,40)'));
-        textSize(10);
-        text(aM.toString(),this.posX+50,this.posY-50);
-        text(aN.toString(), this.posX+50, this.posY+10);
-        pop();
+            push();
+            textFont('Arial');
+            noStroke();
+            fill(color('rgb(40,40,40)'));
+            textSize(10);
+            text(aM.toString(),this.posX+50,this.posY-50);
+            text(aN.toString(), this.posX+50, this.posY+10);
+            pop();
     }
 
     //RENDERS THE SELECTION BOX FOR THE CURRENT ATOM
@@ -57,90 +70,109 @@ class AtomBar{
             this.elementBoxSelector.visibility = this.visibility;
             this.elementBoxSelector.renderListSel();
  
-           if(this.prevAtom!=selectedAtom){
-
-            let getIndex = Object.keys(elementsCovalentBondCount);
-            document.getElementsByClassName(this.className)[0].selectedIndex = getIndex.indexOf(selectedAtom.element);
-            this.changeIconCentralAtom(selectedAtom);
-            this.prevAtom = selectedAtom;
-           }
+       
     }
-
 
     //SHOWS AND CHANGES THE STATES OF THE ATOM SELECTED
     renderShowCentral(selectedAtom){
         this.selectedAtomCentralToggle.visibility = this.visibility;
         this.selectedAtomCentralToggle.renderButton();
-        //this.selectedAtomCentralToggle.NewButton.style('background-image',`url('image/${this.imageShowCentralList[0]}')`);
-        
     }
 
-    changeIconCentralAtom(selectedAtom){
-        this.selectedAtomCentralToggle.NewButton.style('background-image',`url('image/${this.imageShowCentralList[selectedAtom.showCentral]}')`);
-    }
-
+    //SHOWS THE LONE PAIR TOGGLER FOR THE SELECTED ATOM 
     renderLonePairs(selectedAtom){
-
+        this.selectedAtomLonePairToggle.visibility = this.visibility;
+        this.selectedAtomLonePairToggle.renderButton();
     }
 
-    renderAtomBar(selectedAtom){
-        
-        if(selectedAtom!=null){
+    //CHANGES THE TOGGLE BUTTON ICON WITH EVERY CHANGE IN SELECTED ATOM
+    changeIconCentralAtom(selectedAtom,buttonToAct,arrayToPickImg,variableTolook){
+        buttonToAct.NewButton.style('background-image',`url('image/${arrayToPickImg[variableTolook]}')`);
+        if(selectedAtom.sym == "C" && buttonToAct != this.selectedAtomCentralToggle){
+            buttonToAct.NewButton.style('filter', "blur(0px)");
+        }
+        else if(selectedAtom.sym !="C" && buttonToAct == this.selectedAtomCentralToggle){
+            buttonToAct.NewButton.style('filter', "blur(3px)");
+        }
+        else if(selectedAtom.sym == "C" && buttonToAct == this.selectedAtomCentralToggle){
+            buttonToAct.NewButton.style('filter', "blur(0px)");
+        }
+    }
 
-        this.renderSelectionElement(selectedAtom);
-         this.renderShowCentral(selectedAtom);
-        
+    //RENDERS ATOM BAR
+    renderAtomBar(selectedAtom){
+        if(selectedAtom!=null){
+            this.renderSelectionElement(selectedAtom);
+            this.renderShowCentral(selectedAtom);
+            this.renderLonePairs(selectedAtom);
+            this.checkForChangeExec();          
         }
         if(mode == modes.SELECT && selectedAtom!=null){
-        this.renderingElementText(selectedAtom);
-       
-       
-    }
-     
-    
-    
+            this.renderingElementText(selectedAtom);      
+        }    
 }
+
+//CHECKS FOR A CHANGE IN THE ATOM SELECTED AND EXECUTE FUNCTIONS ACCORDINGLY.
+checkForChangeExec(){
+    if(this.prevAtom!=selectedAtom){
+        let getIndex = Object.keys(elementsCovalentBondCount);
+        document.getElementsByClassName(this.className)[0].selectedIndex = getIndex.indexOf(selectedAtom.element);
+        this.changeIconCentralAtom(selectedAtom,this.selectedAtomCentralToggle,this.imageShowCentralList, selectedAtom.showCentral);
+        this.changeIconCentralAtom(selectedAtom,this.selectedAtomLonePairToggle,this.imageShowLPList, selectedAtom.showLonePairs);
+        this.prevAtom = selectedAtom;
+       }
 }
 
 
+}
+
+//CHECKS FOR "OVER BONDING"
 function changeCurrSelectedAtomElement() {
   
     var currValue = document.getElementsByClassName("selectionBoxElementsPreset")[0].selectedIndex;
     let objName = Object.keys(elementsSymbol)[currValue]
-
     let bNo = elementsCovalentBondCount[objName];
     let currNumBonds = structure.adjList.get(selectedAtom).length
+
     if (currNumBonds>bNo){
         alert(`Can't convert to ${objName}. Too many bonds`)
     }else{
         selectedAtom.sym = elementsSymbol[objName];
         selectedAtom.bNo = elementsCovalentBondCount[objName];
         selectedAtom.element = objName;
-    }
-
-   
+    }  
 }   
-  
-  function getKeyByValue(object, value) {
-    return Object.keys(object).find(key => object[key] === value);
-  }
 
+ function ElementfuncIncrement(){
+      
+    if(selectedAtom != null){
+        let currViewingState = selectedAtomIncrementVar(selectedAtom.showCentral,2);
+        SELECT_AtomBar.selectedAtomCentralToggle.NewButton.style('background-image',`url('image/${SELECT_AtomBar.imageShowCentralList[currViewingState]}')`);
+        if(selectedAtom.sym == "C"){
+        selectedAtom.showCentral = currViewingState;
+        }
+    }
+}
 
- function funcIncrement(){
+function LPfuncIncrement(){
       
     if(selectedAtom != null){
         
-        let currViewingState = selectedAtom.showCentral;
+        let currViewingState = selectedAtomIncrementVar(selectedAtom.showLonePairs,2);
+        
+        SELECT_AtomBar.selectedAtomLonePairToggle.NewButton.style('background-image',`url('image/${SELECT_AtomBar.imageShowLPList[currViewingState]}')`);
+ 
+        selectedAtom.showLonePairs = currViewingState;
 
-        if(currViewingState>=2){
+    }
+}
+
+function selectedAtomIncrementVar(varToChange, max){
+    let currViewingState = varToChange;
+        if(currViewingState>=max){
             currViewingState = 0;
-            
         }else{
             currViewingState += 1;
-
         }
-        
-        SELECT_AtomBar.selectedAtomCentralToggle.NewButton.style('background-image',`url('image/${SELECT_AtomBar.imageShowCentralList[currViewingState]}')`);
-        selectedAtom.showCentral = currViewingState;
-    }
+        return currViewingState;
 }
