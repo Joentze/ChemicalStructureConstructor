@@ -117,7 +117,7 @@ class Atom{
         textAlign(CENTER);
         textFont('Arial');
         textSize(18);
-        text(this.sym,this.x,this.y);
+        text(this.sym,this.x,this.y+1);
         pop();
     }
     

@@ -19,12 +19,12 @@ class AtomBar{
         this.selectedAtomLonePairToggle = new buttonCreation("toggleMainButtonPreset",LPfuncIncrement,"","LPtoggleButtonPreset");
         
         //assign visibility
-        this.selectedAtomCentralToggle.visibility = this.visibility;
-        this.selectedAtomLonePairToggle.visibility = this.visibility;
+        this.selectedAtomCentralToggle.visibility, this.selectedAtomLonePairToggle.visibility = this.visibility;
 
         //keeps record of previous atom
         this.prevAtom;
-        
+        this.prevAtomElement;
+
         //current visibility of atom bar
         this.visibility = false;
         
@@ -120,7 +120,12 @@ checkForChangeExec(){
         this.changeIconCentralAtom(selectedAtom,this.selectedAtomCentralToggle,this.imageShowCentralList, selectedAtom.showCentral);
         this.changeIconCentralAtom(selectedAtom,this.selectedAtomLonePairToggle,this.imageShowLPList, selectedAtom.showLonePairs);
         this.prevAtom = selectedAtom;
+        this.prevAtomElement = selectedAtom.element;
        }
+    else if(this.prevAtom == selectedAtom && selectedAtom.element != this.prevAtomElement){
+        this.changeIconCentralAtom(selectedAtom,this.selectedAtomCentralToggle,this.imageShowCentralList, selectedAtom.showCentral);
+        this.prevAtomElement = selectedAtom.element;
+    }
 }
 
 
