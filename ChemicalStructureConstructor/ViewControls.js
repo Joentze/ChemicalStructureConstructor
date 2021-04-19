@@ -34,17 +34,18 @@ class View{
 
 
     zoom(dir){
-        const zoomSpeed = dir/200
-        for (let atom of structure.atoms){
-            let dx = atom.x - mouseX;
-            let dy = atom.y - mouseY;
-            atom.setPos(atom.x + zoomSpeed * dx,atom.y + zoomSpeed * dy)
-        }
-        if (structure.atoms.length>1){
-            fixed_length_bond = dist(structure.atoms[0].x,structure.atoms[0].y,structure.atoms[1].x,structure.atoms[1].y)
+        if(!buttonHighlight){
+            const zoomSpeed = dir/200
+            for (let atom of structure.atoms){
+                let dx = atom.x - mouseX;
+                let dy = atom.y - mouseY;
+                atom.setPos(atom.x + zoomSpeed * dx,atom.y + zoomSpeed * dy)
+            }
+            if (structure.atoms.length>1){
+                fixed_length_bond = dist(structure.atoms[0].x,structure.atoms[0].y,structure.atoms[1].x,structure.atoms[1].y)
 
+            }
         }
-
     }
 
 }

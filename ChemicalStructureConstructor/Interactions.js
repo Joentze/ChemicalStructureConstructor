@@ -1,3 +1,5 @@
+//const { create } = require("domain");
+
 //Creates Button
 class buttonCreation {
   constructor(iconIMG, funcToExec, text, classOfButtonPreset) {
@@ -154,53 +156,41 @@ function launchSelectionsBox() {
   }
 }
 
-/*
-class sliderInput{
-  constructor(StyleCSS){
-    this.css = StyleCSS;
-    this.sliderVar = createSlider(0,100,1);
-    this.sliderVar.class(this.css);
-    this.sliderVar.mouseOver(this.buttonIsHover);
-    this.sliderVar.mouseOut(this.buttonIsNotHover)
-  }
-  returnSliderVal(){
-    return this.sliderVar.value();
-  }
-  buttonIsHover() {
-    buttonHighlight = true;
-  }
-  buttonIsNotHover() {
-    buttonHighlight = false;
-  }
-}
-*/
-
-/*
-class checkBox{
-  constructor(posX, posY, name, styleSheet){
-    this.x = posX;
-    this.y = posY;
-    this.name = name;
-    this.css = styleSheet;
-    this.checkBox;
+class createTextArea{
+  constructor(styleCSS){
+    this.css = styleCSS;
+    this.visibility = true;
+    this.createTextArea;
+    this.renderTextArea(this.css);
+    this.currHeight;
   }
 
-  createCheckBox(){
-    this.checkBox = createCheckbox(this.name, false);
-    this.checkBox.class(this.css);
-    let theInput = this.checkBox.child()[0];
-    theInput.id(this.css);
-    this.checkBox.mouseOver(this.buttonIsHover);
-    this.checkBox.mouseOut(this.buttonIsNotHover);
-    this.checkBox.style('font-family', 'Arame-Regular');
+  renderTextArea(){
+    this.createTextArea = document.createElement('textarea');
+    document.body.appendChild(this.createTextArea);
+    this.createTextArea.setAttribute('class', this.css);
+    this.createTextArea.setAttribute('onmouseover','makeTrue()');
+    this.createTextArea.setAttribute('onmouseout','makeFalse()');
+    this.createTextArea.setAttribute('onkeyup','textAreaAdjust(this)');
+    this.createTextArea.setAttribute('placeholder', '...');
+
   }
- 
-buttonIsHover() {
-    buttonHighlight = true;
-  }
-buttonIsNotHover() {
-    buttonHighlight = false;
-  }
+
   
+
 }
-*/
+
+function textAreaAdjust(element) {
+  element.style.height = "1px";
+  element.style.height = (25+element.scrollHeight)+"px";
+  element.currentHeight = element.style.height;
+  print(element.currentHeight);
+}
+
+function makeTrue(){
+  buttonHighlight = true;
+}
+function makeFalse(){
+  buttonHighlight = false;
+}
+

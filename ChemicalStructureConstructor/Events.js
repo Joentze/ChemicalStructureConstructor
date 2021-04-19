@@ -1,6 +1,4 @@
 //Only one atom allowed to be selected at any time
-
-
 function mousePressed(){
     if (mode==modes.EDIT){
         if(mouseButton == LEFT){
@@ -43,7 +41,7 @@ function mousePressed(){
 
 
     else if(mode == modes.SELECT){
-        if(mouseButton == CENTER){
+        if(mouseButton == CENTER && buttonHighlight == false){
             view.panStart()
         }
         if(mouseButton == LEFT){
@@ -81,7 +79,14 @@ function keyPressed(){
 
 }
 
-
+function mouseDragged(){
+    print("dragging");
+    if(mode == modes.SELECT && mouseButton == CENTER && buttonHighlight == true){
+        let atomBarTextArea = SELECT_AtomBar.notePad.createTextArea;
+        atomBarTextArea.setAttribute('style',`top:${mouseY-40}px;left:${mouseX-80}px;height:${atomBarTextArea.style.height};width:${atomBarTextArea.style.width}`);
+        
+    }
+}
 
 function mouseReleased(){
     view.panStop()

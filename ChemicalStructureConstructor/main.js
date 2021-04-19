@@ -70,6 +70,7 @@ function setup() {
  // let radioTest = new checkBox(50,100,"test","SetRadioPreset");
  // radioTest.createCheckBox();
   SELECT_AtomBar = new AtomBar(40,90);
+  //let testTextArea = new createTextArea("textAreaPreset");
  // ZOOM_slider = new sliderInput("sliderForZoom");
   
   

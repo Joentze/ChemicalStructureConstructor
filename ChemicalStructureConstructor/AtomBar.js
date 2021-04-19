@@ -17,9 +17,10 @@ class AtomBar{
         this.elementBoxSelector = new selectionListCreation(elementsSymbol,changeCurrSelectedAtomElement,this.className);
         this.selectedAtomCentralToggle = new buttonCreation("toggleMainButtonPreset",ElementfuncIncrement, "","toggleButtonPreset");
         this.selectedAtomLonePairToggle = new buttonCreation("toggleMainButtonPreset",LPfuncIncrement,"","LPtoggleButtonPreset");
-        
+        this.notesButton = new buttonCreation("toggleMainButtonPreset",openTextbox,"","textBoxOpenPreset");
+        this.notePad = new createTextArea("textAreaPreset");
         //assign visibility
-        this.selectedAtomCentralToggle.visibility, this.selectedAtomLonePairToggle.visibility = this.visibility;
+        this.notesButton.visibility,this.selectedAtomCentralToggle.visibility, this.selectedAtomLonePairToggle.visibility = this.visibility;
 
         //keeps record of previous atom
         this.prevAtom;
@@ -85,6 +86,12 @@ class AtomBar{
         this.selectedAtomLonePairToggle.renderButton();
     }
 
+    //RENDER TEXT BOX BUTTON
+    renderTextBoxButton(){
+        this.notesButton.visibility = this.visibility;
+        this.notesButton.renderButton();
+    }
+
     //CHANGES THE TOGGLE BUTTON ICON WITH EVERY CHANGE IN SELECTED ATOM
     changeIconCentralAtom(selectedAtom,buttonToAct,arrayToPickImg,variableTolook){
         buttonToAct.NewButton.style('background-image',`url('image/${arrayToPickImg[variableTolook]}')`);
@@ -105,7 +112,8 @@ class AtomBar{
             this.renderSelectionElement(selectedAtom);
             this.renderShowCentral(selectedAtom);
             this.renderLonePairs(selectedAtom);
-            this.checkForChangeExec();          
+            this.renderTextBoxButton(selectedAtom);
+            this.checkForChangeExec();    
         }
         if(mode == modes.SELECT && selectedAtom!=null){
             this.renderingElementText(selectedAtom);      
@@ -129,7 +137,11 @@ checkForChangeExec(){
 }
 
 
+
+
 }
+
+
 
 //CHECKS FOR "OVER BONDING"
 function changeCurrSelectedAtomElement() {
@@ -180,4 +192,12 @@ function selectedAtomIncrementVar(varToChange, max){
             currViewingState += 1;
         }
         return currViewingState;
+}
+
+function openTextbox(){
+
+}
+
+function boolNotesButton(){
+    //SELECT_AtomBar.
 }
