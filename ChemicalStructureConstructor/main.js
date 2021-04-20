@@ -93,11 +93,13 @@ function draw() {
   if(selectedAtom!=null && mode == modes.SELECT){
     SELECT_AtomBar.visibility = true;
         EDIT_selectionBox.visibility = false;
+        EDIT_selectionBox.checkVis();
     }
     
   if(mode == modes.EDIT){
     SELECT_AtomBar.visibility = false;
     EDIT_selectionBox.visibility = true;
+    EDIT_selectionBox.checkVis();
 
   }
 

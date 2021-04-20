@@ -41,7 +41,7 @@ function mousePressed(){
 
 
     else if(mode == modes.SELECT){
-        if(mouseButton == CENTER && buttonHighlight == false){
+        if(mouseButton == RIGHT && buttonHighlight == false){
             view.panStart()
         }
         if(mouseButton == LEFT){
@@ -81,7 +81,7 @@ function keyPressed(){
 
 function mouseDragged(){
     print("dragging");
-    if(mode == modes.SELECT && mouseButton == CENTER && buttonHighlight == true){
+    if(mode == modes.SELECT && mouseButton == RIGHT && buttonHighlight == true){
         let atomBarTextArea = selectedAtom.atomNotePad.createTextArea;
         atomBarTextArea.setAttribute('style',`top:${mouseY-40}px;left:${mouseX-80}px;height:${atomBarTextArea.style.height};width:${atomBarTextArea.style.width}`);
         

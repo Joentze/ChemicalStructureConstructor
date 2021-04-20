@@ -107,6 +107,11 @@ class selectionListCreation {
     this.listSel.mouseOver(this.buttonIsHover);
     this.listSel.mouseOut(this.buttonIsNotHover);
     
+  
+    
+  }
+
+  checkVis(){
     if(this.visibility){
       
       this.listSel.style('visibility', 'visible')
@@ -114,8 +119,8 @@ class selectionListCreation {
     else{
       this.listSel.style('visibility','hidden');
     };
-    
   }
+
   assignListItems(namePair) {
     var listToLook = namePair;
     var lengthOfKey = Object.keys(listToLook).length;

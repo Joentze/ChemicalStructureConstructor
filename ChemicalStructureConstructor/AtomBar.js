@@ -120,7 +120,9 @@ class AtomBar{
         }
         if(mode == modes.SELECT && selectedAtom!=null){
             this.renderingElementText(selectedAtom);      
-        }    
+      
+        }
+        this.elementBoxSelector. checkVis();    
 }
 
 //CHECKS FOR A CHANGE IN THE ATOM SELECTED AND EXECUTE FUNCTIONS ACCORDINGLY.
