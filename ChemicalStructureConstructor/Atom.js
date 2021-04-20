@@ -45,8 +45,8 @@ class Atom{
         //1-show carbon sym, 2-show skeletal, 0-show node.
         this.showCentral = 0;
 
-        //Notes text associated with current atom
-        
+        //NotePad associated with current atom
+        this.atomNotePad = null;
     }
 
     //draws the atom

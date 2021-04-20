@@ -173,10 +173,19 @@ class createTextArea{
     this.createTextArea.setAttribute('onmouseout','makeFalse()');
     this.createTextArea.setAttribute('onkeyup','textAreaAdjust(this)');
     this.createTextArea.setAttribute('placeholder', '...');
-
+  
   }
 
-  
+  checkVisOfTextArea(){
+    if(this.visibility){
+
+      this.createTextArea.style.visibility = "visible";
+    }
+    else{
+      this.createTextArea.style.visibility = "hidden";
+    };
+    
+  }
 
 }
 

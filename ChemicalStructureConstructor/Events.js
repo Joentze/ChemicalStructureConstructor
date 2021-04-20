@@ -82,7 +82,7 @@ function keyPressed(){
 function mouseDragged(){
     print("dragging");
     if(mode == modes.SELECT && mouseButton == CENTER && buttonHighlight == true){
-        let atomBarTextArea = SELECT_AtomBar.notePad.createTextArea;
+        let atomBarTextArea = selectedAtom.atomNotePad.createTextArea;
         atomBarTextArea.setAttribute('style',`top:${mouseY-40}px;left:${mouseX-80}px;height:${atomBarTextArea.style.height};width:${atomBarTextArea.style.width}`);
         
     }

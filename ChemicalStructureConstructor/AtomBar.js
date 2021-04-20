@@ -18,7 +18,7 @@ class AtomBar{
         this.selectedAtomCentralToggle = new buttonCreation("toggleMainButtonPreset",ElementfuncIncrement, "","toggleButtonPreset");
         this.selectedAtomLonePairToggle = new buttonCreation("toggleMainButtonPreset",LPfuncIncrement,"","LPtoggleButtonPreset");
         this.notesButton = new buttonCreation("toggleMainButtonPreset",openTextbox,"","textBoxOpenPreset");
-        this.notePad = new createTextArea("textAreaPreset");
+ 
         //assign visibility
         this.notesButton.visibility,this.selectedAtomCentralToggle.visibility, this.selectedAtomLonePairToggle.visibility = this.visibility;
 
@@ -113,7 +113,10 @@ class AtomBar{
             this.renderShowCentral(selectedAtom);
             this.renderLonePairs(selectedAtom);
             this.renderTextBoxButton(selectedAtom);
-            this.checkForChangeExec();    
+            this.checkForChangeExec();  
+            if(selectedAtom.atomNotePad != null){
+            selectedAtom.atomNotePad.checkVisOfTextArea();  
+            }
         }
         if(mode == modes.SELECT && selectedAtom!=null){
             this.renderingElementText(selectedAtom);      
@@ -129,11 +132,14 @@ checkForChangeExec(){
         this.changeIconCentralAtom(selectedAtom,this.selectedAtomLonePairToggle,this.imageShowLPList, selectedAtom.showLonePairs);
         this.prevAtom = selectedAtom;
         this.prevAtomElement = selectedAtom.element;
+        this.notesButton.buttonState = false;
        }
     else if(this.prevAtom == selectedAtom && selectedAtom.element != this.prevAtomElement){
         this.changeIconCentralAtom(selectedAtom,this.selectedAtomCentralToggle,this.imageShowCentralList, selectedAtom.showCentral);
         this.prevAtomElement = selectedAtom.element;
     }
+
+    
 }
 
 
@@ -195,9 +201,35 @@ function selectedAtomIncrementVar(varToChange, max){
 }
 
 function openTextbox(){
+    if(selectedAtom!=null && mode == modes.SELECT){
+        let note = selectedAtom.atomNotePad;
+        if(note == null){
 
+            selectedAtom.atomNotePad = new createTextArea("TextAreaPreset");
+            selectedAtom.atomNotePad.visibility = true;
+
+        }
+        else if(note!=null){
+            let boolButton = toggleButton(SELECT_AtomBar.notesButton);
+            if(boolButton){
+                console.log("changing....");
+                note.visibility = true;
+            }
+            else if(!boolButton){
+                note.visibility = false;
+            }
+        }
+    }
 }
 
-function boolNotesButton(){
+function toggleButton(buttonClass){
     //SELECT_AtomBar.
+    if(buttonClass.buttonState == false){
+        buttonClass.buttonState = true;
+    }
+    else if(buttonClass.buttonState == true){
+        buttonClass.buttonState = false;
+    }
+
+    return buttonClass.buttonState;
 }
