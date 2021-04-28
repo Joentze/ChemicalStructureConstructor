@@ -81,11 +81,10 @@ function keyPressed(){
 
 function mouseDragged(){
     print("dragging");
-    if(mode == modes.SELECT && mouseButton == RIGHT && buttonHighlight == true){
-        let atomBarTextArea = selectedAtom.atomNotePad.createTextArea;
-        atomBarTextArea.setAttribute('style',`top:${mouseY-40}px;left:${mouseX-80}px;height:${atomBarTextArea.style.height};width:${atomBarTextArea.style.width}`);
-        
+    if(/*mode == modes.SELECT &&*/ mouseButton == RIGHT && buttonHighlight == true && selectedNote != null){
+        selectedNote.setAttribute('style',`top:${mouseY-40}px;left:${mouseX-80}px;height:${selectedNote.style.height};width:${selectedNote.style.width}`);
     }
+
 }
 
 function mouseReleased(){

@@ -66,7 +66,7 @@
     left:240px;
     background-position: center;
     background-repeat: no-repeat;
-    background-image:url("image/card-text.svg");
+    background-image:url("image/pencil-square.svg");
 }
 
 .textBoxOpenPreset:hover{
@@ -109,6 +109,14 @@
     background-position: center;
     background-repeat: no-repeat;
     top:93%;
+    left:96%;
+}
+
+.sideNoteCol{
+    background-image: url('image/card-text.svg');
+    background-position: center;
+    background-repeat: no-repeat;
+    top:77%;
     left:96%;
 }
 
@@ -195,10 +203,15 @@
     left:56%;
 }
 
+textarea{
+    display:block;
+}
+
 .textAreaPreset{
     position: absolute;
+    /*
     top:30px;
-    left:290px;
+    left:290px;*/
     z-index: 2;
     background:rgba(210,210,210, 0.5);
     width:250px;
@@ -215,6 +228,8 @@
     box-shadow: 0 5px 10px 0 rgba(0,0,0,0.24), 0 10px 20px 0 rgba(0,0,0,0.19);
 }
 
+
+
 ::-webkit-resizer {
     display: none;
   }
@@ -222,3 +237,54 @@
 ::placeholder{
     color: rgb(190,190,190)
 }
+
+.noteCol {
+    height: 100%;
+    width: 0;
+    position: fixed;
+    z-index: 3;
+    top: 0;
+    right: 0;
+    color:rgb(50,50,50);
+    background:rgba(200,200,200, 0.5);
+    backdrop-filter: blur(5px);
+    overflow-x: hidden;
+    transition: 0.5s;
+    padding-top: 60px;
+  }
+  
+  .noteCol a {
+    padding: 8px 8px 8px 32px;
+    text-decoration: none;
+    font-size: 25px;
+    color: #818181;
+    display: block;
+    transition: 0.3s;
+  }
+  
+  .noteCol a:hover {
+    color: #f1f1f1;
+  }
+  
+  .noteCol .closebtn {
+    position: absolute;
+    top: 0;
+    right: 195px;
+    font-size: 36px;
+    margin-left: 50px;
+  }
+  
+  @media screen and (max-height: 450px) {
+    .noteCol {padding-top: 15px;}
+    .noteCol a {font-size: 18px;}
+  }
+  .txtAreaNoteCol{
+    font-family:Arial, Helvetica, sans-serif;
+    background:rgba(200,200,200, 0.0);
+    padding: 20px;
+    font-size:14px;
+    outline:none;
+    border:none;
+    width:100%;
+    height:100%;
+  }

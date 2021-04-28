@@ -209,6 +209,8 @@ function openTextbox(){
 
             selectedAtom.atomNotePad = new createTextArea("TextAreaPreset");
             selectedAtom.atomNotePad.visibility = true;
+            selectedAtom.atomNotePad.createTextArea.style.top = `${selectedAtom.y}px`;
+            selectedAtom.atomNotePad.createTextArea.style.left = `${selectedAtom.x}px`;
 
         }
         else if(note!=null){

@@ -168,28 +168,38 @@ class createTextArea{
     this.createTextArea;
     this.renderTextArea(this.css);
     this.currHeight;
+    this.buttonClose;
   }
 
   renderTextArea(){
     this.createTextArea = document.createElement('textarea');
+    this.buttonClose = document.createElement('button');
+    this.buttonClose.setAttribute('class','closeButtonStyle');
+    
+    let words = document.createTextNode('button');
+    this.buttonClose.appendChild(words);
+    
+
     document.body.appendChild(this.createTextArea);
     this.createTextArea.setAttribute('class', this.css);
     this.createTextArea.setAttribute('onmouseover','makeTrue()');
     this.createTextArea.setAttribute('onmouseout','makeFalse()');
     this.createTextArea.setAttribute('onkeyup','textAreaAdjust(this)');
+    this.createTextArea.setAttribute('onmousedown','clickSelectText(this)');
     this.createTextArea.setAttribute('placeholder', '...');
-  
+    
   }
 
   checkVisOfTextArea(){
     if(this.visibility){
-
+      this.buttonClose.style.visibility = "visible";
       this.createTextArea.style.visibility = "visible";
     }
     else{
+      this.buttonClose.style.visibility = "hidden"
       this.createTextArea.style.visibility = "hidden";
     };
-    
+   
   }
 
 }
@@ -208,3 +218,22 @@ function makeFalse(){
   buttonHighlight = false;
 }
 
+function clickSelectText(element){
+  if(selectedNote!=null){
+    selectedNote.style.background = 'rgba(210,210,210, 0.5)'
+  }
+ 
+  selectedNote = element;
+  selectedNote.style.background = 'rgba(255, 211, 221,0.3)'
+}
+
+function openNoteCol(){
+  console.log("is opening...")
+  console.log(document.getElementById("mySideNotesCol"));
+  document.getElementById("mySideNotesCol").style.width = "450px"
+}
+
+function closeNoteCol(){
+  console.log("is closing")
+  document.getElementById("mySideNotesCol").style.width = "0px"
+}

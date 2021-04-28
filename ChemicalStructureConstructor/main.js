@@ -33,9 +33,12 @@ var fixed_length_bond = 100;
 //Default font
 let myFont;
 
+//Notes selected 
+let selectedNote = null;
+
 //
 var EDIT_selectionBox;
-
+let noteColButton;
 
 let view = new View()
 
@@ -58,7 +61,8 @@ function setup() {
   drawMainBranch.renderButton();
   var branchFromNodes = new buttonCreation("backGroundBranching",modeClickerSELECT,"","mainButtonPreset");
   branchFromNodes.renderButton();
-  
+  noteColButton = new buttonCreation('sideNoteCol',openNoteCol,"","clearPresetButton")
+  noteColButton.renderButton();
   fsButton = new buttonCreation("backGroundFS",makeFullScreen,"","clearPresetButton");
   fsButton.renderButton();
 
@@ -81,7 +85,7 @@ function windowResized() {
 }
 
 function draw() {
-  
+ 
   resizeCanvas(windowWidth, windowHeight);
   background(230);
 
@@ -172,4 +176,3 @@ function drawGuideLineForBranching(currAtomClass) {
 function getKeyByValue(object, value) {
   return Object.keys(object).find(key => object[key] === value);
 }
-

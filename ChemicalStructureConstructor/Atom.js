@@ -5,6 +5,7 @@ class Atom{
         //position of the atom
         this.x = posX;
         this.y = posY;
+        //this.z = posZ;
         this.targetX = this.x;
         this.targetY = this.y;
 
