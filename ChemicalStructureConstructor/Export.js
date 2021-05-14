@@ -34,7 +34,7 @@ class SVGExport{
 
             if(currAtomState == false){
                 if(currAtom.showCentral==0){
-                  stringToJoin = `<circle cx="${currAtom.x}" cy="${currAtom.y}" r="10" stroke-width = "0" fill="black"/>`
+                  stringToJoin = `<circle cx="${currAtom.x}" cy="${currAtom.y}" r="5" stroke-width = "0" fill="black"/>`
                 }
 
             }
