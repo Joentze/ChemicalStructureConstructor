@@ -1,7 +1,11 @@
+
+
 //Only one atom allowed to be selected at any time
 function mousePressed(){
+
     if (mode==modes.EDIT){
         if(mouseButton == LEFT){
+
             // change selection if any atom is hovered
             let changingSelection = false;
             for (atom of structure.atoms){
@@ -13,8 +17,10 @@ function mousePressed(){
             // if no atom is hovered, create a new atom
             if (!changingSelection){
                 newAtom = createAtom()
+
                 if(newAtom){
                     selectedAtom=newAtom
+
                 }
                 
             }
@@ -23,6 +29,7 @@ function mousePressed(){
         else if(mouseButton == RIGHT){
             // join selected atom with currently hovered atom
             newAtom = joinAtoms()
+            
             if(newAtom){
                 selectedAtom=newAtom
             }
@@ -41,6 +48,7 @@ function mousePressed(){
 
 
     else if(mode == modes.SELECT){
+
         if(mouseButton == RIGHT && buttonHighlight == false){
             view.panStart()
         }
@@ -78,14 +86,15 @@ function keyPressed(){
   }
 
 }
-
+/*
 function mouseDragged(){
     print("dragging");
-    if(/*mode == modes.SELECT &&*/ mouseButton == RIGHT && buttonHighlight == true && selectedNote != null){
+    
+    if(mouseButton == RIGHT && buttonHighlight == true && selectedNote != null){
         selectedNote.setAttribute('style',`top:${mouseY-40}px;left:${mouseX-80}px;height:${selectedNote.style.height};width:${selectedNote.style.width}`);
     }
 
-}
+}*/
 
 function mouseReleased(){
     view.panStop()

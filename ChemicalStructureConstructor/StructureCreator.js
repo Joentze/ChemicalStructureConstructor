@@ -5,6 +5,7 @@ function createAtom(){
             latestAtom=selectedAtom
         }
         if(!latestAtom){
+
             structure.addAtom(new Atom(mouseX, mouseY, currElement, currElementName));
         }else{
 
@@ -25,6 +26,7 @@ function createAtom(){
 
 function joinAtoms(){
     let joinAtom = null
+
     for (atom of structure.atoms){
         if (atom.hoverBool){
             joinAtom=atom;

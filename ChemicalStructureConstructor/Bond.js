@@ -20,7 +20,7 @@ class Bond{
 
         //states of the selected bond
         this.isSelected = false;
-
+        this.accessCoord;
         //whether cursor xy is within atom one and two xy
         // this.isWithinArea = false;
 
@@ -38,6 +38,7 @@ class Bond{
 
         this.isHoverLine = this.checkIfHover(atom1,atom2)
         let coords = this.gapMinus(20,atom1,atom2);
+        this.accessCoord = coords;
         push();
         stroke(this.strokeColor);
         strokeWeight(this.strokeW);

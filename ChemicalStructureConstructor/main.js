@@ -65,7 +65,8 @@ function setup() {
   noteColButton.renderButton();
   fsButton = new buttonCreation("backGroundFS",makeFullScreen,"","clearPresetButton");
   fsButton.renderButton();
-
+ let downloadButton = new buttonCreation("downloadButton",downloadSVG,"","clearPresetButton");
+  downloadButton.renderButton();
   var structureViewButton = new buttonCreation("backGroundviewButt",changeViewStructure,"","clearPresetButton");
   structureViewButton.renderButton();
   

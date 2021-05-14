@@ -269,7 +269,7 @@ textarea{
   .noteCol .closebtn {
     position: absolute;
     top: 0;
-    right: 195px;
+    right:90%;
     font-size: 36px;
     margin-left: 50px;
   }
@@ -287,4 +287,13 @@ textarea{
     border:none;
     width:100%;
     height:100%;
+  }
+
+  .downloadButton{
+      background-image: url('image/download.svg');
+      position:absolute;
+      top:0;
+      right:0;
+      background-repeat:no-repeat;
+      background-position:center;
   }
