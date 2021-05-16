@@ -1,5 +1,6 @@
 
 
+
 class SVGExport{
     constructor(atoms, bonds){
         this.atoms = atoms;
@@ -47,20 +48,29 @@ class SVGExport{
         append(this.arrayToJoin,finalCompile);
     }
     exportSVG(){
+
         this.initSVG()
         this.createLines();
         this.createNodes();
         append(this.arrayToJoin,'</svg>');
         return this.arrayToJoin.join('\n');
+
     }
 }
 
 function downloadSVG(){
     let currentDrawingSVG = new SVGExport(structure.atoms, structure.bonds);
     let printThis = currentDrawingSVG.returnSVG;
-    download('drawing.svg',printThis)
+    download('drawing.svg',printThis);
 }
-
+/*
+function canvasPNGfrmSVG(SVGtext){
+    let tempCanvas = document.createElement('canvas');
+    tempCanvas.setAttribute('id','toBeDownloaded');
+    tempCanvas.setAttribute('src', "data:image/svg+xml;charset=utf-8," + encodeURIComponent(text));
+    
+}
+*/
 function download(filename, text) {
     var element = document.createElement("a");
     element.setAttribute(

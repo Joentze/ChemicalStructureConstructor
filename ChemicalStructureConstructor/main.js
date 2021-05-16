@@ -88,6 +88,7 @@ function windowResized() {
 function draw() {
  
   resizeCanvas(windowWidth, windowHeight);
+
   background(230);
 
   if(mousePressed && view.panning){
