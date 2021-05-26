@@ -68,6 +68,8 @@ function mousePressed(){
 
 }
 
+
+
 }
 
 function mouseWheel(e){
@@ -86,7 +88,7 @@ function keyPressed(){
   }
 
 }
-/*
+
 function mouseDragged(){
     print("dragging");
     
@@ -94,7 +96,7 @@ function mouseDragged(){
         selectedNote.setAttribute('style',`top:${mouseY-40}px;left:${mouseX-80}px;height:${selectedNote.style.height};width:${selectedNote.style.width}`);
     }
 
-}*/
+}
 
 function mouseReleased(){
     view.panStop()

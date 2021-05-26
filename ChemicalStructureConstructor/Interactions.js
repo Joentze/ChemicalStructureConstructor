@@ -169,6 +169,7 @@ class createTextArea{
     this.renderTextArea(this.css);
     this.currHeight;
     this.buttonClose;
+    selectedNote = this.createTextArea;
   }
 
   renderTextArea(){
@@ -185,7 +186,7 @@ class createTextArea{
     this.createTextArea.setAttribute('onmouseover','makeTrue()');
     this.createTextArea.setAttribute('onmouseout','makeFalse()');
     this.createTextArea.setAttribute('onkeyup','textAreaAdjust(this)');
-    this.createTextArea.setAttribute('onmousedown','clickSelectText(this)');
+    this.createTextArea.setAttribute('onclick','clickSelectText(this)');
     this.createTextArea.setAttribute('placeholder', '...');
     
   }
@@ -221,9 +222,10 @@ function makeFalse(){
 function clickSelectText(element){
   if(selectedNote!=null){
     selectedNote.style.background = 'rgba(210,210,210, 0.5)'
+    selectedNote.style.zIndex = '2';
   }
- 
   selectedNote = element;
+  selectedNote.style.zIndex='5';
   selectedNote.style.background = 'rgba(255, 211, 221,0.3)'
 }
 
