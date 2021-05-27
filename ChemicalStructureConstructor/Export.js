@@ -58,21 +58,21 @@ class SVGExport{
 }
 
 function downloadSVG(){
-    /*let currentDrawingSVG = new SVGExport(structure.atoms, structure.bonds);
+    closeTables();
+    let currentDrawingSVG = new SVGExport(structure.atoms, structure.bonds);
     let printThis = currentDrawingSVG.returnSVG;
-    download('drawing.svg',printThis);*/
-    if(selectedAtom!=null){
-    selectedAtom.selectedBool = false;
-    selectedAtom = null
-    
-    }
-    structure.render();
-   setTimeout(1, draw());
-   downloadPNG();
+    download('drawing.svg',printThis);
 }
 
 function downloadPNG(){
-    
+    closeTables();
+    if(selectedAtom!=null){
+        selectedAtom.selectedBool = false;
+        selectedAtom = null
+        
+        }
+    structure.render();
+    setTimeout(1, draw());
     let png = document.getElementById('defaultCanvas0').toDataURL();
         var download = function(href, name){
         var link = document.createElement('a');

@@ -239,3 +239,23 @@ function closeNoteCol(){
   console.log("is closing")
   document.getElementById("mySideNotesCol").style.width = "0px"
 }
+
+let dldmenustate = false;
+
+function downloadmenuswitch(){
+  let iddownload = document.getElementById('downloadPopup');
+  if(dldmenustate == false){
+    iddownload.style.visibility = 'visible';
+    dldmenustate = true;
+  }
+  else if(dldmenustate == true){
+    iddownload.style.visibility = 'hidden';
+    dldmenustate = false;
+  }
+}
+
+function closeTables(){
+  let iddownload = document.getElementById('downloadPopup');
+  iddownload.style.visibility = 'hidden';
+  dldmenustate = false;
+}

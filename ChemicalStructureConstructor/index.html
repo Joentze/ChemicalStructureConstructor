@@ -3,6 +3,8 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="style.css">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
+
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
  <!-- <script>$('textarea').autoResize</script>-->
   <script language="javascript" type="text/javascript" src="libraries/p5.min.js"></script>
@@ -36,5 +38,10 @@
     <a href="javascript:void(0)" class="closebtn" onclick="closeNoteCol()">&times;</a>
     <textarea class = "txtAreaNoteCol" placeholder="Take Notes Here!"></textarea>
   </div>
+  <div id="downloadPopup" onmouseover = "makeTrue()" onmouseout="makeFalse()">
+    <button id = "pngDownload" onclick="downloadPNG()">Export PNG</button>
+    <button id = "svgDownload" onclick="downloadSVG()">Export SVG</button>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous"></script>
 </body>
 </html>

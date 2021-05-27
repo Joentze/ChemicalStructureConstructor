@@ -274,6 +274,35 @@ textarea{
     margin-left: 50px;
   }
   
+#downloadPopup{
+    visibility:hidden;
+    z-index:2;
+    position:absolute;
+    top:50px;
+    right:20px;
+    width:120px;
+    height:fit-content;
+    background:rgb(235,235,235,0.6);
+    backdrop-filter: blur(10px);
+    border: none;
+    box-shadow: 0 5px 8px 0 rgba(0,0,0,0.2), 0 6px 10px 0 rgba(0,0,0,0.1);
+    border-radius:5px;
+    }
+#downloadPopup button{
+    width:100%;
+    background:transparent;
+    outline:none;
+    border:none;
+    font-size:16px;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    margin:none;
+    border-radius:3px;
+}
+
+#downloadPopup button:hover{
+    background:rgb(220,220,220);
+    }
+
   @media screen and (max-height: 450px) {
     .noteCol {padding-top: 15px;}
     .noteCol a {font-size: 18px;}

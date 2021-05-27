@@ -2,7 +2,9 @@
 
 //Only one atom allowed to be selected at any time
 function mousePressed(){
-
+    if(buttonHighlight==false){
+        closeTables();
+    }
     if (mode==modes.EDIT){
         if(mouseButton == LEFT && buttonHighlight==false){
 
@@ -68,7 +70,6 @@ function mousePressed(){
     }
 
 }
-
 
 
 }
