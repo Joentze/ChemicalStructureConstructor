@@ -61,12 +61,20 @@ function downloadSVG(){
     /*let currentDrawingSVG = new SVGExport(structure.atoms, structure.bonds);
     let printThis = currentDrawingSVG.returnSVG;
     download('drawing.svg',printThis);*/
-    downloadPNG();
+    if(selectedAtom!=null){
+    selectedAtom.selectedBool = false;
+    selectedAtom = null
+    
+    }
+    structure.render();
+   setTimeout(1, draw());
+   downloadPNG();
 }
 
 function downloadPNG(){
+    
     let png = document.getElementById('defaultCanvas0').toDataURL();
-    var download = function(href, name){
+        var download = function(href, name){
         var link = document.createElement('a');
         link.download = name;
         link.style.opacity = "0";

@@ -29,7 +29,7 @@ class Atom{
 
         //is the atom selected
         this.selectedBool = false;
-
+        this.atomElementDrawing;
         //check if cursor is hovering over the atom 
         this.hoverBool = false;
 
@@ -64,7 +64,7 @@ class Atom{
                     noStroke();
                     fill(this.colorOfAtom);
                     var currRadiusSize = this.CursorNearExpand();
-                    ellipse(this.x, this.y, currRadiusSize, currRadiusSize);
+                    this.atomElementDrawing = ellipse(this.x, this.y, currRadiusSize, currRadiusSize);
                     pop();
                 }
             }
@@ -106,6 +106,7 @@ class Atom{
     }
 
     RSelected(){
+        
         push();
         this.CursorNearExpand();
         strokeWeight(0.3);

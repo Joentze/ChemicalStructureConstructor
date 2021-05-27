@@ -96,7 +96,7 @@ function draw() {
     view.pan();
   }
 
-  structure.render();
+  //structure.render();
   if(selectedAtom!=null && mode == modes.SELECT){
     SELECT_AtomBar.visibility = true;
         EDIT_selectionBox.visibility = false;
