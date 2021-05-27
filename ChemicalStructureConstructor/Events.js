@@ -4,7 +4,7 @@
 function mousePressed(){
 
     if (mode==modes.EDIT){
-        if(mouseButton == LEFT){
+        if(mouseButton == LEFT && buttonHighlight==false){
 
             // change selection if any atom is hovered
             let changingSelection = false;
@@ -26,7 +26,7 @@ function mousePressed(){
             }
             
         }
-        else if(mouseButton == RIGHT){
+        else if(mouseButton == RIGHT && buttonHighlight==false){
             // join selected atom with currently hovered atom
             newAtom = joinAtoms()
             
@@ -40,10 +40,11 @@ function mousePressed(){
             atom.selectedBool = (atom == selectedAtom)
             atom.fullstate = atomIsFull(atom)
         }
+        /*
         if(structure.atoms.length>0){
             neatenStructure(structure)
 
-        }
+        }*/
     }
 
 

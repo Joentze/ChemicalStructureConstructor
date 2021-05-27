@@ -55,7 +55,7 @@ function preload() {
 function setup() {
   //load default font
   textFont(myFont);
-
+  document.getElementById('defaultCanvas0').style.background = 'rgb(230,230,230)';
   //NEATEN THIS UP!!!!
   var drawMainBranch = new buttonCreation("backGroundPencil",modeClickerEDIT,"","mainButtonPreset");
   drawMainBranch.renderButton();
@@ -83,13 +83,14 @@ function setup() {
 
 function windowResized() {
   resizeCanvas(windowWidth, windowHeight);
+  
 }
 
 function draw() {
- 
+  
   resizeCanvas(windowWidth, windowHeight);
-
-  background(230);
+  
+  
 
   if(mousePressed && view.panning){
     view.pan();

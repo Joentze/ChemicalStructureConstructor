@@ -8,7 +8,8 @@ var elementsCovalentBondCount = {
     "Chlorine":1,
     "Bromine":1,
     "Iodine":1,
-    "Phosphine":5
+    "Phosphine":5,
+    "--Type Out--":1
 };
 
 var elementsSymbol = {
@@ -21,7 +22,8 @@ var elementsSymbol = {
     "Chlorine":"Cl",
     "Bromine":"Br",
     "Iodine":"I",
-    "Phosphine":"P"
+    "Phosphine":"P",
+    "--Type Out--":"X"
 };
 
 var organicGroupCovalent = {
@@ -43,6 +45,6 @@ var elementsArShow = {
     "Cl":{"aM":35.5,"aN":17},
     "Br":{"aM":80,"aN":35},
     "I":{"aM":127,"aN":53},
-    "P":{"aM":31,"aN":15}
-  
-};
+    "P":{"aM":31,"aN":15},
+    "--":{"aM":'--',"aN":'--'}
+    };

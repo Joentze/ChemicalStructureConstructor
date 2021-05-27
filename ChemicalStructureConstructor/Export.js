@@ -1,6 +1,4 @@
 
-
-
 class SVGExport{
     constructor(atoms, bonds){
         this.atoms = atoms;
@@ -10,6 +8,7 @@ class SVGExport{
     }
     initSVG(){
         let SVGString = `<svg version="1.1"
+        id="svg_element"
         baseProfile="full"
         width="${windowWidth}" height="${windowHeight}"
         xmlns="http://www.w3.org/2000/svg">`
@@ -59,10 +58,26 @@ class SVGExport{
 }
 
 function downloadSVG(){
-    let currentDrawingSVG = new SVGExport(structure.atoms, structure.bonds);
+    /*let currentDrawingSVG = new SVGExport(structure.atoms, structure.bonds);
     let printThis = currentDrawingSVG.returnSVG;
-    download('drawing.svg',printThis);
+    download('drawing.svg',printThis);*/
+    downloadPNG();
 }
+
+function downloadPNG(){
+    let png = document.getElementById('defaultCanvas0').toDataURL();
+    var download = function(href, name){
+        var link = document.createElement('a');
+        link.download = name;
+        link.style.opacity = "0";
+        link.href = href;
+        link.click();
+        link.remove();
+      }
+      download(png, "image.png");
+      
+}
+
 /*
 function canvasPNGfrmSVG(SVGtext){
     let tempCanvas = document.createElement('canvas');

@@ -74,8 +74,10 @@ class Bond{
                 perpDist = abs(crossProduct)/distance
                 
             }
+
             return perpDist < 10
         }
+
         return false
     }
     

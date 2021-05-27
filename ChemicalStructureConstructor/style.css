@@ -3,7 +3,7 @@
 .mainButtonPreset{
     outline:none;
     z-index: 2;
-    position: sticky;
+    position: fixed;
     border: none;
     background:rgba(200,200,200,0.3);
     backdrop-filter: blur(5px);
