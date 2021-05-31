@@ -11,6 +11,7 @@ class Structure{
         }
         for (let atom of this.atoms){
             atom.render()
+            
             if (atom.hoverBool){
                 hoveredAtom=atom
             }

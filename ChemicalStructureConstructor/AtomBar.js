@@ -1,4 +1,5 @@
 
+
 class AtomBar{
     constructor(x,y){
 
@@ -18,7 +19,7 @@ class AtomBar{
         this.selectedAtomCentralToggle = new buttonCreation("toggleMainButtonPreset",ElementfuncIncrement, "","toggleButtonPreset");
         this.selectedAtomLonePairToggle = new buttonCreation("toggleMainButtonPreset",LPfuncIncrement,"","LPtoggleButtonPreset");
         this.notesButton = new buttonCreation("toggleMainButtonPreset",openTextbox,"","textBoxOpenPreset");
- 
+        this.ElementText(selectedAtom);      
         //assign visibility
         this.notesButton.visibility,this.selectedAtomCentralToggle.visibility, this.selectedAtomLonePairToggle.visibility = this.visibility;
 
@@ -32,40 +33,32 @@ class AtomBar{
     }
 
     //RENDERS THE TEXT AT TOP LEFT CORNER DURING SELECT MODE
-    renderingElementText(AtomSelected){
-        let atomSym = AtomSelected.sym;
-        push();
-        if(atomSym.length==1){
-            textFont('Arial');
-            noStroke();
-            fill(color('rgb(40,40,40)'));
-            textSize(70);
-            text(atomSym,this.posX,this.posY);
-            pop();
+    ElementText(){
 
-        }
-        else if(atomSym.length == 2){
-            textFont('Arial');
-            noStroke();
-            fill(color('rgb(40,40,40)'));
-            textSize(70);
-            text(atomSym,this.posX-20,this.posY);
-            pop();
-
-        }
-            let aM = elementsArShow[atomSym]["aM"];
-            let aN = elementsArShow[atomSym]["aN"];
-        
-            push();
-            textFont('Arial');
-            noStroke();
-            fill(color('rgb(40,40,40)'));
-            textSize(10);
-            text(aM.toString(),this.posX+50,this.posY-50);
-            text(aN.toString(), this.posX+50, this.posY+10);
-            pop();
+        let textDiv = document.createElement('div')
+        textDiv.setAttribute('class', 'ElementText')
+        textDiv.setAttribute('id', 'ElementTextDiv')
+        textDiv.style.visibility = 'hidden';
+        let h1SymInnerHtml = `<h1 id = "atomBarElementText"></h1>`
+        textDiv.insertAdjacentHTML('afterbegin',h1SymInnerHtml)
+        document.body.appendChild(textDiv);
     }
 
+    checkVisElText(){
+        let el = document.getElementById('ElementTextDiv')
+        if(mode == modes.SELECT){
+            el.style.visibility = 'visible'
+        }
+        else if(mode == modes.EDIT){
+            el.style.visibility = 'hidden'
+        }
+    }
+
+    updateElementText(selectedAtom){
+        let component = document.getElementById('atomBarElementText')
+        component.innerHTML = "";
+        component.insertAdjacentHTML('afterbegin',selectedAtom.sym);
+    }
     //RENDERS THE SELECTION BOX FOR THE CURRENT ATOM
     renderSelectionElement(selectedAtom){
             this.elementBoxSelector.visibility = this.visibility;
@@ -114,15 +107,17 @@ class AtomBar{
             this.renderLonePairs(selectedAtom);
             this.renderTextBoxButton(selectedAtom);
             this.checkForChangeExec();  
+            
             if(selectedAtom.atomNotePad != null){
             selectedAtom.atomNotePad.checkVisOfTextArea();  
             }
         }
         if(mode == modes.SELECT && selectedAtom!=null){
-            this.renderingElementText(selectedAtom);      
+            
       
         }
         this.elementBoxSelector. checkVis();    
+        this.checkVisElText();
 }
 
 //CHECKS FOR A CHANGE IN THE ATOM SELECTED AND EXECUTE FUNCTIONS ACCORDINGLY.
@@ -132,12 +127,17 @@ checkForChangeExec(){
         document.getElementsByClassName(this.className)[0].selectedIndex = getIndex.indexOf(selectedAtom.element);
         this.changeIconCentralAtom(selectedAtom,this.selectedAtomCentralToggle,this.imageShowCentralList, selectedAtom.showCentral);
         this.changeIconCentralAtom(selectedAtom,this.selectedAtomLonePairToggle,this.imageShowLPList, selectedAtom.showLonePairs);
+        this.updateElementText(selectedAtom)
+        
         this.prevAtom = selectedAtom;
         this.prevAtomElement = selectedAtom.element;
         this.notesButton.buttonState = false;
+        
+
        }
     else if(this.prevAtom == selectedAtom && selectedAtom.element != this.prevAtomElement){
         this.changeIconCentralAtom(selectedAtom,this.selectedAtomCentralToggle,this.imageShowCentralList, selectedAtom.showCentral);
+        this.updateElementText(selectedAtom)
         this.prevAtomElement = selectedAtom.element;
     }
 

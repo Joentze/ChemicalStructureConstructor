@@ -66,6 +66,7 @@ function downloadSVG(){
 
 function downloadPNG(){
     closeTables();
+    
     if(selectedAtom!=null){
         selectedAtom.selectedBool = false;
         selectedAtom = null
