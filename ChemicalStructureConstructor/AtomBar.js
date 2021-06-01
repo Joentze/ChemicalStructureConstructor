@@ -282,15 +282,19 @@ function toggleButton(buttonClass){
 
 
 function updateAtomPrintText(element){
-    let getLastChar = element.value[element.value.length-1]
-    let getInt  = Number(getLastChar);
-    console.log(getInt);
-    if(isNaN(getInt)){
-        selectedAtom.printSym = element.value
+    //this is janky af but its the only thing that works with the p5js text canvas drawing thing
+    let unicodeDictionary={
+        0:'\u2080',1:'\u2081',2:'\u2082',3:'\u2083',4:'\u2084',5:'\u2085',6:'\u2086',7:'\u2087',8:'\u2088',9:'\u2089'
     }
-    else if(!isNaN(getInt)){
-        let newStringWSub = element.value.slice(0, -1) + getInt.toString().sub()
-        selectedAtom.printSym = newStringWSub;
-
-    }
+    let returnString = ""
+    for(let currChar of element.value){
+        let getInt  = Number(currChar);
+        if(isNaN(getInt)){
+            returnString += currChar
+        }
+        else if(!isNaN(getInt)){
+            returnString += unicodeDictionary[getInt]
+        }
+}
+selectedAtom.printSym = returnString;
 }
