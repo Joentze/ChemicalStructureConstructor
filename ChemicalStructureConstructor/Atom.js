@@ -134,7 +134,7 @@ class Atom{
             textFont('Arial');
             textSize(18);
             textAlign(LEFT,BOTTOM);
-            text(this.printSym,this.x-1,this.y+1,);
+            let testthis = text(this.printSym,this.x-1,this.y+1,);
             pop();
         }
     }

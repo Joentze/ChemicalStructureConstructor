@@ -1,5 +1,3 @@
-
-
 class AtomBar{
     constructor(x,y){
 
@@ -58,6 +56,7 @@ class AtomBar{
         textAreaForSym.setAttribute('onkeyup','updateAtomPrintText(this)')
         textAreaForSym.setAttribute('placeholder','type group')
         textAreaForSym.style.visibility = 'hidden';
+        
         divHolder.appendChild(textAreaForSym);
         document.body.appendChild(divHolder);
         
@@ -196,6 +195,7 @@ function changeCurrSelectedAtomElement() {
     }else{
         if(objName!="--Type Out--"){
             selectedAtom.sym = elementsSymbol[objName];
+            selectedAtom.printSym = elementsSymbol[objName];
             selectedAtom.bNo = elementsCovalentBondCount[objName];
             selectedAtom.element = objName;
             el2.style.visibility = 'hidden';
@@ -203,6 +203,8 @@ function changeCurrSelectedAtomElement() {
         else{
             el2.style.visibility = 'visible';
             selectedAtom.sym = elementsSymbol[objName];
+            selectedAtom.bNo = elementsCovalentBondCount[objName];
+            selectedAtom.printSym = elementsSymbol[objName];
             
         }
     }  
@@ -280,6 +282,15 @@ function toggleButton(buttonClass){
 
 
 function updateAtomPrintText(element){
-    selectedAtom.printSym = element.value
-    
+    let getLastChar = element.value[element.value.length-1]
+    let getInt  = Number(getLastChar);
+    console.log(getInt);
+    if(isNaN(getInt)){
+        selectedAtom.printSym = element.value
+    }
+    else if(!isNaN(getInt)){
+        let newStringWSub = element.value.slice(0, -1) + getInt.toString().sub()
+        selectedAtom.printSym = newStringWSub;
+
+    }
 }
