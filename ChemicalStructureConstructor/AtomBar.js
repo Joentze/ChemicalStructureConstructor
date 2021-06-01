@@ -20,6 +20,8 @@ class AtomBar{
         this.selectedAtomLonePairToggle = new buttonCreation("toggleMainButtonPreset",LPfuncIncrement,"","LPtoggleButtonPreset");
         this.notesButton = new buttonCreation("toggleMainButtonPreset",openTextbox,"","textBoxOpenPreset");
         this.ElementText(selectedAtom);      
+        this.typeOutElement();
+        this.el2 = document.getElementById('typeOutElementText')
         //assign visibility
         this.notesButton.visibility,this.selectedAtomCentralToggle.visibility, this.selectedAtomLonePairToggle.visibility = this.visibility;
 
@@ -44,13 +46,35 @@ class AtomBar{
         document.body.appendChild(textDiv);
     }
 
+    typeOutElement(){
+        let divHolder = document.createElement('div')
+        divHolder.setAttribute('id','typeOutDivHolder')
+        let textAreaForSym = document.createElement('textarea');
+        textAreaForSym.setAttribute('id','typeOutElementText')
+        textAreaForSym.setAttribute('onmouseover','makeTrue()')
+        textAreaForSym.setAttribute('onmouseout','makeFalse()')
+        textAreaForSym.setAttribute('rows','1')
+        textAreaForSym.setAttribute('maxlength','20')
+        textAreaForSym.setAttribute('onkeyup','updateAtomPrintText(this)')
+        textAreaForSym.setAttribute('placeholder','type group')
+        textAreaForSym.style.visibility = 'hidden';
+        divHolder.appendChild(textAreaForSym);
+        document.body.appendChild(divHolder);
+        
+
+    }
+
+
     checkVisElText(){
         let el = document.getElementById('ElementTextDiv')
+        
         if(mode == modes.SELECT){
             el.style.visibility = 'visible'
+            
         }
         else if(mode == modes.EDIT){
             el.style.visibility = 'hidden'
+            
         }
     }
 
@@ -129,9 +153,17 @@ checkForChangeExec(){
         this.changeIconCentralAtom(selectedAtom,this.selectedAtomLonePairToggle,this.imageShowLPList, selectedAtom.showLonePairs);
         this.updateElementText(selectedAtom)
         
+        if(selectedAtom.sym=='--Type Out--'){
+            this.el2.value = selectedAtom.sym;
+            this.el2.style.visibility = 'visible'
+        }
+        else{
+            this.el2.style.visibility = 'hidden'
+        }
         this.prevAtom = selectedAtom;
         this.prevAtomElement = selectedAtom.element;
         this.notesButton.buttonState = false;
+        
         
 
        }
@@ -158,13 +190,21 @@ function changeCurrSelectedAtomElement() {
     let objName = Object.keys(elementsSymbol)[currValue]
     let bNo = elementsCovalentBondCount[objName];
     let currNumBonds = structure.adjList.get(selectedAtom).length
-
+    let el2 = document.getElementById('typeOutElementText')
     if (currNumBonds>bNo){
         alert(`Can't convert to ${objName}. Too many bonds`)
     }else{
-        selectedAtom.sym = elementsSymbol[objName];
-        selectedAtom.bNo = elementsCovalentBondCount[objName];
-        selectedAtom.element = objName;
+        if(objName!="--Type Out--"){
+            selectedAtom.sym = elementsSymbol[objName];
+            selectedAtom.bNo = elementsCovalentBondCount[objName];
+            selectedAtom.element = objName;
+            el2.style.visibility = 'hidden';
+        }
+        else{
+            el2.style.visibility = 'visible';
+            selectedAtom.sym = elementsSymbol[objName];
+            
+        }
     }  
 }   
 
@@ -236,4 +276,10 @@ function toggleButton(buttonClass){
     }
 
     return buttonClass.buttonState;
+}
+
+
+function updateAtomPrintText(element){
+    selectedAtom.printSym = element.value
+    
 }

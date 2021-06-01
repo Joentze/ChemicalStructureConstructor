@@ -2,7 +2,7 @@
 /*creates round button in a standardised color*/
 .mainButtonPreset{
     outline:none;
-    z-index: 2;
+    z-index: 1000;
     position: fixed;
     border: none;
     background:rgba(200,200,200,0.3);
@@ -25,6 +25,29 @@
     font-size:70px;
 }
 
+#typeOutDivHolder{
+    position:fixed;
+    bottom: 20px;
+    width:100%;
+    z-index: 5;
+    height:fit-content;
+
+}
+
+
+#typeOutElementText{
+    margin-left:auto;  
+    margin-right:auto;
+    border:none;
+    outline:none;
+    padding:3px;
+    padding-left:6px;
+    height:30px;
+    border-radius:50px;
+    resize: none;
+    background:rgba(200,200,200,0.6);
+    backdrop-filter:blur(10px);
+}
 
 
 .toggleMainButtonPreset{

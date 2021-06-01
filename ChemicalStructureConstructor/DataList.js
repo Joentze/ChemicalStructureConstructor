@@ -9,7 +9,7 @@ var elementsCovalentBondCount = {
     "Bromine":1,
     "Iodine":1,
     "Phosphine":5,
-    "--Type Out--":1
+    "--Type Out--":3
 };
 
 var elementsSymbol = {

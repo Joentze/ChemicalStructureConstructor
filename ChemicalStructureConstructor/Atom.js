@@ -12,6 +12,7 @@ class Atom{
         //for testing
         this.sym = SymbolOfElement;
         this.element =  getKeyByValue(elementsSymbol, this.sym);
+        this.printSym = this.sym
         //the total number of total covalent bonds that can be formed
         this.bNo = noOfBranches;
              
@@ -117,13 +118,25 @@ class Atom{
     }
 
     RShowText(){
+        if(this.sym != 'X'){
         push();
         this.CursorNearExpand();
         textAlign(CENTER);
         textFont('Arial');
         textSize(18);
-        text(this.sym,this.x,this.y+1);
+        text(this.printSym,this.x,this.y+1);
         pop();
+        }
+        else{
+            push();
+            this.CursorNearExpand();
+            textAlign(CENTER);
+            textFont('Arial');
+            textSize(18);
+            textAlign(LEFT,BOTTOM);
+            text(this.printSym,this.x-1,this.y+1,);
+            pop();
+        }
     }
     
     // implements lerp for when the cursor is near the atom 
