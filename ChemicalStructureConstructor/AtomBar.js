@@ -86,8 +86,7 @@ class AtomBar{
     renderSelectionElement(selectedAtom){
             this.elementBoxSelector.visibility = this.visibility;
             this.elementBoxSelector.renderListSel();
- 
-       
+        
     }
 
     //SHOWS AND CHANGES THE STATES OF THE ATOM SELECTED
@@ -134,12 +133,12 @@ class AtomBar{
             if(selectedAtom.atomNotePad != null){
             selectedAtom.atomNotePad.checkVisOfTextArea();  
             }
-        }
-        if(mode == modes.SELECT && selectedAtom!=null){
+            if(selectedAtom.sym == '--Type Out--'){
             
-      
+            }
         }
-        this.elementBoxSelector. checkVis();    
+        
+        this.elementBoxSelector.checkVis();    
         this.checkVisElText();
 }
 
@@ -152,8 +151,8 @@ checkForChangeExec(){
         this.changeIconCentralAtom(selectedAtom,this.selectedAtomLonePairToggle,this.imageShowLPList, selectedAtom.showLonePairs);
         this.updateElementText(selectedAtom)
         
-        if(selectedAtom.sym=='--Type Out--'){
-            this.el2.value = selectedAtom.sym;
+        if(selectedAtom.element=='--Type Out--' && mode == modes.SELECT){
+            this.el2.innerHTML = selectedAtom.sym;
             this.el2.style.visibility = 'visible'
         }
         else{
@@ -170,6 +169,15 @@ checkForChangeExec(){
         this.changeIconCentralAtom(selectedAtom,this.selectedAtomCentralToggle,this.imageShowCentralList, selectedAtom.showCentral);
         this.updateElementText(selectedAtom)
         this.prevAtomElement = selectedAtom.element;
+    }
+    else if(this.prevAtom == selectedAtom){
+        if(selectedAtom.element =='--Type Out--' && mode == modes.SELECT){
+            this.el2.innerHTML = selectedAtom.sym;
+            this.el2.style.visibility = 'visible'
+        }
+        else{
+            this.el2.style.visibility = 'hidden'
+        }
     }
 
     
@@ -193,7 +201,8 @@ function changeCurrSelectedAtomElement() {
     if (currNumBonds>bNo){
         alert(`Can't convert to ${objName}. Too many bonds`)
     }else{
-        if(objName!="--Type Out--"){
+        
+        if(currValue!="--Type Out--"){
             selectedAtom.sym = elementsSymbol[objName];
             selectedAtom.printSym = elementsSymbol[objName];
             selectedAtom.bNo = elementsCovalentBondCount[objName];
@@ -202,6 +211,7 @@ function changeCurrSelectedAtomElement() {
         }
         else{
             el2.style.visibility = 'visible';
+            
             selectedAtom.sym = elementsSymbol[objName];
             selectedAtom.bNo = elementsCovalentBondCount[objName];
             selectedAtom.printSym = elementsSymbol[objName];

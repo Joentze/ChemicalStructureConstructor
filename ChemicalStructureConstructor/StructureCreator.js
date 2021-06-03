@@ -15,6 +15,7 @@ function createAtom(){
                 // this gets the fixed angled bonds
                 let [projX,projY] = calculateNextPointFixLen(fixed_length_bond, latestAtom, mouseX, mouseY);
                 atom = new Atom(projX,projY,currElement,currElementName)
+
                 structure.addAtom(atom)
                 bond = new Bond(atom,latestAtom)
                 structure.addBond(bond)

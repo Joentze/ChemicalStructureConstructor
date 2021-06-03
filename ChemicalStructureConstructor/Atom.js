@@ -1,3 +1,5 @@
+
+
 class Atom{
     // **** New variable in construtor shows the name of the element
     constructor(posX, posY, noOfBranches, SymbolOfElement){
@@ -124,7 +126,8 @@ class Atom{
         textAlign(CENTER);
         textFont('Arial');
         textSize(18);
-        text(this.printSym,this.x,this.y+1);
+        textAlign(CENTER,CENTER);
+        text(this.printSym,this.x,this.y);
         pop();
         }
         else{
@@ -133,8 +136,8 @@ class Atom{
             textAlign(CENTER);
             textFont('Arial');
             textSize(18);
-            textAlign(LEFT,BOTTOM);
-            let testthis = text(this.printSym,this.x-1,this.y+1,);
+            textAlign(LEFT,CENTER);
+            text(this.printSym,this.x,this.y);
             pop();
         }
     }
@@ -144,9 +147,22 @@ class Atom{
         var calDist = sqrt(sq(mouseY - this.y)+sq(mouseX - this.x));
         var return_radius = this.radiusA;
         if(calDist<=this.radiusA){
+            
             this.radiusA = lerp(this.radiusA, this.radiusB, 0.05);
             return_radius = this.radiusA;
             this.hoverBool = true;
+        }
+        
+        else if(this.element == '--Type Out--'){
+            let lenOfRect = this.printSym.length*20
+            let XisInRect = (mouseX<this.x + lenOfRect && mouseX>=this.x)
+            let YisInRect = (mouseY<this.y +15 && mouseY>=this.y)
+            if(XisInRect && YisInRect){
+                this.hoverBool = true
+            }
+            else{
+                this.hoverBool = false
+            }
         }
         else{
             this.radiusA = lerp(this.radiusA, 10, 0.1);
