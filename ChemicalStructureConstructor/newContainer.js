@@ -1,4 +1,25 @@
 
+
+let mainButtonDict = {
+    'EDITbutton':{
+        'func':'modeClickerEDIT()',
+        'icon':'<i class="fa fa-pencil fa-m" aria-hidden="true"></i>'
+    },
+    'SELECTbutton':{
+        'func':'modeClickerSELECT()',
+        'icon':'<i class="fa fa-mouse-pointer fa-m" aria-hidden="true"></i>'
+    },
+    'VIEWbutton':{
+        'func':'changeViewStructure()',
+        'icon':'<i class="fa fa-eye" aria-hidden="true"></i>'
+    }
+
+}
+
+
+
+
+
 class newButtonContainer{
     //will render a list of html buttons with reference to a set of coordinates
     //takes in list number of buttons and passes in their functions

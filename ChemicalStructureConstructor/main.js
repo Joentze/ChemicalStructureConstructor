@@ -41,7 +41,7 @@ var EDIT_selectionBox;
 let noteColButton;
 
 let view = new View()
-
+let buttonPill;
 
 let structure = new Structure()
 
@@ -58,18 +58,18 @@ function setup() {
   document.getElementById('defaultCanvas0').style.background = 'rgb(245,245,245)';
   //NEATEN THIS UP!!!!
   var drawMainBranch = new buttonCreation("backGroundPencil",modeClickerEDIT,"","mainButtonPreset");
-  drawMainBranch.renderButton();
+  //drawMainBranch.renderButton();
   var branchFromNodes = new buttonCreation("backGroundBranching",modeClickerSELECT,"","mainButtonPreset");
-  branchFromNodes.renderButton();
+  //branchFromNodes.renderButton();
   noteColButton = new buttonCreation('sideNoteCol',openNoteCol,"","clearPresetButton")
-  noteColButton.renderButton();
+  //noteColButton.renderButton();
   fsButton = new buttonCreation("backGroundFS",makeFullScreen,"","clearPresetButton");
-  fsButton.renderButton();
+  //fsButton.renderButton();
  let downloadButton = new buttonCreation("downloadButton",downloadmenuswitch,"","clearPresetButton");
   downloadButton.renderButton();
   var structureViewButton = new buttonCreation("backGroundviewButt",changeViewStructure,"","clearPresetButton");
-  structureViewButton.renderButton();
-  
+  //structureViewButton.renderButton();
+  buttonPill = new newButtonContainer('visible', 'buttonPill', 'pillWrap', mainButtonDict, 'pillButtonStyle')
   EDIT_selectionBox = new selectionListCreation(elementsCovalentBondCount,changeMainElementSelection,"selectionBoxPreset");
   EDIT_selectionBox.renderListSel();
  // let radioTest = new checkBox(50,100,"test","SetRadioPreset");

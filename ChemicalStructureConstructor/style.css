@@ -185,7 +185,7 @@
     border:none;
     backdrop-filter: blur(5px);
     width:130px;
-    background:rgba(200,200,200,0.3);
+    background:rgba(210, 184, 255,0.3);
     color: rgba(60,60,60,0.19);
     z-index: 1000;
     box-shadow: 0 5px 8px 0 rgba(0,0,0,0.2), 0 6px 10px 0 rgba(0,0,0,0.1);
@@ -372,3 +372,38 @@ textarea{
       background-repeat:no-repeat;
       background-position:center;
   }
+
+  .pillWrap{
+      display:flex;
+      flex-wrap:wrap;
+      flex-direction:row;
+  }
+
+  #buttonPill{
+      position:fixed;
+      z-index: 1000;
+      left:30px;
+      bottom:20px;
+      background:rgb(210, 184, 255,0.8);
+      backdrop-filter: blur(15px);
+      width:fit-content;
+      border-radius:40px;
+    border:1px solid rgb(209, 185, 255);
+    transition-duration: 0.3s;
+    box-shadow: 0 5px 8px 0 rgba(0,0,0,0.2), 0 6px 10px 0 rgba(0,0,0,0.1);
+  }
+.pillButtonStyle{
+    width:40px;
+    height: 40px;
+    margin:10px;
+    border-radius:50%;
+    border:none;
+    background:transparent;
+}
+.pillButtonStyle:hover{
+    transition-duration: 0.3s;
+    background:rgb(220, 214, 255)
+}
+i{
+    color:rgb(67, 39, 101)
+}
