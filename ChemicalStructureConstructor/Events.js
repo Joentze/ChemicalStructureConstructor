@@ -155,6 +155,7 @@ function clearSelectedAtom(selectedAtomIfAny){
 }
 
 window.addEventListener('message',event=>{
+    console.log('received message')
     if(event.data == "downloadPNG"){
         downloadPNG();
     }
