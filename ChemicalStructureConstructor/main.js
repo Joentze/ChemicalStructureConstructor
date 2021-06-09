@@ -55,7 +55,7 @@ function preload() {
 function setup() {
   //load default font
   textFont(myFont);
-  document.getElementById('defaultCanvas0').style.background = 'rgb(230,230,230)';
+  document.getElementById('defaultCanvas0').style.background = 'rgb(245,245,245)';
   //NEATEN THIS UP!!!!
   var drawMainBranch = new buttonCreation("backGroundPencil",modeClickerEDIT,"","mainButtonPreset");
   drawMainBranch.renderButton();
