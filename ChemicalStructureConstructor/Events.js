@@ -158,7 +158,7 @@ window.addEventListener('message',event=>{
     
     if(event.data == "downloadPNG"){
         downloadPNG();
-        event.source.postMessage('hi there also')
+        event.source.postMessage('hi there also', event.origin)
     }
     else{
         return
