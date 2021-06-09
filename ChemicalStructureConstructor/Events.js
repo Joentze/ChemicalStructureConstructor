@@ -155,11 +155,12 @@ function clearSelectedAtom(selectedAtomIfAny){
 }
 
 window.addEventListener('message',event=>{
-    console.log('received message')
+    
     if(event.data == "downloadPNG"){
         downloadPNG();
+        event.source.postMessage('hi there also')
     }
     else{
         return
     }
-})
+},false)
