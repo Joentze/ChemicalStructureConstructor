@@ -15,8 +15,3 @@ window.addEventListener('message',event =>{
         return
     }
 },false)
-
-
-window.addEventListener('message',()=>{
-    console.log('pee pee')
-})

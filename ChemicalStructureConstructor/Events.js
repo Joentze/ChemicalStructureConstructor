@@ -153,14 +153,3 @@ function clearSelectedAtom(selectedAtomIfAny){
         console.log("is clearing...")
     }
 }
-
-window.addEventListener('message',event=>{
-    console.log('message received pee pee')
-    if(event.data == "downloadPNG"){
-        downloadPNG();
-        event.source.postMessage('sending PNG URI', event.origin)
-    }
-    else{
-        return
-    }
-},false)
