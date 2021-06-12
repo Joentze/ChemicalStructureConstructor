@@ -87,6 +87,18 @@ function downloadPNG() {
 
 }
 
+function getCanvasURI (){
+    if (selectedAtom != null) {
+        selectedAtom.selectedBool = false;
+        selectedAtom = null
+
+    }
+    structure.render();
+    setTimeout(1, draw());
+    let URI = document.getElementById('defaultCanvas0').toDataURL();
+    return URI
+}
+
 /*
 function canvasPNGfrmSVG(SVGtext){
     let tempCanvas = document.createElement('canvas');

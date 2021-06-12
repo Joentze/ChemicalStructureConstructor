@@ -154,12 +154,3 @@ function clearSelectedAtom(selectedAtomIfAny){
     }
 }
 
-window.addEventListener('message',event=>{
-    if(event.data == "downloadPNG"){
-        downloadPNG();
-        event.source.postMessage('sending PNG URI', event.origin)
-    }
-    else{
-        return
-    }
-},false)
