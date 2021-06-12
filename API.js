@@ -1,6 +1,6 @@
 
 //EXPORT PNG URI QUARK API
-document.addEventListener('message',event=>{
+window.addEventListener('message',event=>{
     console.log('receiving a message')
     if(event.data == "downloadPNG"){
         let uri = getCanvasURI()
