@@ -3,7 +3,11 @@
 window.addEventListener('message',event=>{
     if(event.data == "downloadPNG"){
         let uri = getCanvasURI()
-        event.source.postMessage(uri, event.origin)
+        let type = 'downloadPNG'
+        event.source.postMessage({
+            'type':type,
+            'uri':uri
+        }, event.origin)
     }
     else{
         return
