@@ -78,7 +78,9 @@ function setup() {
   SELECT_AtomBar = new AtomBar(40,90);
   //let testTextArea = new createTextArea("textAreaPreset");
  // ZOOM_slider = new sliderInput("sliderForZoom");
-  
+  let testGenerate = generateCoordinatePoly(100,100,6,30);
+  console.log(testGenerate)
+  console.log(returnVertexPair(testGenerate))
   
 }
 
@@ -92,7 +94,7 @@ function draw() {
   resizeCanvas(windowWidth, windowHeight);
   
   
-
+  //drawRing(returnVertexPair(generateCoordinatePoly(100,100,6,100)),generateCoordinatePoly(100,100,6,100))
   if(mousePressed && view.panning){
     view.pan();
   }
