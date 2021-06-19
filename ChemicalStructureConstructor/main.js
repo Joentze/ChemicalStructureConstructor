@@ -78,9 +78,9 @@ function setup() {
   SELECT_AtomBar = new AtomBar(40,90);
   //let testTextArea = new createTextArea("textAreaPreset");
  // ZOOM_slider = new sliderInput("sliderForZoom");
-  let testGenerate = generateCoordinatePoly(100,100,6,30);
-  console.log(testGenerate)
-  console.log(returnVertexPair(testGenerate))
+  //let testGenerate = generateCoordinatePoly(100,100,6,30);
+  //console.log(testGenerate)
+  //console.log(returnVertexPair(testGenerate))
   
 }
 
