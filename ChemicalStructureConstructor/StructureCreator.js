@@ -19,6 +19,9 @@ function createAtom(){
                 structure.addAtom(atom)
                 bond = new Bond(atom,latestAtom)
                 structure.addBond(bond)
+                if(selectedAtom!=null){
+                addRing(6)
+                }
                 return atom
             }
         }

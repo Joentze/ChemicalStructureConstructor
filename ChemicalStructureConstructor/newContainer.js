@@ -39,7 +39,8 @@ class newButtonContainer{
         let divContainer = document.createElement('div')
         divContainer.setAttribute('class',this.contClass)
         divContainer.setAttribute('id',this.idMain)
-
+        divContainer.setAttribute('onmouseover','makeTrue()')
+        divContainer.setAttribute('onmouseout','makeFalse()')
         for(let currKey of Object.keys(this.list)){
             let currAttribute = this.htmlFrameButton(currKey)
             divContainer.insertAdjacentHTML('beforeend',currAttribute)

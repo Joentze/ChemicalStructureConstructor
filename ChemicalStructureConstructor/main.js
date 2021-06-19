@@ -92,7 +92,7 @@ function draw() {
   resizeCanvas(windowWidth, windowHeight);
   
   
-  //drawRing(returnVertexPair(generateCoordinatePoly(100,100,6,100)),generateCoordinatePoly(100,100,6,100))
+  //drawRing(returnVertexPair(generateCoordinatePoly(400,400,6,100)),generateCoordinatePoly(400,400,6,100))
   if(mousePressed && view.panning){
     view.pan();
   }
@@ -111,6 +111,7 @@ function draw() {
 
   }
 
+  //renderRing(5)
   structure.render();
   // text(`${mouseX}, ${mouseY}`,10,10)
   SELECT_AtomBar.renderAtomBar(selectedAtom);
