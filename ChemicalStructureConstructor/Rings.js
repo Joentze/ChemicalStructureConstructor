@@ -41,7 +41,7 @@ function formRingAtoms(vertexPair, coordDict){
         //for test purposes use carbon only!!!
         //start creating from second atom because the first will be the selected
         if(cnt>0){
-            let thisNewAtom = new Atom(x,y,currElement,currElementName)
+            let thisNewAtom = new Atom(x,y,currAtomUsedRing,currElementName)
             structure.addAtom(thisNewAtom)
             returnDict[cnt] = thisNewAtom;
         }

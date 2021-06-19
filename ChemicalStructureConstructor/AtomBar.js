@@ -13,7 +13,7 @@ class AtomBar{
         this.imageShowLPList = ["showLPPresetThree.svg","showLPPresetTwo.svg","showLPPresetOne.svg"];
         
         //Creation of interaction objects
-        this.elementBoxSelector = new selectionListCreation(elementsSymbol,changeCurrSelectedAtomElement,this.className);
+        this.elementBoxSelector = new selectionListCreation(elementsSymbol,changeCurrSelectedAtomElement,'atomBarSelectID',this.className);
         this.selectedAtomCentralToggle = new buttonCreation("toggleMainButtonPreset",ElementfuncIncrement, "","toggleButtonPreset");
         this.selectedAtomLonePairToggle = new buttonCreation("toggleMainButtonPreset",LPfuncIncrement,"","LPtoggleButtonPreset");
         this.notesButton = new buttonCreation("toggleMainButtonPreset",openTextbox,"","textBoxOpenPreset");
@@ -146,7 +146,7 @@ class AtomBar{
 checkForChangeExec(){
     if(this.prevAtom!=selectedAtom){
         let getIndex = Object.keys(elementsCovalentBondCount);
-        document.getElementsByClassName(this.className)[0].selectedIndex = getIndex.indexOf(selectedAtom.element);
+        document.getElementById('mainElementSelect').selectedIndex = getIndex.indexOf(selectedAtom.element);
         this.changeIconCentralAtom(selectedAtom,this.selectedAtomCentralToggle,this.imageShowCentralList, selectedAtom.showCentral);
         this.changeIconCentralAtom(selectedAtom,this.selectedAtomLonePairToggle,this.imageShowLPList, selectedAtom.showLonePairs);
         this.updateElementText(selectedAtom)

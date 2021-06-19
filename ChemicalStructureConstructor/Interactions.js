@@ -87,11 +87,12 @@ function checkIfHoverCircle(posX, posY, radiusRange) {
 
 //Creates selection box
 class selectionListCreation {
-  constructor(itemSelection, executeThisFunction, classPresetCSS) {
+  constructor(itemSelection, executeThisFunction, id, classPresetCSS) {
     
     this.namePair = itemSelection;
     this.exe = executeThisFunction;
     this.CSSclass = classPresetCSS;
+    this.id = id;
     this.currVal;
     this.listSel = createSelect();
     this.visibility = true;
@@ -100,6 +101,7 @@ class selectionListCreation {
     //listSel.position(this.x,this.y)
     this.assignListItems(this.namePair);
     this.listSel.class(this.CSSclass);
+    this.listSel.id(this.id)
     this.currVal = this.listSel.value();
 
     this.listSel.changed(this.exe);
@@ -143,18 +145,29 @@ function changeMainElementSelection() {
   var getNumCovalentBonds = elementsCovalentBondCount[currSelect.value()];
   var getSymElement = elementsSymbol[currSelect.value()];
   console.log(currSelect.value())
-  if(currSelect.value()=='Rings'){
+  let el = document.getElementById('ringedSelection')
+  if(currSelect.value()=='Rings ⬡'){
     isDrawingRing = true
-    console.log('ring it')
+    el.style.visibility = 'visible'
   }
   else{
     isDrawingRing = false
+    el.style.visibility = 'hidden'
   }
     currElement = getNumCovalentBonds;
     currElementName = getSymElement;
   
   print(currElement);
 }
+
+function changeRingSelection() {
+  let currSelect = RING_selectionBox.listSel;
+  let thisRing = ringCompoundList[currSelect.value()];
+  currRingVertices = thisRing['vertices']
+  console.log(currRingVertices)
+  currAtomUsedRing = thisRing['atomUsed']
+}
+
 
 function launchSelectionsBox() {
   if (selectedAtomIfAny.length > 0) {

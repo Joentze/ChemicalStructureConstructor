@@ -1,5 +1,6 @@
 var elementsCovalentBondCount = {
     "Carbon":4,
+    "Rings ⬡":4,
     "Nitrogen":3,
     "Oxygen":2,
     "Hydrogen":1,
@@ -9,7 +10,6 @@ var elementsCovalentBondCount = {
     "Bromine":1,
     "Iodine":1,
     "Phosphine":5,
-    "Rings":4,
     "--Type Out--":3
 };
 
@@ -27,6 +27,7 @@ let ringCompoundList = {
 
 var elementsSymbol = {
     "Carbon":"C",
+    "Rings ⬡":'C',
     "Nitrogen":"N",
     "Oxygen":"O",
     "Hydrogen":"H",
@@ -37,7 +38,6 @@ var elementsSymbol = {
     "Iodine":"I",
     "Phosphine":"P",
     "--Type Out--":"X",
-    "Rings":'C'
 };
 
 var organicGroupCovalent = {

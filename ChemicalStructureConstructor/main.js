@@ -13,6 +13,8 @@ var currSelectedVar = 0;
 let modes = {SELECT:0, EDIT:1}
 let mode = modes.EDIT;
 let isDrawingRing = false;
+let currRingVertices = 3;
+let currAtomUsedRing = 4; 
 //viewing state
 //0-skeletal structure, 1 - lewis structure, 2-view without nodes
 var currViewingState = 0;
@@ -70,8 +72,10 @@ function setup() {
   var structureViewButton = new buttonCreation("backGroundviewButt",changeViewStructure,"","clearPresetButton");
   //structureViewButton.renderButton();
   buttonPill = new newButtonContainer('visible', 'buttonPill', 'pillWrap', mainButtonDict, 'pillButtonStyle')
-  EDIT_selectionBox = new selectionListCreation(elementsCovalentBondCount,changeMainElementSelection,"selectionBoxPreset");
+  EDIT_selectionBox = new selectionListCreation(elementsCovalentBondCount,changeMainElementSelection,'mainElementSelect',"selectionBoxPreset");
   EDIT_selectionBox.renderListSel();
+  RING_selectionBox = new selectionListCreation(ringCompoundList,changeRingSelection, 'ringedSelection',"ringedSelection");
+  RING_selectionBox.renderListSel();
  // let radioTest = new checkBox(50,100,"test","SetRadioPreset");
  // radioTest.createCheckBox();
  console.log(document.getElementById('defaultCanvas0').innerHTML);
