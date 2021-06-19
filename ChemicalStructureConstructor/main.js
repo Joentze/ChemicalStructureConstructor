@@ -12,7 +12,7 @@ var currSelectedVar = 0;
 //States in the system
 let modes = {SELECT:0, EDIT:1}
 let mode = modes.EDIT;
-
+let isDrawingRing = false;
 //viewing state
 //0-skeletal structure, 1 - lewis structure, 2-view without nodes
 var currViewingState = 0;

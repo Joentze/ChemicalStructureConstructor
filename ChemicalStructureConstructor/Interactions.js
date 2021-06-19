@@ -142,8 +142,17 @@ function changeMainElementSelection() {
   let currSelect = EDIT_selectionBox.listSel;
   var getNumCovalentBonds = elementsCovalentBondCount[currSelect.value()];
   var getSymElement = elementsSymbol[currSelect.value()];
-  currElement = getNumCovalentBonds;
-  currElementName = getSymElement;
+  console.log(currSelect.value())
+  if(currSelect.value()=='Rings'){
+    isDrawingRing = true
+    console.log('ring it')
+  }
+  else{
+    isDrawingRing = false
+  }
+    currElement = getNumCovalentBonds;
+    currElementName = getSymElement;
+  
   print(currElement);
 }
 
