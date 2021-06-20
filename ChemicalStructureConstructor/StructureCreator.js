@@ -14,9 +14,11 @@ function createAtom(){
           
                 // this gets the fixed angled bonds
                 
-                if(selectedAtom!=null && isDrawingRing==true){
-                addRing(currRingVertices)
-                }else{
+                if(selectedAtom!=null && isDrawingRing){
+                    addRing(currRingVertices)
+                    isDrawingRing = false;
+                    changeMainElementSelection();
+                }else if(!isDrawingRing){
                     let [projX,projY] = calculateNextPointFixLen(fixed_length_bond, latestAtom, mouseX, mouseY);
                     atom = new Atom(projX,projY,currElement,currElementName)
 

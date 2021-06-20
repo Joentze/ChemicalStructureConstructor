@@ -13,8 +13,9 @@ var currSelectedVar = 0;
 let modes = {SELECT:0, EDIT:1}
 let mode = modes.EDIT;
 let isDrawingRing = false;
-let currRingVertices = 3;
-let currAtomUsedRing = 4; 
+let firstRingsData = Object.keys(ringCompoundList)[0]
+let currRingVertices = ringCompoundList[firstRingsData]['vertices'];
+let currAtomUsedRing = ringCompoundList[firstRingsData]['atomUsed']; 
 //viewing state
 //0-skeletal structure, 1 - lewis structure, 2-view without nodes
 var currViewingState = 0;

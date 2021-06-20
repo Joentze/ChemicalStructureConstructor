@@ -133,7 +133,7 @@ class AtomBar{
             if(selectedAtom.atomNotePad != null){
             selectedAtom.atomNotePad.checkVisOfTextArea();  
             }
-            if(selectedAtom.sym == '--Type Out--'){
+            if(selectedAtom.sym == 'Type Out ⌨️'){
             
             }
         }
@@ -151,7 +151,7 @@ checkForChangeExec(){
         this.changeIconCentralAtom(selectedAtom,this.selectedAtomLonePairToggle,this.imageShowLPList, selectedAtom.showLonePairs);
         this.updateElementText(selectedAtom)
         
-        if(selectedAtom.element=='--Type Out--' && mode == modes.SELECT){
+        if(selectedAtom.element=='Type Out ⌨️' && mode == modes.SELECT){
             this.el2.innerHTML = selectedAtom.sym;
             this.el2.style.visibility = 'visible'
         }
@@ -171,7 +171,7 @@ checkForChangeExec(){
         this.prevAtomElement = selectedAtom.element;
     }
     else if(this.prevAtom == selectedAtom){
-        if(selectedAtom.element =='--Type Out--' && mode == modes.SELECT){
+        if(selectedAtom.element =='Type Out ⌨️' && mode == modes.SELECT){
             this.el2.innerHTML = selectedAtom.sym;
             this.el2.style.visibility = 'visible'
         }
@@ -202,7 +202,7 @@ function changeCurrSelectedAtomElement() {
         alert(`Can't convert to ${objName}. Too many bonds`)
     }else{
         
-        if(currValue!="--Type Out--"){
+        if(currValue!="Type Out ⌨️"){
             selectedAtom.sym = elementsSymbol[objName];
             selectedAtom.printSym = elementsSymbol[objName];
             selectedAtom.bNo = elementsCovalentBondCount[objName];

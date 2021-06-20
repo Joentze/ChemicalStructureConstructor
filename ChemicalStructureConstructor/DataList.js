@@ -10,19 +10,21 @@ var elementsCovalentBondCount = {
     "Bromine":1,
     "Iodine":1,
     "Phosphine":5,
-    "--Type Out--":3
+    "Type Out ⌨️":3
 };
 
 let ringCompoundList = {
+
+    'Benzene':{vertices:6,atomUsed:3},
+    'Cyclohexane':{vertices:6,atomUsed:4},
     'Cyclopropane':{vertices:3,atomUsed:4},
     'Cyclobutane':{vertices:4,atomUsed:4},
     'Cyclopentane':{vertices:5,atomUsed:4},
-    'Cyclohexane':{vertices:6,atomUsed:4},
     'Cycloheptane':{vertices:7,atomUsed:4},
     'Cyclooctane':{vertices:8,atomUsed:4},
     'Cyclononane':{vertices:9,atomUsed:4},
     'Cyclodecane':{vertices:10,atomUsed:4},
-    'Benzene':{vertices:6,atomUsed:3}
+   
 }
 
 var elementsSymbol = {
@@ -37,7 +39,7 @@ var elementsSymbol = {
     "Bromine":"Br",
     "Iodine":"I",
     "Phosphine":"P",
-    "--Type Out--":"X",
+    "Type Out ⌨️":"X",
 };
 
 var organicGroupCovalent = {

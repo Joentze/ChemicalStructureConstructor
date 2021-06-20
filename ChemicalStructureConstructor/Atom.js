@@ -153,7 +153,7 @@ class Atom{
             this.hoverBool = true;
         }
         
-        else if(this.element == '--Type Out--'){
+        else if(this.element == 'Type Out ⌨️'){
             let lenOfRect = this.printSym.length*20
             let XisInRect = (mouseX<this.x + lenOfRect && mouseX>=this.x)
             let YisInRect = (mouseY<this.y +15 && mouseY>=this.y)

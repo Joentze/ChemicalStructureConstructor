@@ -18,13 +18,22 @@ function mousePressed(){
             }
             // if no atom is hovered, create a new atom
             if (!changingSelection){
-                newAtom = createAtom()
-
-                if(newAtom){
-                    selectedAtom=newAtom
-
-                }
+                if(!isDrawingRing){
+                    newAtom = createAtom()
+                    
+                    if(newAtom){
+                        selectedAtom=newAtom
+                    }
                 
+                }
+                else{
+                    console.log('is this')
+                    isDrawingRing=false
+                    addRing(currRingVertices)
+                }
+
+                
+
             }
             
         }

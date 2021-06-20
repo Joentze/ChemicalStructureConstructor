@@ -1,3 +1,11 @@
+//lengthOfEdge is usually bond length
+function getLengthToCenter(vertices, lengthOfEdge){
+    angleMode(DEGREES)
+    let separation = 360/vertices
+    let halvedAngle = separation*0.5
+    let halvedEdge = lengthOfEdge*0.5
+    return  halvedEdge/sin(halvedAngle)
+}
 
 
 function calculateNewAddCoordinatesCenter(hypotonuseLength,angleNow,angleAdd){
@@ -35,28 +43,47 @@ function returnVertexPair(coordDict){
 function formRingAtoms(vertexPair, coordDict){
     
     let lenOfNewAtoms = Object.keys(coordDict).length
-    let returnDict = {0:selectedAtom}
-    for(let cnt=0; cnt<lenOfNewAtoms; cnt++){
-        let [x,y] = coordDict[cnt]
-        //for test purposes use carbon only!!!
-        //start creating from second atom because the first will be the selected
-        if(cnt>0){
+    if(selectedAtom!=null){
+        let returnDict = {0:selectedAtom}
+        for(let cnt=0; cnt<lenOfNewAtoms; cnt++){
+            let [x,y] = coordDict[cnt]
+            if(cnt>0){
+                let thisNewAtom = new Atom(x,y,currAtomUsedRing,currElementName)
+                structure.addAtom(thisNewAtom)
+                returnDict[cnt] = thisNewAtom;
+            }
+
+        }
+        let Vertices = Object.keys(returnDict)
+        console.log(returnDict)
+        for(let currCnt of Vertices){
+            let atom1 = returnDict[currCnt]
+            let atom2 = returnDict[vertexPair[currCnt]]
+            thisBond = new Bond(atom1, atom2);
+            structure.addBond(thisBond)
+        }
+    }
+    else{
+        let returnDict = {}
+        for(let cnt=0; cnt<lenOfNewAtoms; cnt++){
+            let [x,y] = coordDict[cnt]
             let thisNewAtom = new Atom(x,y,currAtomUsedRing,currElementName)
             structure.addAtom(thisNewAtom)
             returnDict[cnt] = thisNewAtom;
         }
 
+
+        let Vertices = Object.keys(returnDict)
+        console.log(returnDict)
+        for(let currCnt of Vertices){
+            let atom1 = returnDict[currCnt]
+            let atom2 = returnDict[vertexPair[currCnt]]
+            thisBond = new Bond(atom1, atom2);
+            structure.addBond(thisBond)
+        }
     }
-    let Vertices = Object.keys(returnDict)
-    console.log(returnDict)
-    for(let currCnt of Vertices){
-        let atom1 = returnDict[currCnt]
-        let atom2 = returnDict[vertexPair[currCnt]]
-        thisBond = new Bond(atom1, atom2);
-        structure.addBond(thisBond)
     }
 
-}
 
 function getAngleOffset(prevPoint, newX, newY) {
     angleMode(DEGREES);
@@ -81,17 +108,17 @@ function drawRingWithOffset(selectedAtom,endX, endY, numberOfVertices, lenToCent
 
 //test
 function addRing(vertices){
-
+    let lenToCenter = 100//getLengthToCenter(currRingVertices, 100)
     let len = structure.atoms.length
     if(selectedAtom==null && len>1){
         let [newX, newY] = calculateNextPointFixLen(100,structure.atoms.slice(-1)[0],mouseX, mouseY)
-        drawRingWithOffset(structure.atoms.slice(-1)[0],newX, newY, vertices, 100);
+        drawRingWithOffset(structure.atoms.slice(-1)[0],newX, newY, vertices, lenToCenter);
     }
     else if(selectedAtom!=null && len>1){
         let [newX, newY] = calculateNextPointFixLen(100,selectedAtom,mouseX, mouseY)
-        drawRingWithOffset(selectedAtom,newX, newY, vertices, 100);
+        drawRingWithOffset(selectedAtom,newX, newY, vertices, lenToCenter);
     }
     else if(selectedAtom==null && len==0){
-        drawRingWithOffset(selectedAtom,mouseX, mouseY, vertices, 100);
+        drawRingWithOffset(selectedAtom,mouseX, mouseY, vertices, lenToCenter);
     }
 }
