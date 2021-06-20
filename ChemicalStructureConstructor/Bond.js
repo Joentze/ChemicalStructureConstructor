@@ -32,8 +32,10 @@ class Bond{
 
         this.moreThanOneBond = false;
         //number of covalent bond...1/2/3
-        this.bondNumber = 1;
+        this.bondNumber = 2;
 
+        this.DBoffset = 5
+        this.TBoffset = 4
 
     }
     
@@ -44,18 +46,34 @@ class Bond{
         this.isHoverLine = this.checkIfHover(atom1,atom2)
         let coords = this.gapMinus(20,atom1,atom2);
         this.accessCoord = coords;
-        //let DBCoords = this.getOffsetDblBond(atom1,atom2);
-        //console.log(DBCoords);
-        //let set1 = subset(DBCoords,0,4);
-        //let set2 = subset(DBCoords,4,4);
         push();
         stroke(this.strokeColor);
         strokeWeight(this.strokeW);
-        line(...coords);
-        //testDoubleBond
-        //console.log(set1)
-        //line(...set1);
-        //line(...set2);
+ 
+        if(this.bondNumber==1){
+            line(...coords);
+        }else{ // this is so cancerous wtf
+            let [x1,y1,x2,y2] = coords
+            let m = [y1-y2,x2-x1]
+            let mabs = sqrt(sq(m[0])+sq(m[1]))
+            let mhat = [m[0]/mabs, m[1]/mabs]
+            if(this.bondNumber==2){
+                let xoff=this.DBoffset*mhat[0]; 
+                let yoff=this.DBoffset*mhat[1];
+                let coords1 = [x1+xoff, y1+yoff, x2+xoff, y2+yoff]
+                let coords2 = [x1-xoff, y1-yoff, x2-xoff, y2-yoff]
+                line(...coords1)
+                line(...coords2)
+            }else if(this.bondNumber==3){
+                let xoff=this.TBoffset*mhat[0]; 
+                let yoff=this.TBoffset*mhat[1];
+                let coords1 = [x1+xoff, y1+yoff, x2+xoff, y2+yoff]
+                let coords2 = [x1-xoff, y1-yoff, x2-xoff, y2-yoff]
+                line(...coords1)
+                line(...coords)
+                line(...coords2)
+            }
+        }
         pop();
      
         //is returned when cursor is hovered
