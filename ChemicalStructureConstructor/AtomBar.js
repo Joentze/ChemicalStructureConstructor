@@ -146,7 +146,10 @@ class AtomBar{
 checkForChangeExec(){
     if(this.prevAtom!=selectedAtom){
         let getIndex = Object.keys(elementsCovalentBondCount);
-        document.getElementById('mainElementSelect').selectedIndex = getIndex.indexOf(selectedAtom.element);
+        document.getElementById('atomBarSelectID').selectedIndex = getIndex.indexOf(selectedAtom.element)
+        document.getElementById('mainElementSelect').selectedIndex = getIndex.indexOf(selectedAtom.element)
+        console.log(getIndex.indexOf(selectedAtom.element))
+        console.log(selectedAtom.element)
         this.changeIconCentralAtom(selectedAtom,this.selectedAtomCentralToggle,this.imageShowCentralList, selectedAtom.showCentral);
         this.changeIconCentralAtom(selectedAtom,this.selectedAtomLonePairToggle,this.imageShowLPList, selectedAtom.showLonePairs);
         this.updateElementText(selectedAtom)

@@ -110,20 +110,25 @@ class Atom{
 
     RSelected(){
         
-        push();
-        this.CursorNearExpand();
-        strokeWeight(0.3);
-        stroke(color('rgb(150, 30,30)'));
-        fill(color('rgba(232, 134, 121,0.5)'));
-        ellipse(this.x, this.y, this.radiusB, this.radiusB);
-        pop();
+            push();
+            this.CursorNearExpand();
+            strokeWeight(0.3);
+            stroke(color('rgb(150, 30,30)'));
+            fill(color('rgba(232, 134, 121,0.5)'));
+            ellipse(this.x, this.y, this.radiusB, this.radiusB);
+            pop();
     }
 
     RShowText(){
         if(this.sym != 'X'){
         push();
         this.CursorNearExpand();
-        textAlign(CENTER);
+        if(this.selectedBool){
+            fill(color('rgb(255,120,120)'))
+        }
+        else{
+            fill(0)
+        }
         textFont('Arial');
         textSize(18);
         textAlign(CENTER,CENTER);
@@ -133,11 +138,16 @@ class Atom{
         else{
             push();
             this.CursorNearExpand();
-            textAlign(CENTER);
             textFont('Arial');
             textSize(18);
             textAlign(LEFT,CENTER);
-            text(this.printSym,this.x,this.y);
+            if(this.selectedBool){
+                fill(color('rgb(255,120,120)'))
+            }
+            else{
+                fill(0)
+            }
+            text(this.printSym,this.x-3,this.y);
             pop();
         }
     }

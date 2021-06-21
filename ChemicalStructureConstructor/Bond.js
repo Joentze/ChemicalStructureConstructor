@@ -50,7 +50,7 @@ class Bond{
         let [atom1, atom2] = this.pair;    
 
         this.isHoverLine = this.checkIfHover(atom1,atom2)
-        let coords = this.gapMinus(20,atom1,atom2);
+        let coords = this.gapMinus(14,atom1,atom2);
         this.accessCoord = coords;
         push();
         stroke(this.strokeColor);
@@ -183,65 +183,6 @@ class Bond{
         return num/den
     }
 
-//must make sure that there can be double bond lol 
-//refer to google drive brainstorm file kekw
-    getBaseCoordinates(atom1, atom2){
-        let oneX1, oneY1
-        let twoX1, twoY1
-        let getAdjAtom1 = structure.adjList.get(atom1)
-        if(getAdjAtom1.length == 1){
-            atom1.isGapNeeded,atom2.isGapNeeded = true;
-            let coords = this.gapMinus(10,atom1,atom2);
-            let gradientBond = this.getGradient(...coords);
-            if(gradientBond == Infinity){
-                return [coords[0]+10,coords[1],coords[2]+10,coords[3],coords[0]-10,coords[1],coords[2]-10,coords[3]]
-            }
-            else{
-                
-            }
-        }
-        else if(getAdjAtom1.length == 2){
-            getAdjAtom1.pop(atom2);
-            [oneX1,oneY1] = calculateNextPointFixLen(20,atom1,getAdjAtom1[0].x,getAdjAtom1[0].y)
-            return [oneX1,oneY1] 
-        }else if(getAdjAtom1.length == 3){
-            getAdjAtom1.pop(atom2)
-            [oneX1,oneY1] = calculateNextPointFixLen(20,atom1,getAdjAtom1[0].x,getAdjAtom1[0].y)
-            [twoX1,twoY1] = calculateNextPointFixLen(20,atom1,getAdjAtom1[1].x,getAdjAtom1[1].y)
-            return [oneX1,oneY1,twoX1,twoY1];
-        }
-        
-    
-    }
-
-    getOffsetDblBond(atom1,atom2){
-
-        let returnArray = [];
-        atom1.isGapNeeded,atom2.isGapNeeded = true;
-        let coords = this.gapMinus(10,atom1,atom2);
-        let gradientBond = this.getGradient(...coords);
-        if(gradientBond == Infinity){
-            return [coords[0]+10,coords[1],coords[2]+10,coords[3],coords[0]-10,coords[1],coords[2]-10,coords[3]]
-        }
-        else if(gradientBond == 0){
-            return [coords[0],coords[1]+10,coords[2],coords[3]+10,coords[0],coords[1]-10,coords[2],coords[3]-10]
-        }
-        else{
-            console.log(coords);
-returnArray = concat(returnArray,this.newXYOffsetCal(10,gradientBond,coords[0],coords[1]))
-returnArray = concat(returnArray,this.newXYOffsetCal(10,gradientBond,coords[2],coords[3]))
-returnArray = concat(returnArray,this.newXYOffsetCal(-10,gradientBond,coords[0],coords[1]))
-returnArray = concat(returnArray,this.newXYOffsetCal(-10,gradientBond,coords[2],coords[3]))
-            
-        }
-        return returnArray    
-    }
-
-    newXYOffsetCal(constant, gradient, x, y){
-        let newY = y + constant;
-        let newX = x
-        return [newX, newY]
-    }
 }
 
 function iterNoBondOnClick(bondObj){

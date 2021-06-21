@@ -108,14 +108,14 @@ function drawRingWithOffset(selectedAtom,endX, endY, numberOfVertices, lenToCent
 
 //test
 function addRing(vertices){
-    let lenToCenter = 100//getLengthToCenter(currRingVertices, 100)
+    let lenToCenter = getLengthToCenter(currRingVertices, 100)
     let len = structure.atoms.length
     if(selectedAtom==null && len>1){
-        let [newX, newY] = calculateNextPointFixLen(100,structure.atoms.slice(-1)[0],mouseX, mouseY)
+        let [newX, newY] = calculateNextPointFixLen(lenToCenter,structure.atoms.slice(-1)[0],mouseX, mouseY)
         drawRingWithOffset(structure.atoms.slice(-1)[0],newX, newY, vertices, lenToCenter);
     }
     else if(selectedAtom!=null && len>1){
-        let [newX, newY] = calculateNextPointFixLen(100,selectedAtom,mouseX, mouseY)
+        let [newX, newY] = calculateNextPointFixLen(lenToCenter,selectedAtom,mouseX, mouseY)
         drawRingWithOffset(selectedAtom,newX, newY, vertices, lenToCenter);
     }
     else if(selectedAtom==null && len==0){
