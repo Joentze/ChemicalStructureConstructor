@@ -20,6 +20,9 @@ let currAtomUsedRing = ringCompoundList[firstRingsData]['atomUsed'];
 //0-skeletal structure, 1 - lewis structure, 2-view without nodes
 var currViewingState = 0;
 
+//Default bond number
+let defaultBondNo = 1;
+
 //shows user is branching
 var isBranchingAnotherAtom = false;
 

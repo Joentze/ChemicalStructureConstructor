@@ -32,10 +32,15 @@ class Bond{
 
         this.moreThanOneBond = false;
         //number of covalent bond...1/2/3
-        this.bondNumber = 2;
+        this.bondNumber = defaultBondNo;
 
-        this.DBoffset = 5
-        this.TBoffset = 4
+        //DOUBLE BOND COMBI, inner double bonds and regular double bond
+        //1-regular 2-inner1 3-inner2
+        this.iterDblBond = 1
+
+
+        this.DBoffset = 7
+        this.TBoffset = 5
 
     }
     
@@ -58,12 +63,23 @@ class Bond{
             let mabs = sqrt(sq(m[0])+sq(m[1]))
             let mhat = [m[0]/mabs, m[1]/mabs]
             if(this.bondNumber==2){
+
                 let xoff=this.DBoffset*mhat[0]; 
                 let yoff=this.DBoffset*mhat[1];
                 let coords1 = [x1+xoff, y1+yoff, x2+xoff, y2+yoff]
                 let coords2 = [x1-xoff, y1-yoff, x2-xoff, y2-yoff]
-                line(...coords1)
-                line(...coords2)
+                if(this.iterDblBond==1){
+                    line(...coords1)
+                    line(...coords2)
+                }
+                else if(this.iterDblBond==2){
+                    line(...coords)
+                    line(...coords2)
+                }
+                else if(this.iterDblBond==3){
+                    line(...coords1)
+                    line(...coords)
+                }
             }else if(this.bondNumber==3){
                 let xoff=this.TBoffset*mhat[0]; 
                 let yoff=this.TBoffset*mhat[1];
@@ -198,3 +214,51 @@ returnArray = concat(returnArray,this.newXYOffsetCal(-10,gradientBond,coords[2],
         return [newX, newY]
     }
 }
+
+function iterNoBondOnClick(bondObj){
+    if(bondObj.bondNumber<3){
+        bondObj.bondNumber += 1;
+        console.log('adding...')
+    }
+    else if(bondObj.bondNumber == 3){
+        console.log('reducing')
+        bondObj.bondNumber=1;
+    }
+}
+
+function findHoverBond(){
+    let allBonds = structure.bonds
+    
+    for(let currBond of allBonds){
+        if(currBond.isHoverLine){
+            iterNoBondOnClick(currBond)
+            break
+        }
+    }
+}
+function iterDblBondTypeOnClick(bondObj){
+    if(bondObj.bondNumber==2){
+        if(bondObj.iterDblBond<3){
+            bondObj.iterDblBond += 1;
+        }
+        else if(bondObj.iterDblBond == 3){
+            bondObj.iterDblBond=1;
+        }
+    }
+}
+
+function adjDblBond(){
+    let allBonds = structure.bonds
+    
+    for(let currBond of allBonds){
+        if(currBond.isHoverLine){
+            iterDblBondTypeOnClick(currBond)
+            break
+        }
+    }
+}
+
+//branch seperation (l shape identification) algorithm
+//decides if DOUBLE BOND is inside or outside
+
+

@@ -20,7 +20,6 @@ function mousePressed(){
             if (!changingSelection){
                 if(!isDrawingRing){
                     newAtom = createAtom()
-                    
                     if(newAtom){
                         selectedAtom=newAtom
                     }
@@ -56,8 +55,8 @@ function mousePressed(){
             neatenStructure(structure)
 
         }*/
+        //findHoverBond()
     }
-
 
     else if(mode == modes.SELECT){
 
@@ -76,6 +75,10 @@ function mousePressed(){
             atom.selectedBool = (atom == selectedAtom)
             atom.fullstate = atomIsFull(atom)
         }
+        findHoverBond()
+    }
+    if(mouseButton == RIGHT){
+        adjDblBond()
     }
 
 }

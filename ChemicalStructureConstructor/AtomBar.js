@@ -47,12 +47,12 @@ class AtomBar{
     typeOutElement(){
         let divHolder = document.createElement('div')
         divHolder.setAttribute('id','typeOutDivHolder')
-        let textAreaForSym = document.createElement('textarea');
+        let textAreaForSym = document.createElement('input');
         textAreaForSym.setAttribute('id','typeOutElementText')
         textAreaForSym.setAttribute('onmouseover','makeTrue()')
         textAreaForSym.setAttribute('onmouseout','makeFalse()')
         textAreaForSym.setAttribute('rows','1')
-        textAreaForSym.setAttribute('maxlength','20')
+        textAreaForSym.setAttribute('maxlength','30')
         textAreaForSym.setAttribute('onkeyup','updateAtomPrintText(this)')
         textAreaForSym.setAttribute('placeholder','type group')
         textAreaForSym.style.visibility = 'hidden';
