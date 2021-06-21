@@ -37,7 +37,8 @@ class Bond{
         //DOUBLE BOND COMBI, inner double bonds and regular double bond
         //1-regular 2-inner1 3-inner2
         this.iterDblBond = 1
-
+        //show wedges and stuff, combi from 1-5, this is for enantiomerism 
+        this.iterSingleBond = 1;
 
         this.DBoffset = 7
         this.TBoffset = 5
@@ -54,20 +55,48 @@ class Bond{
         push();
         stroke(this.strokeColor);
         strokeWeight(this.strokeW);
- 
+        let [x1,y1,x2,y2] = coords
+        let m = [y1-y2,x2-x1]
+        let mabs = sqrt(sq(m[0])+sq(m[1]))
+        let mhat = [m[0]/mabs, m[1]/mabs]
+        let xoff=this.DBoffset*mhat[0]; 
+        let yoff=this.DBoffset*mhat[1];
+        let coords1 = [x1+xoff, y1+yoff, x2+xoff, y2+yoff]
+        let coords2 = [x1-xoff, y1-yoff, x2-xoff, y2-yoff]
         if(this.bondNumber==1){
-            line(...coords);
+            if(this.iterSingleBond==1){
+                line(...coords);
+            }
+            else if(this.iterSingleBond==2){
+                push()
+                fill(0)
+                triangle(coords1[0],coords1[1],coords2[0],coords2[1],coords[2],coords[3])
+                pop()
+            }
+            else if(this.iterSingleBond==3){
+                push()
+                fill(0)
+                triangle(coords1[2],coords1[3],coords2[2],coords2[3],coords[0],coords[1])
+                pop()
+            }
+            else if(this.iterSingleBond==4){
+                push()
+                noFill()
+                triangle(coords1[0],coords1[1],coords2[0],coords2[1],coords[2],coords[3])
+                pop()
+            }
+            else if(this.iterSingleBond==5){
+                push()
+                noFill()
+                triangle(coords1[2],coords1[3],coords2[2],coords2[3],coords[0],coords[1])
+                pop()
+            }
+            
         }else{ // this is so cancerous wtf
-            let [x1,y1,x2,y2] = coords
-            let m = [y1-y2,x2-x1]
-            let mabs = sqrt(sq(m[0])+sq(m[1]))
-            let mhat = [m[0]/mabs, m[1]/mabs]
+      
             if(this.bondNumber==2){
 
-                let xoff=this.DBoffset*mhat[0]; 
-                let yoff=this.DBoffset*mhat[1];
-                let coords1 = [x1+xoff, y1+yoff, x2+xoff, y2+yoff]
-                let coords2 = [x1-xoff, y1-yoff, x2-xoff, y2-yoff]
+                
                 if(this.iterDblBond==1){
                     line(...coords1)
                     line(...coords2)
@@ -253,6 +282,29 @@ function adjDblBond(){
     for(let currBond of allBonds){
         if(currBond.isHoverLine){
             iterDblBondTypeOnClick(currBond)
+            break
+        }
+    }
+}
+
+function iterSingleBondTypeOnClick(bondObj){
+    if(bondObj.bondNumber==1){
+        if(bondObj.iterSingleBond<5){
+            bondObj.iterSingleBond += 1;
+            console.log('single mingle')
+        }
+        else if(bondObj.iterSingleBond == 5){
+            bondObj.iterSingleBond=1;
+        }
+    }
+}
+
+function adjSingleBond(){
+    let allBonds = structure.bonds
+    
+    for(let currBond of allBonds){
+        if(currBond.isHoverLine){
+            iterSingleBondTypeOnClick(currBond)
             break
         }
     }

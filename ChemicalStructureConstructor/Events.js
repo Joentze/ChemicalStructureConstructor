@@ -79,6 +79,7 @@ function mousePressed(){
     }
     if(mouseButton == RIGHT){
         adjDblBond()
+        adjSingleBond()
     }
 
 }
