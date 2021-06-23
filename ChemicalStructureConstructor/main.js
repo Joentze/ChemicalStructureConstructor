@@ -119,7 +119,13 @@ function draw() {
     EDIT_selectionBox.checkVis();
 
   }
-
+  console.log(EDIT_selectionBox.listSel.value())
+  if(EDIT_selectionBox.listSel.value()!='Rings ⬡'){
+    document.getElementById('ringedSelection').style.visibility = 'hidden'
+  }
+  else{
+    document.getElementById('ringedSelection').style.visibility = 'visible'
+  }
   //renderRing(5)
   structure.render();
   // text(`${mouseX}, ${mouseY}`,10,10)
