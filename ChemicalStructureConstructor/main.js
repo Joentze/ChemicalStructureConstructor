@@ -119,7 +119,6 @@ function draw() {
     EDIT_selectionBox.checkVis();
 
   }
-  console.log(EDIT_selectionBox.listSel.value())
   if(EDIT_selectionBox.listSel.value()!='Rings ⬡'){
     document.getElementById('ringedSelection').style.visibility = 'hidden'
   }

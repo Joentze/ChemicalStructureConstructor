@@ -13,15 +13,15 @@ class AtomBar{
         this.imageShowLPList = ["showLPPresetThree.svg","showLPPresetTwo.svg","showLPPresetOne.svg"];
         
         //Creation of interaction objects
-        this.elementBoxSelector = new selectionListCreation(elementsSymbol,changeCurrSelectedAtomElement,'atomBarSelectID',this.className);
+        this.elementBoxSelector = new selectionListCreation(elementsSymbolForSelect,changeCurrSelectedAtomElement,'atomBarSelectID',this.className);
         this.selectedAtomCentralToggle = new buttonCreation("toggleMainButtonPreset",ElementfuncIncrement, "","toggleButtonPreset",'centralAtomButton');
         this.selectedAtomLonePairToggle = new buttonCreation("toggleMainButtonPreset",deleteAtomButton,"","LPtoggleButtonPreset");
-        this.notesButton = new buttonCreation("toggleMainButtonPreset",openTextbox,"","textBoxOpenPreset","notesButton");
+        ////this.notesButton = new buttonCreation("toggleMainButtonPreset",openTextbox,"","textBoxOpenPreset","notesButton");
         this.ElementText(selectedAtom);      
         this.typeOutElement();
         this.el2 = document.getElementById('typeOutElementText')
         //assign visibility
-        this.notesButton.visibility,this.selectedAtomCentralToggle.visibility, this.selectedAtomLonePairToggle.visibility = this.visibility;
+        //this.notesButton.visibility,this.selectedAtomCentralToggle.visibility, this.selectedAtomLonePairToggle.visibility = this.visibility;
         
         //keeps record of previous atom
         this.prevAtom;
@@ -104,8 +104,8 @@ class AtomBar{
 
     //RENDER TEXT BOX BUTTON
     renderTextBoxButton(){
-        this.notesButton.visibility = this.visibility;
-        this.notesButton.renderButton();
+        //this.notesButton.visibility = this.visibility;
+        //this.notesButton.renderButton();
         //document.getElementById('notesButton').disabled=true;
         //document.getElementById('centralAtomButton').disabled=true;
     }
@@ -154,7 +154,7 @@ checkForChangeExec(){
         console.log(getIndex.indexOf(selectedAtom.element))
         console.log(selectedAtom.element)
         this.changeIconCentralAtom(selectedAtom,this.selectedAtomCentralToggle,this.imageShowCentralList, selectedAtom.showCentral);
-        this.changeIconCentralAtom(selectedAtom,this.selectedAtomLonePairToggle,this.imageShowLPList, selectedAtom.showLonePairs);
+        //this.changeIconCentralAtom(selectedAtom,this.selectedAtomLonePairToggle,this.imageShowLPList, selectedAtom.showLonePairs);
         this.updateElementText(selectedAtom)
         
         if(selectedAtom.element=='Type Out ⌨️' && mode == modes.SELECT){
@@ -166,7 +166,7 @@ checkForChangeExec(){
         }
         this.prevAtom = selectedAtom;
         this.prevAtomElement = selectedAtom.element;
-        this.notesButton.buttonState = false;
+        //this.notesButton.buttonState = false;
         
         
 

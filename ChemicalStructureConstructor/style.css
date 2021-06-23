@@ -92,9 +92,11 @@
 .LPtoggleButtonPreset{
     top:60px;
     left:190px;
+    background-image:url('./image/trash.svg');
     background-position: center;
     background-repeat: no-repeat;
 }
+
 
 .textBoxOpenPreset{
     position: absolute;
@@ -107,11 +109,13 @@
 
 .textBoxOpenPreset:hover{
     transition-duration: 0.8s;
+
     box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.1);
 }
 
 .LPtoggleButtonPreset:hover{
     transition-duration: 0.8s;
+    background-color:rgba(255, 133, 147,0.6);
     box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.1);
 }
 

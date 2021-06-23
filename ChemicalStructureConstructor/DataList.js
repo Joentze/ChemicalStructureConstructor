@@ -42,6 +42,20 @@ var elementsSymbol = {
     "Type Out ⌨️":"X",
 };
 
+var elementsSymbolForSelect = {
+    "Carbon":"C",
+    "Nitrogen":"N",
+    "Oxygen":"O",
+    "Hydrogen":"H",
+    "Silicon":"Si",
+    "Fluorine":"F",
+    "Chlorine":"Cl",
+    "Bromine":"Br",
+    "Iodine":"I",
+    "Phosphine":"P",
+    "Type Out ⌨️":"X",
+};
+
 var organicGroupCovalent = {
     "Hydroxyl": 1,
     "Carboxylic":1,
