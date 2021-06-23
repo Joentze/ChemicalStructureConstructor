@@ -42,13 +42,14 @@ class Structure{
     }
 
     removeAtom(atom){
-        this.atoms.splice(this.atoms.indexOf(atom),1)
+        
 
         for(let bond of this.bonds){
             if (bond.pair.includes(atom)){
                 this.removeBond(bond)
             }
-        } 
+        }
+        this.atoms.splice(this.atoms.indexOf(atom),1)         
         this.adjList.delete(atom);
 
 
@@ -58,8 +59,10 @@ class Structure{
         let [v,w] = bond.pair
         let vBonds = this.adjList.get(v)
         let wBonds = this.adjList.get(w)
-        vBonds.splice(vBonds.indexOf(w),1)
-        wBonds.splice(wBonds.indexOf(v),1)
+        if(vBonds!=undefined && wBonds!=undefined){
+            vBonds.splice(vBonds.indexOf(w),1)
+            wBonds.splice(wBonds.indexOf(v),1)           
+        }
         this.bonds.splice(this.bonds.indexOf(bond),1)
 
     }

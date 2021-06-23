@@ -14,15 +14,15 @@ class AtomBar{
         
         //Creation of interaction objects
         this.elementBoxSelector = new selectionListCreation(elementsSymbol,changeCurrSelectedAtomElement,'atomBarSelectID',this.className);
-        this.selectedAtomCentralToggle = new buttonCreation("toggleMainButtonPreset",ElementfuncIncrement, "","toggleButtonPreset");
-        this.selectedAtomLonePairToggle = new buttonCreation("toggleMainButtonPreset",LPfuncIncrement,"","LPtoggleButtonPreset");
-        this.notesButton = new buttonCreation("toggleMainButtonPreset",openTextbox,"","textBoxOpenPreset");
+        this.selectedAtomCentralToggle = new buttonCreation("toggleMainButtonPreset",ElementfuncIncrement, "","toggleButtonPreset",'centralAtomButton');
+        this.selectedAtomLonePairToggle = new buttonCreation("toggleMainButtonPreset",deleteAtomButton,"","LPtoggleButtonPreset");
+        this.notesButton = new buttonCreation("toggleMainButtonPreset",openTextbox,"","textBoxOpenPreset","notesButton");
         this.ElementText(selectedAtom);      
         this.typeOutElement();
         this.el2 = document.getElementById('typeOutElementText')
         //assign visibility
         this.notesButton.visibility,this.selectedAtomCentralToggle.visibility, this.selectedAtomLonePairToggle.visibility = this.visibility;
-
+        
         //keeps record of previous atom
         this.prevAtom;
         this.prevAtomElement;
@@ -86,13 +86,14 @@ class AtomBar{
     renderSelectionElement(selectedAtom){
             this.elementBoxSelector.visibility = this.visibility;
             this.elementBoxSelector.renderListSel();
-        
+
     }
 
     //SHOWS AND CHANGES THE STATES OF THE ATOM SELECTED
     renderShowCentral(selectedAtom){
         this.selectedAtomCentralToggle.visibility = this.visibility;
         this.selectedAtomCentralToggle.renderButton();
+        
     }
 
     //SHOWS THE LONE PAIR TOGGLER FOR THE SELECTED ATOM 
@@ -105,6 +106,8 @@ class AtomBar{
     renderTextBoxButton(){
         this.notesButton.visibility = this.visibility;
         this.notesButton.renderButton();
+        //document.getElementById('notesButton').disabled=true;
+        //document.getElementById('centralAtomButton').disabled=true;
     }
 
     //CHANGES THE TOGGLE BUTTON ICON WITH EVERY CHANGE IN SELECTED ATOM
@@ -310,4 +313,12 @@ function updateAtomPrintText(element){
         }
 }
 selectedAtom.printSym = returnString;
+}
+
+
+function deleteAtomButton(){
+    if(selectedAtom!=null){
+        structure.removeAtom(selectedAtom)
+    }
+    selectedAtom=null
 }

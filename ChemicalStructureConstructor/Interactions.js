@@ -2,19 +2,20 @@
 
 //Creates Button
 class buttonCreation {
-  constructor(iconIMG, funcToExec, text, classOfButtonPreset) {
+  constructor(iconIMG, funcToExec, text, classOfButtonPreset,id) {
     
     this.img = iconIMG;
     this.exe = funcToExec;
     this.text = text;
     this.idName = classOfButtonPreset;
+    this.id = id;
     this.buttonState = false;
     this.buttonCnt = 0;
     this.visibility = true;
     this.NewButton = createButton(this.text);
   }
   renderButton() {
-    
+    this.NewButton.id(this.id)
     this.NewButton.class(this.idName + " " + this.img);
     //NewButton.position(this.x, this.y);
     this.NewButton.mouseOver(this.buttonIsHover);
@@ -163,6 +164,7 @@ function changeMainElementSelection() {
 function changeRingSelection() {
   let currSelect = RING_selectionBox.listSel;
   let thisRing = ringCompoundList[currSelect.value()];
+  firstRingsData = currSelect.value();
   currRingVertices = thisRing['vertices']
   console.log(currRingVertices)
   currAtomUsedRing = thisRing['atomUsed']

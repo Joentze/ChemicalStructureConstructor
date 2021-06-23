@@ -16,6 +16,9 @@ function mousePressed(){
                     changingSelection=true;
                 }
             }
+
+            
+
             // if no atom is hovered, create a new atom
             if (!changingSelection){
                 if(!isDrawingRing){
@@ -55,11 +58,11 @@ function mousePressed(){
             neatenStructure(structure)
 
         }*/
-        //findHoverBond()
+        //findHoverBond(
     }
 
     else if(mode == modes.SELECT){
-
+  
         if(mouseButton == RIGHT && buttonHighlight == false){
             view.panStart()
         }

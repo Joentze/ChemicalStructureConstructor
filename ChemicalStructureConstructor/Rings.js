@@ -80,6 +80,12 @@ function formRingAtoms(vertexPair, coordDict){
             let atom2 = returnDict[vertexPair[currCnt]]
             thisBond = new Bond(atom1, atom2);
             structure.addBond(thisBond)
+            if(firstRingsData=='Benzene'){
+                if(currCnt==1||currCnt==3||currCnt==5){
+                    thisBond.bondNumber = 2
+                    thisBond.iterDblBond = 3
+                }
+            }
         }
     }
     }

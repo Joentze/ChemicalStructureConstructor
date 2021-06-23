@@ -48,7 +48,7 @@ class Bond{
     render(){
         //check if the cursor is within two points
         let [atom1, atom2] = this.pair;    
-
+        this.isSelectedRender()
         this.isHoverLine = this.checkIfHover(atom1,atom2)
         let coords = this.gapMinus(14,atom1,atom2);
         this.accessCoord = coords;
@@ -182,7 +182,15 @@ class Bond{
         let den = x2-x1
         return num/den
     }
-
+    isSelectedRender(){
+        if(this.isSelected){
+            push()
+            strokeWeight(3)
+            stroke(this.strokeColorSel)
+            line(atom1.x, atom1.y,atom2.x,atom2.y )
+            pop()
+        }
+    }
 }
 
 function iterNoBondOnClick(bondObj){

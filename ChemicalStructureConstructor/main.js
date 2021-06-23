@@ -52,6 +52,7 @@ let buttonPill;
 let structure = new Structure()
 
 let selectedAtom = null;
+let selectedBond = null;
 
 
 function preload() {
