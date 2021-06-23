@@ -104,7 +104,11 @@ function keyPressed(){
       modeClicker = 0;
       print("clicker mode 0")
   }
-
+  if(keyCode == DELETE){
+  if(mode==modes.SELECT){
+    deleteAtomButton()
+  }
+}
 }
 
 function mouseDragged(){

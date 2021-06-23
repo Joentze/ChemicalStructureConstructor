@@ -42,11 +42,11 @@ class Structure{
     }
 
     removeAtom(atom){
-        
-
-        for(let bond of this.bonds){
-            if (bond.pair.includes(atom)){
-                this.removeBond(bond)
+        let len = this.bonds.length
+        for(let cnt=len-1;cnt>=0;cnt--){
+            if (this.bonds[cnt].pair.includes(atom)){
+                this.removeBond(this.bonds[cnt])
+                
             }
         }
         this.atoms.splice(this.atoms.indexOf(atom),1)         
