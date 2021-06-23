@@ -200,7 +200,7 @@ checkForChangeExec(){
 function changeCurrSelectedAtomElement() {
   
     var currValue = document.getElementsByClassName("selectionBoxElementsPreset")[0].selectedIndex;
-    let objName = Object.keys(elementsSymbol)[currValue]
+    let objName = Object.keys(elementsSymbolForSelect)[currValue]
     let bNo = elementsCovalentBondCount[objName];
     let currNumBonds = structure.adjList.get(selectedAtom).length
     let el2 = document.getElementById('typeOutElementText')
