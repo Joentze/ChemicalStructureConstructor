@@ -31,6 +31,7 @@ class AtomBar{
         this.visibility = false;
         
     }
+    //hello test
 
     //RENDERS THE TEXT AT TOP LEFT CORNER DURING SELECT MODE
     ElementText(){
