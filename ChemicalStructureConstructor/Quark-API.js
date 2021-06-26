@@ -15,3 +15,4 @@ window.addEventListener('message',event =>{
         return
     }
 },false)
+//unload coordinates
