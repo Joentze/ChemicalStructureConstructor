@@ -323,3 +323,6 @@ function deleteAtomButton(){
     }
     selectedAtom=null
 }
+
+
+
