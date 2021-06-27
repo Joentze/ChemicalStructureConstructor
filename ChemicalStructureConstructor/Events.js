@@ -109,6 +109,17 @@ function keyPressed(){
     deleteAtomButton()
   }
 }
+if(keyIsDown(CONTROL)){
+    if(key == '1'){
+        mode = modes.EDIT
+        console.log('edit mode')
+    }
+    if(key == '2' ){
+        mode = modes.SELECT
+        console.log('select mode@')
+    }
+}
+
 }
 
 function mouseDragged(){
