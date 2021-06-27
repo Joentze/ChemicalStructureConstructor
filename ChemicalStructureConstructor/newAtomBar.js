@@ -11,7 +11,7 @@ class newAtomBar{
                                  <div id="interactionBox class="subAtomBarBox">
                                  <div id="atomBarSelect">
                                  <select id="atomBarSelectTag" onchange='atomBarSelectChange(this)' onmouseover='makeTrue()' onmouseout='makeFalse()'>
-                                 ${this.lists}
+                                 ${this.initSelect(this.lists)}
                                  </select>
                                  </div>
                                  <div id="atomBarButtonContainer">
@@ -20,6 +20,7 @@ class newAtomBar{
                                  </div>
                                  </div>
                                 </div>`
+        this.render(this.x, this.y, this.id, this.htmlBarContainer)
     }
     //injects options into html select tag
     initSelect(dict){
@@ -31,30 +32,50 @@ class newAtomBar{
         }
         return returnString
     }
+    //assign x y coordinates for atom bar
+    pegContainerToCoordinates(id, x, y){
+        let container = document.getElementById(id)
+        container.style.left = `${x}px`
+        container.style.top = `${y}px`
+    }
+
+    //adds html of atom bar to html body
+    injectHTMLString(htmlString){
+        document.body.insertAdjacentHTML('beforeend',htmlString)
+    }
+    //init atombar
+    render(x, y, id, htmlString){
+        this.injectHTMLString(htmlString)
+        this.pegContainerToCoordinates(id,x,y)
+    }
+
+
 }
 
-function atomBarSelectChange(el){
-    
-    let selectValue = el.value
-    let bNo = elementsCovalentBondCount[selectValue]
-    let currNoOfBonds = structure.adjList.get(selectedAtom).length
-    let typeOutElement = document.getElementById('typeOutElementText')
-
-    if(currNoOfBonds>bNo){
-        alert(`Can't convert to ${selectValue}. Too many bonds`)
-    }
-    else{
-    
-        selectedAtom.sym = elementsSymbol[selectValue];
-        selectedAtom.bNo = elementsCovalentBondCount[selectValue];
-        selectedAtom.printSym = elementsSymbol[selectValue];
-    
-        if(currValue!="Type Out ⌨️"){
-            selectedAtom.element = objName;
-            typeOutElement.style.visibility = 'hidden';
+function atomBarSelectChange(el){    
+    if(mode==modes.SELECT){
+        
+        let selectValue = el.value
+        let bNo = elementsCovalentBondCount[selectValue]
+        let currNoOfBonds = structure.adjList.get(selectedAtom).length
+        let typeOutElement = document.getElementById('typeOutElementText')
+        
+        if(currNoOfBonds>bNo){
+            alert(`Can't convert to ${selectValue}. Too many bonds`)
         }
         else{
-            typeOutElement.style.visibility = 'visible';
+        
+            selectedAtom.sym = elementsSymbol[selectValue];
+            selectedAtom.bNo = elementsCovalentBondCount[selectValue];
+            selectedAtom.printSym = elementsSymbol[selectValue];
+        
+            if(currValue!="Type Out ⌨️"){
+                selectedAtom.element = objName;
+                typeOutElement.style.visibility = 'hidden';
+            }
+            else{
+                typeOutElement.style.visibility = 'visible';
+            }
         }
     }
 }

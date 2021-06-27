@@ -88,6 +88,7 @@ function setup() {
   //let testTextArea = new createTextArea("textAreaPreset");
  // ZOOM_slider = new sliderInput("sliderForZoom");
   let testGenerate = generateCoordinatePoly(100,100,6,30);
+  let newAtomBarTest = new newAtomBar(500,500,'visible', 'testAtomBar', elementsSymbolForSelect);
   
 }
 
