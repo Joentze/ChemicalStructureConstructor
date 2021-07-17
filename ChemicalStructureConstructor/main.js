@@ -53,7 +53,7 @@ let structure = new Structure()
 
 let selectedAtom = null;
 let selectedBond = null;
-
+let newAtomBarTest;
 
 function preload() {
   myFont = loadFont("Assets/Arame-Regular.ttf");
@@ -88,6 +88,7 @@ function setup() {
   //let testTextArea = new createTextArea("textAreaPreset");
  // ZOOM_slider = new sliderInput("sliderForZoom");
   let testGenerate = generateCoordinatePoly(100,100,6,30);
+  //newAtomBarTest = new newAtomBar(500,500,'hidden', 'testAtomBar', elementsSymbolForSelect);
   
 }
 
@@ -99,7 +100,7 @@ function windowResized() {
 function draw() {
   
   resizeCanvas(windowWidth, windowHeight);
-  
+  //newAtomBarTest.render()
   
   //drawRing(returnVertexPair(generateCoordinatePoly(400,400,6,100)),generateCoordinatePoly(400,400,6,100))
   if(mousePressed && view.panning){
