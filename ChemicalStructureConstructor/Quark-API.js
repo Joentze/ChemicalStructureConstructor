@@ -23,7 +23,7 @@ window.addEventListener('message',event =>{
         })), event.origin)
     }
     else if(event.data.fn == 'qrk_load_data'){
-        print(event.data.payload.data)
+        console.log(event.data.payload.data)
     }
 },false)
 
