@@ -15,10 +15,12 @@ window.addEventListener('message',event =>{
     }
     else if(event.data.fn == 'qrk_save_data'){
         console.log("saving object data")
-        event.source.postMessage({
+        event.source.postMessage(
+        JSON.parse(JSON.stringify(    
+        {
             fn:"qrk_save_data",
             payload:{"test1":"hello","test2":"hello"}
-        })
+        })), event.origin)
     }
 },false)
 
