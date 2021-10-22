@@ -34,10 +34,10 @@ function organiseObject(){
         bonds:[]
     }
     for(let thisAtom of structure.atoms){
-        package.atoms.append(thisAtom)
+        package.atoms.push(thisAtom)
     }
     for(let thisBond of structure.bonds){
-        package.atoms.append(thisAtom)
+        package.atoms.push(thisAtom)
     }
     console.log("getting object....3")
     console.log(package)
