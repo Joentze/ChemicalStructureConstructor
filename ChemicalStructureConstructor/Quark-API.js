@@ -11,7 +11,7 @@ window.addEventListener('message',event =>{
         }, event.origin)
         
     }
-    else if(event.data['fn'] == 'qrk_save_data'){
+    else if(event.data.fn == 'qrk_save_data'){
         console.log("saving object data")
         event.source.postMessage({
             fn:"qrk_save_data",
