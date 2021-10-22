@@ -37,7 +37,7 @@ function organiseObject(){
         package.atoms.push(thisAtom)
     }
     for(let thisBond of structure.bonds){
-        package.atoms.push(thisAtom)
+        package.atoms.push(thisBond)
     }
     console.log("getting object....3")
     console.log(package)
