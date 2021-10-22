@@ -15,9 +15,7 @@ function mousePressed(){
                     selectedAtom=atom;
                     changingSelection=true;
                 }
-            }
-
-            
+            }          
 
             // if no atom is hovered, create a new atom
             if (!changingSelection){
@@ -109,6 +107,18 @@ function keyPressed(){
     deleteAtomButton()
   }
 }
+// USES P5JS
+if(keyIsDown(CONTROL)){
+    if(key == '1'){
+        mode = modes.EDIT
+        console.log('edit mode')
+    }
+    if(key == '2' ){
+        mode = modes.SELECT
+        console.log('select mode@')
+    }
+}
+
 }
 
 function mouseDragged(){
