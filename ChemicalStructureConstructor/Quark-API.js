@@ -11,11 +11,12 @@ window.addEventListener('message',event =>{
         }, event.origin)
         
     }
-    else{
-        return
+    else if(event.data['fn'] == 'qrk_save_data'){
+        getStructureObj = 
+        event.source.postMessage({
+            fn:"qrk_save_data",
+            payload:{"test1":"hello","test2":"hello"}
+        })
     }
 },false)
-//upload coordinates
-window.addEventListener('message',event =>{
-    console.log(event.data)
-},false)
+
