@@ -23,6 +23,7 @@ window.addEventListener('message',event =>{
         })), event.origin)
     }
     else if(event.data.fn == 'qrk_load_data'){
+        console.log("unloading data form firebase")
         console.log(event.data.payload.data)
     }
 },false)
