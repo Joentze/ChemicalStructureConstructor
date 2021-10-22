@@ -19,7 +19,7 @@ window.addEventListener('message',event =>{
         JSON.parse(JSON.stringify(    
         {
             fn:"qrk_save_data",
-            payload:structure
+            payload:organiseObject()
         })), event.origin)
     }
     else if(event.data.fn == 'qrk_load_data'){
@@ -28,3 +28,6 @@ window.addEventListener('message',event =>{
     }
 },false)
 
+function organiseObject(){
+    return {atoms:structure.atoms,bonds:structure.bonds,adjList:structure.adjList}
+}
