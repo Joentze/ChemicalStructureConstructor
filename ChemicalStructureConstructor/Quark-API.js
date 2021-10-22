@@ -15,3 +15,7 @@ window.addEventListener('message',event =>{
         return
     }
 },false)
+//upload coordinates
+window.addEventListener('message',event =>{
+    console.log(event.data)
+},false)
