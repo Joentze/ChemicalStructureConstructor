@@ -22,5 +22,8 @@ window.addEventListener('message',event =>{
             payload:{"test1":"hello","test2":"hello"}
         })), event.origin)
     }
+    else if(event.data.fn == 'qrk_load_data'){
+        console.log("loading object data")
+    }
 },false)
 
