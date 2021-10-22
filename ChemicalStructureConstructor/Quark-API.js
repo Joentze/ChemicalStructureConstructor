@@ -30,16 +30,28 @@ window.addEventListener('message',event =>{
 
 function organiseObject(){
     let package = {
-        atoms:[]//,
-       // bonds:[]
-    }/*
+        atoms:{}//,
+        //bonds:[]
+    }
     for(let thisAtom of structure.atoms){
-        package.atoms.push(thisAtom)
-    }*/
+        if(Object.keys(package.atoms).length ==0){
+            for(let thisVariable of thisAtom.getAllVariables()){
+                package.atoms[thisVariable] = [thisAtom[thisVariable]]
+            }
+        }else if(Object.keys(package.atoms).length>0){
+            for(let thisVariable of thisAtom.getAllVariables()){
+                package.atoms[thisVariable].push(thisAtom[thisVariable])
+            }
+        }
+    }
+    //delete package.atoms['targetX']
+    //delete package.atoms['targetY']
+    delete package.atoms['atomElementDrawing']
+    /*
     for(let thisBond of structure.bonds){
         package.bonds.push(thisBond)
-    }
-    console.log("getting object....3")
+    }*/
+    console.log("getting object....4")
     console.log(package)
     return package
 }

@@ -13,8 +13,7 @@ class Atom{
 
         //for testing
         this.sym = SymbolOfElement;
-        this.element =  getKeyByValue(elementsSymbol, this.sym);
-        this.printSym = this.sym
+        this.element =  getKeyByValue(elementsSymbol, SymbolOfElement);
         //the total number of total covalent bonds that can be formed
         this.bNo = noOfBranches;
              
@@ -132,7 +131,7 @@ class Atom{
         textFont('Arial');
         textSize(18);
         textAlign(CENTER,CENTER);
-        text(this.printSym,this.x,this.y);
+        text(this.sym,this.x,this.y);
         pop();
         }
         else{
@@ -147,7 +146,7 @@ class Atom{
             else{
                 fill(0)
             }
-            text(this.printSym,this.x-3,this.y);
+            text(this.sym,this.x-3,this.y);
             pop();
         }
     }
@@ -164,7 +163,7 @@ class Atom{
         }
         
         else if(this.element == 'Type Out ⌨️'){
-            let lenOfRect = this.printSym.length*20
+            let lenOfRect = this.sym.length*20
             let XisInRect = (mouseX<this.x + lenOfRect && mouseX>=this.x)
             let YisInRect = (mouseY<this.y +15 && mouseY>=this.y)
             if(XisInRect && YisInRect){
@@ -190,5 +189,17 @@ class Atom{
         else{
             this.isGapNeeded = true;
         }
+    }
+    getAllVariables(){
+        let returnList = []
+        for(let thisVariable in this){
+            if(thisVariable != 'targetX' || thisVariable !='targetY'){
+                returnList.push(thisVariable)
+            }
+            else{
+                console.log('wonk')
+            }
+        }
+        return returnList
     }
 }
