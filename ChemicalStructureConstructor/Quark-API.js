@@ -19,7 +19,7 @@ window.addEventListener('message',event =>{
         JSON.parse(JSON.stringify(    
         {
             fn:"qrk_save_data",
-            payload:{"test1":"hello","test2":"hello"}
+            payload:structure
         })), event.origin)
     }
     else if(event.data.fn == 'qrk_load_data'){
