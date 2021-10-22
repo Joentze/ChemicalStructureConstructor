@@ -30,12 +30,12 @@ window.addEventListener('message',event =>{
 
 function organiseObject(){
     let package = {
-        atoms:[],
-        bonds:[]
-    }
+        atoms:[]//,
+       // bonds:[]
+    }/*
     for(let thisAtom of structure.atoms){
         package.atoms.push(thisAtom)
-    }
+    }*/
     for(let thisBond of structure.bonds){
         package.bonds.push(thisBond)
     }
