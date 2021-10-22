@@ -29,10 +29,17 @@ window.addEventListener('message',event =>{
 },false)
 
 function organiseObject(){
-    console.log("getting object....2")
-    let obj = {atoms:structure.atoms}
-    console.log(structure.atoms)
-    console.log(structure.prototype)
-    console.log(obj)
-    return obj
+    let package = {
+        atoms:[],
+        bonds:[]
+    }
+    for(let thisAtom of structure.atoms){
+        package.atoms.append(thisAtom)
+    }
+    for(let thisBond of structure.bonds){
+        package.atoms.append(thisAtom)
+    }
+    console.log("getting object....3")
+    console.log(package)
+    return package
 }
