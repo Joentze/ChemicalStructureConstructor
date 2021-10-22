@@ -29,6 +29,7 @@ window.addEventListener('message',event =>{
 },false)
 
 function organiseObject(){
-    console.log("getting object....1")
-    return {atoms:structure.atoms,bonds:structure.bonds}
+    console.log("getting object....2")
+    let obj = {atoms:structure.atoms,bonds:structure.bonds}
+    return obj
 }
