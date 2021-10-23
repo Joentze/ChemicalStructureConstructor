@@ -193,13 +193,9 @@ class Atom{
     getAllVariables(){
         let returnList = []
         for(let thisVariable in this){
-            if(thisVariable != 'targetX' || thisVariable !='targetY'){
                 returnList.push(thisVariable)
             }
-            else{
-                console.log('wonk')
-            }
-        }
+        
         return returnList
     }
 }

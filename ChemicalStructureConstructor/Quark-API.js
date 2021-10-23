@@ -25,33 +25,37 @@ window.addEventListener('message',event =>{
     else if(event.data.fn == 'qrk_load_data'){
         console.log("unloading data form firebase")
         console.log(event.data.payload.data)
+        unloadStructureData(event.data.payload.data)
     }
 },false)
 
 function organiseObject(){
+
     let package = {
-        atoms:{}//,
-        //bonds:[]
+        atoms:[],
+        bonds:structure.bonds,
+        adjList:[]
     }
     for(let thisAtom of structure.atoms){
-        if(Object.keys(package.atoms).length ==0){
-            for(let thisVariable of thisAtom.getAllVariables()){
-                package.atoms[thisVariable] = [thisAtom[thisVariable]]
-            }
-        }else if(Object.keys(package.atoms).length>0){
-            for(let thisVariable of thisAtom.getAllVariables()){
-                package.atoms[thisVariable].push(thisAtom[thisVariable])
-            }
-        }
+        //remove atomElementDrawing to prevent circular json
+        delete thisAtom['atomElementDrawing']
+        package.atoms.push(thisAtom)
     }
-    //delete package.atoms['targetX']
-    //delete package.atoms['targetY']
-    delete package.atoms['atomElementDrawing']
-    /*
-    for(let thisBond of structure.bonds){
-        package.bonds.push(thisBond)
-    }*/
-    console.log("getting object....4")
-    console.log(package)
+
+    for(let atomMap of structure.adjList){
+        //console.log(atomMap)
+        package.adjList.push({key:atomMap[0], value:atomMap[1]})
+    }
     return package
+}
+
+function unloadStructureData(data){
+    structure.atoms = data.atoms
+    structure.bonds = data.bonds
+    let adjListArray = data.adjList
+    for(let thisMap of adjListArray){
+        let keyAtom = thisMap['key']
+        let valueArray = thisMap['value']
+        structure.adjList.set(keyAtom, valueArray)
+    }
 }
