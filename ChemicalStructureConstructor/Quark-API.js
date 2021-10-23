@@ -39,6 +39,7 @@ function organiseObject(){
     for(let thisAtom of structure.atoms){
         //remove atomElementDrawing to prevent circular json
         delete thisAtom['atomElementDrawing']
+        delete thisAtom['colorOfAtom']
         package.atoms.push(thisAtom)
     }
 
@@ -50,12 +51,48 @@ function organiseObject(){
 }
 
 function unloadStructureData(data){
-    structure.atoms = data.atoms
-    structure.bonds = data.bonds
+    //structure.atoms = data.atoms
+    //structure.bonds = data.bonds
+ //   for(let thisAtom of data.atoms){
+ //       atom = new Atom()
+ //       for(let key of Object.keys(thisAtom)){
+ //           if(key!='colorOfAtom'){
+ //               atom[key] = thisAtom[key]
+ //           }
+ //       }
+ //       structure.addAtom(atom)
+ //   }
+ //   
     let adjListArray = data.adjList
     for(let thisMap of adjListArray){
         let keyAtom = thisMap['key']
         let valueArray = thisMap['value']
-        structure.adjList.set(keyAtom, valueArray)
+        //structure.adjList.set(keyAtom, valueArray)
+        atom = new Atom()
+        //
+        for(let key of Object.keys(keyAtom)){
+                atom[key] = keyAtom[key]
+        }
+        structure.addAtom(atom)
+        for(let valueAtom of valueArray){
+            let atom = new Atom()
+            for(let key of Object.keys(keyAtom)){
+                atom[key] = valueAtom[key]
+            }
+            if(containsObject(atom, structure.atoms)){
+                structure.addAtom(atom)
+            }
+        }
     }
+}
+
+function containsObject(obj, list) {
+    var i;
+    for (i = 0; i < list.length; i++) {
+        if (list[i] === obj) {
+            return true;
+        }
+    }
+
+    return false;
 }
