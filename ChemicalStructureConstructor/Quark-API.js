@@ -59,10 +59,10 @@ function unloadStructureData(data){
         console.log(bond)
         let atomOne = propagateVariable(new Atom(),pair[0])
         let atomTwo = propagateVariable(new Atom(),pair[1])
-        if(!containsObject(atomOne, Object.keys(pair[0]))){
+        if(containsObject(atomOne, Object.keys(pair[0]))){
             structure.addAtom(atomOne)
         }
-        if(!containsObject(atomTwo, Object.keys(pair[1]))){
+        if(containsObject(atomTwo, Object.keys(pair[1]))){
             structure.addAtom(atomTwo)
         }
         let instantiateBond = propagateVariable(new Bond(), bond)
