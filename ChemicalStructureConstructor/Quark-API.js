@@ -50,55 +50,34 @@ function organiseObject(){
 }
 
 function unloadStructureData(data){
+    let allBonds = data.bonds
+    for(let bond of allBonds){
+        let pair = bond.pair
+        delete bond['strokeColorSel']
+        delete bond['strokeColHov']
+        delete bond['strokeColor']
+        console.log(bond)
+        let atomOne = propagateVariable(new Atom(),pair[0])
+        let atomTwo = propagateVariable(new Atom(),pair[1])
+        if(!containsObject(atomOne, Object.keys(pair[0]))){
+            structure.addAtom(atomOne)
+        }
+        if(!containsObject(atomTwo, Object.keys(pair[1]))){
+            structure.addAtom(atomTwo)
+        }
+        let instantiateBond = propagateVariable(new Bond(), bond)
+        instantiateBond.pair = [atomOne, atomTwo]
+        structure.addBond(instantiateBond)
 
-    let adjListArray = data.adjList
-    for(let thisMap of adjListArray){
-        let keyAtom = thisMap['key']
-        
-        //creates new atom class for key atom
-        let currAtom = new Atom()
-        //
-        for(let key of Object.keys(keyAtom)){
-            //propogates class instances into atom 'key' object
-                currAtom[key] = keyAtom[key]
-        }
-        structure.addAtom(currAtom)
-        //interates atoms in the value array
-        
     }
-    for(let thisMap of adjListArray){
-        let keyAtom = thisMap['key']
-        let valueArray = thisMap['value']
-        let currAtom = new Atom()
-        //
-        for(let key of Object.keys(keyAtom)){
-            //propogates class instances into atom 'key' object
-                currAtom[key] = keyAtom[key]
-        }
-        for(let valueAtom of valueArray){
-            let atom = new Atom()
-            for(let key of Object.keys(keyAtom)){
-                atom[key] = valueAtom[key]
-            }
-            //check if current atom 'value' object has been added to the structure
-            if(containsObject(atom, structure.atoms)){
-                structure.addAtom(atom)
-            }
-            let currentBond = new Bond(currAtom, atom)
-            for(let thisBond of data.bonds){
-                let ifContainOne = containsObject(currAtom, thisBond.pair)
-                let ifContainTwo = containsObject(atom, thisBond.pair)
-                if(ifContainOne && ifContainTwo){
-                    for(let bondVariable of Object.keys(thisBond)){
-                        currentBond[bondVariable] = thisBond[bondVariable]
-                    }
-                }
-            }
-            currentBond.pair = [currAtom, atom]
-            console.log(currentBond)
-            structure.addBond(currentBond)
-        }
+    
+}
+
+function propagateVariable(object, map){
+    for(let key of Object.keys(map)){
+        object[key] = map[key]
     }
+    return object
 }
 
 function containsObject(obj, list) {
