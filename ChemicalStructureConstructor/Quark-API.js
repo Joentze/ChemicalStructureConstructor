@@ -39,7 +39,6 @@ function organiseObject(){
     for(let thisAtom of structure.atoms){
         //remove atomElementDrawing to prevent circular json
         delete thisAtom['atomElementDrawing']
-        delete thisAtom['colorOfAtom']
         package.atoms.push(thisAtom)
     }
 
@@ -51,37 +50,53 @@ function organiseObject(){
 }
 
 function unloadStructureData(data){
-    //structure.atoms = data.atoms
-    //structure.bonds = data.bonds
- //   for(let thisAtom of data.atoms){
- //       atom = new Atom()
- //       for(let key of Object.keys(thisAtom)){
- //           if(key!='colorOfAtom'){
- //               atom[key] = thisAtom[key]
- //           }
- //       }
- //       structure.addAtom(atom)
- //   }
- //   
+
     let adjListArray = data.adjList
     for(let thisMap of adjListArray){
         let keyAtom = thisMap['key']
-        let valueArray = thisMap['value']
-        //structure.adjList.set(keyAtom, valueArray)
-        atom = new Atom()
+        
+        //creates new atom class for key atom
+        let currAtom = new Atom()
         //
         for(let key of Object.keys(keyAtom)){
-                atom[key] = keyAtom[key]
+            //propogates class instances into atom 'key' object
+                currAtom[key] = keyAtom[key]
         }
-        structure.addAtom(atom)
+        structure.addAtom(currAtom)
+        //interates atoms in the value array
+        
+    }
+    for(let thisMap of adjListArray){
+        let keyAtom = thisMap['key']
+        let valueArray = thisMap['value']
+        let currAtom = new Atom()
+        //
+        for(let key of Object.keys(keyAtom)){
+            //propogates class instances into atom 'key' object
+                currAtom[key] = keyAtom[key]
+        }
         for(let valueAtom of valueArray){
             let atom = new Atom()
             for(let key of Object.keys(keyAtom)){
                 atom[key] = valueAtom[key]
             }
+            //check if current atom 'value' object has been added to the structure
             if(containsObject(atom, structure.atoms)){
                 structure.addAtom(atom)
             }
+            let currentBond = new Bond(currAtom, atom)
+            for(let thisBond of data.bonds){
+                let ifContainOne = containsObject(currAtom, thisBond.pair)
+                let ifContainTwo = containsObject(atom, thisBond.pair)
+                if(ifContainOne && ifContainTwo){
+                    for(let bondVariable of Object.keys(thisBond)){
+                        currentBond[bondVariable] = thisBond[bondVariable]
+                    }
+                }
+            }
+            currentBond.pair = [currAtom, atom]
+            console.log(currentBond)
+            structure.addBond(currentBond)
         }
     }
 }
@@ -89,7 +104,13 @@ function unloadStructureData(data){
 function containsObject(obj, list) {
     var i;
     for (i = 0; i < list.length; i++) {
-        if (list[i] === obj) {
+        let testAtom = new Atom()
+        let thisAtomVariables = list[i]
+        for(let key of Object.keys(thisAtomVariables)){
+            //propogates class instances into atom 'key' object
+                testAtom[key] = thisAtomVariables[key]
+        }
+        if (testAtom === obj) {
             return true;
         }
     }

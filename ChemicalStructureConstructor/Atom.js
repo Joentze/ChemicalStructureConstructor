@@ -21,7 +21,8 @@ class Atom{
         this.fullState = false;
 
         //color of the rendered atom
-        this.colorOfAtom = color(40);
+        this.greyScaleValue = 40
+    
 
         //radius of rendered atom 
         this.radiusA = 10;
@@ -64,7 +65,7 @@ class Atom{
                 else{
                     push();
                     noStroke();
-                    fill(this.colorOfAtom);
+                    fill(color(this.greyScaleValue));
                     var currRadiusSize = this.CursorNearExpand();
                     this.atomElementDrawing = ellipse(this.x, this.y, currRadiusSize, currRadiusSize);
                     pop();
@@ -84,7 +85,7 @@ class Atom{
                 else{
                     push();
                     noStroke();
-                    fill(this.colorOfAtom);
+                    fill(color(this.greyScaleValue));
                     var currRadiusSize = this.CursorNearExpand();
                     //ellipse(this.x, this.y, currRadiusSize, currRadiusSize);
                     pop();
