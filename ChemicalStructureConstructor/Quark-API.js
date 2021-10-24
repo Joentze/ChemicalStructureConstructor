@@ -51,26 +51,31 @@ function organiseObject(){
 
 function unloadStructureData(data){
     let allBonds = data.bonds
-    for(let bond of allBonds){
-        let pair = bond.pair
-        delete bond['strokeColorSel']
-        delete bond['strokeColHov']
-        delete bond['strokeColor']
-        console.log(bond)
-        let atomOne = propagateVariable(new Atom(),pair[0])
-        let atomTwo = propagateVariable(new Atom(),pair[1])
-        if(containsObject(atomOne, Object.keys(pair[0]))){
-            structure.addAtom(atomOne)
-        }
-        if(containsObject(atomTwo, Object.keys(pair[1]))){
-            structure.addAtom(atomTwo)
-        }
-        let instantiateBond = propagateVariable(new Bond(), bond)
-        instantiateBond.pair = [atomOne, atomTwo]
-        structure.addBond(instantiateBond)
+    if(data.atoms.length>1){
+        for(let bond of allBonds){
+            let pair = bond.pair
+            delete bond['strokeColorSel']
+            delete bond['strokeColHov']
+            delete bond['strokeColor']
+            console.log(bond)
+            let atomOne = propagateVariable(new Atom(),pair[0])
+            let atomTwo = propagateVariable(new Atom(),pair[1])
+            if(!containsObject(atomOne, Object.keys(pair[0]))){
+                structure.addAtom(atomOne)
+            }
+            if(!containsObject(atomTwo, Object.keys(pair[1]))){
+                structure.addAtom(atomTwo)
+            }
+            let instantiateBond = propagateVariable(new Bond(), bond)
+            instantiateBond.pair = [atomOne, atomTwo]
+            structure.addBond(instantiateBond)
 
+        }
     }
-    
+    else{
+        let atom = propagateVariable(new Atom(), data.atoms[0])
+        structure.addAtom(atom)
+    }
 }
 
 function propagateVariable(object, map){
