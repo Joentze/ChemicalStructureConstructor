@@ -31,6 +31,7 @@ class Structure{
     addAtom(atom){
 
         this.atoms.push(atom)
+        atom.indexNo = this.atoms.length - 1 
         this.adjList.set(atom,[])
     }
 

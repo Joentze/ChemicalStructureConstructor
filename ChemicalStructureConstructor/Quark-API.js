@@ -51,31 +51,31 @@ function organiseObject(){
 
 function unloadStructureData(data){
     let allBonds = data.bonds
+    let allAtoms = data.atoms
+    for(let atomVar of allAtoms){
+        delete atomVar['atomElementDrawing']
+        let thisAtom = propagateVariable(new Atom(), atomVar)
+        structure.addAtom(thisAtom)
+
+    }
+
     if(data.atoms.length>1){
         for(let bond of allBonds){
             let pair = bond.pair
             delete bond['strokeColorSel']
             delete bond['strokeColHov']
             delete bond['strokeColor']
-            console.log(bond)
-            let atomOne = propagateVariable(new Atom(),pair[0])
-            let atomTwo = propagateVariable(new Atom(),pair[1])
-            if(!containsObject(atomOne, Object.keys(pair[0]))){
-                structure.addAtom(atomOne)
-            }
-            if(!containsObject(atomTwo, Object.keys(pair[1]))){
-                structure.addAtom(atomTwo)
-            }
+            let atomOne = pair[0]
+            let atomTwo = pair[1]
             let instantiateBond = propagateVariable(new Bond(), bond)
-            instantiateBond.pair = [atomOne, atomTwo]
+            instantiateBond.pair = [structure.atoms[atomOne.indexNo], structure.atoms[atomTwo.indexNo]]
+            console.log(instantiateBond.pair)
             structure.addBond(instantiateBond)
 
         }
     }
-    else{
-        let atom = propagateVariable(new Atom(), data.atoms[0])
-        structure.addAtom(atom)
-    }
+
+    console.log(structure.bonds)
 }
 
 function propagateVariable(object, map){
@@ -83,21 +83,4 @@ function propagateVariable(object, map){
         object[key] = map[key]
     }
     return object
-}
-
-function containsObject(obj, list) {
-    var i;
-    for (i = 0; i < list.length; i++) {
-        let testAtom = new Atom()
-        let thisAtomVariables = list[i]
-        for(let key of Object.keys(thisAtomVariables)){
-            //propogates class instances into atom 'key' object
-                testAtom[key] = thisAtomVariables[key]
-        }
-        if (testAtom === obj) {
-            return true;
-        }
-    }
-
-    return false;
 }

@@ -2,7 +2,7 @@
 class Bond{
     constructor(atomOne, atomTwo){
         //current atom classes 
-       
+        this.indexNo;
         
         this.pair = [atomOne,atomTwo]
 
