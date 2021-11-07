@@ -1,3 +1,3 @@
 # ChemicalStructureConstructor
-Create Chemical Strutures easily and rapidly
+Create Chemical Strutures easily and rapidly.
 
